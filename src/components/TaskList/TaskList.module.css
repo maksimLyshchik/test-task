@@ -1,0 +1,4 @@
+.blockTask{
+    display: flex;
+    flex-direction: row;
+}
