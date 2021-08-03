@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import taskReducer from './reducer';
 
 export default configureStore({
-  reducer: {taskReducer}
-})
-
+  reducer: {
+    tasks: taskReducer
+  }
+});
