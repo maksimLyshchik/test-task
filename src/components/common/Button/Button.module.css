@@ -1,20 +1,24 @@
+:root {
+  --button-bg-color: #0764e5;
+  --button-brd-color: #dcdce7;
+  --button-bg-color-disable: #cbd0d2;
+}
+
 .button {
   padding: 10px;
-  margin: 10px;
-  background-color: dodgerblue;
-  border-radius: 5px;
+  background-color: var(--button-bg-color);
+  border-radius: 6px;
   text-transform: uppercase;
-  border: 2px solid #dcdce7;
+  border: 2px solid var(--button-brd-color);
+  cursor: pointer;
 }
 
 .button_disable {
-  background-color: #cbd0d2;
-
+  background-color: var(--button-bg-color-disable);
   cursor: not-allowed;
 }
 
 .button_primary {
-  background-color: #0764e5;
-  color: #dcdce7;
-
+  background-color: var(--button-bg-color);
+  color: var(--button-brd-color);
 }
