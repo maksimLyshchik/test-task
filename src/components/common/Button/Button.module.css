@@ -1,24 +1,21 @@
-:root {
-  --button-bg-color: #0764e5;
-  --button-brd-color: #dcdce7;
-  --button-bg-color-disable: #cbd0d2;
-}
-
 .button {
   padding: 10px;
-  background-color: var(--button-bg-color);
   border-radius: 6px;
+  border: 2px solid var(--brd-color);
+
   text-transform: uppercase;
-  border: 2px solid var(--button-brd-color);
+  background-color: var(--bg-color);
+
   cursor: pointer;
 }
 
 .button_disable {
-  background-color: var(--button-bg-color-disable);
+  background-color: var(--bg-color-disable);
+
   cursor: not-allowed;
 }
 
 .button_primary {
-  background-color: var(--button-bg-color);
-  color: var(--button-brd-color);
+  background-color: var(--bg-color);
+  color: var(--brd-color);
 }

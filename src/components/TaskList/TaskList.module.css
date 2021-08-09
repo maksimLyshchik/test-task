@@ -6,15 +6,26 @@
 .TaskList {
   display: flex;
   flex-direction: column;
+
+  padding: 10px 10px 0 10px;
   min-width: 720px;
   border: 2px solid var(--task-list-br-color);
   border-radius: 8px;
+
   background-color: var(--task-list-bg-color);
-  padding: 10px 10px 0 10px;
 }
 
 .TaskList__option {
+  display: flex;
   min-height: 40px;
   padding-left: 12px;
   padding-bottom: 12px;
+}
+
+.TaskList__option_name {
+  padding: 10px;
+
+  font-size: 1.2em;
+  color: var(--bg-color);
+  text-transform: uppercase;
 }

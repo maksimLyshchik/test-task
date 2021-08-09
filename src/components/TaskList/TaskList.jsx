@@ -33,6 +33,7 @@ export const TaskList = () => {
     <div className={s.TaskList}>
       <div className={s.TaskList__option}>
         <Checkbox name='checkedAll' type='checkbox' onChange={handleChange} checked={checkedAll}/>
+        <span className={s.TaskList__option_name}>Selected all tasks</span>
       </div>
       {tasks.map(item => <BlockTask {...item} selected={selectedTasks[item.id]}/>)}
     </div>

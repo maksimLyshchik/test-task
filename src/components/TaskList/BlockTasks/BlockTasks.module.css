@@ -1,13 +1,10 @@
-:root {
-  --block-task-br-color: #578cd5;
-  --block-task-bg-color: #ffffff;
-}
-
 .blockTask {
   display: flex;
+
   margin-bottom: 12px;
   border: 2px solid var(--block-task-br-color);
   border-radius: 8px;
   padding: 10px;
-  background-color: var(--block-task-bg-color);
+
+  background-color: var(--element-bg-color);
 }

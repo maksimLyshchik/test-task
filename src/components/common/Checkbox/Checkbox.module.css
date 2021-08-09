@@ -1,16 +1,11 @@
-:root {
-  --check-bg-color: #0764e5;
-  --check-brd-color: #dcdce7;
-  --check-bg-color-disable: #87adf6;
-  --check-mark-brd-color: white;
-}
-
 .checkbox_primary {
   display: block;
   position: relative;
   padding-left: 48px;
   margin-bottom: 20px;
+
   cursor: pointer;
+
   font-size: 22px;
 }
 
@@ -26,9 +21,11 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 40px;
-  width: 40px;
+  height: 38px;
+  width: 38px;
+
   background-color: var(--check-bg-color-disable);
+  border: 2px solid var(--bg-color);
 }
 
 .checkbox_primary:hover input ~ .checkmark {
@@ -36,7 +33,7 @@
 }
 
 .checkbox_primary input:checked ~ .checkmark {
-  background-color: var(--check-bg-color);
+  background-color: var(--bg-color);
 }
 
 .checkmark:after {
@@ -50,11 +47,12 @@
 }
 
 .checkbox_primary .checkmark:after {
-  left: 10px;
+  left: 14px;
   top: 6px;
-  width: 14px;
+  width: 8px;
   height: 16px;
-  border: solid var(--check-mark-brd-color);
+
+  border: solid var(--element-bg-color);
   border-width: 0 4px 4px 0;
   -webkit-transform: rotate(45deg);
 }
