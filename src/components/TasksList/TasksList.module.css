@@ -1,28 +1,23 @@
-:root {
-  --task-list-br-color: #578cd5;
-  --task-list-bg-color: #c5daf8;
-}
-
-.TaskList {
+.TasksList {
   display: flex;
   flex-direction: column;
 
   padding: 10px 10px 0 10px;
-  min-width: 720px;
-  border: 2px solid var(--task-list-br-color);
+  min-width: 900px;
+  border: 2px solid var(--block-task-br-color);
   border-radius: 8px;
 
-  background-color: var(--task-list-bg-color);
+  background-color: var(--bg-color-list);
 }
 
-.TaskList__option {
+.TasksList__option {
   display: flex;
   min-height: 40px;
   padding-left: 12px;
   padding-bottom: 12px;
 }
 
-.TaskList__option_name {
+.TasksList__option_name {
   padding: 10px;
 
   font-size: 1.2em;

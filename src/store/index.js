@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { selectTaskReducer, taskReducer } from './reducer';
+import { tasksReducer } from './tasks/reducerTasks';
+import { selectTaskReducer } from './selects/reducerSelects';
 
 export default configureStore({
   reducer: {
-    tasks: taskReducer,
+    tasks: tasksReducer,
     selects: selectTaskReducer,
   }
 });

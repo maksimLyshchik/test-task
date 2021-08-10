@@ -1,6 +1,6 @@
 import React from 'react';
 import { AddTask } from './components/AddTask/AddTask';
-import { TaskList } from './components/TaskList/TaskList';
+import { TasksList } from './components/TasksList/TasksList';
 import s from './App.module.css';
 
 export const App = () => {
@@ -8,7 +8,7 @@ export const App = () => {
     <div className={s.app_section}>
       <div className={s.app_section__container}>
         <AddTask/>
-        <TaskList/>
+        <TasksList/>
       </div>
     </div>
   );

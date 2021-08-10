@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addTask, setSelectTask } from '../../store/actions';
+import { setSelectTask } from '../../store/selects/actionsSelects';
 import { getId } from '../../helpers/getUniqId';
-import { Button } from '../common/Button/Button';
-import { Input } from '../common/Input/Input';
+import { Button } from '../../common/models/Button/Button';
+import { Input } from '../../common/models/Input/Input';
+import { addTask } from '../../store/tasks/actionsTasks';
 import s from './AddTask.module.css';
 
 export const AddTask = () => {
@@ -12,7 +13,7 @@ export const AddTask = () => {
 
   const handleSubmitTask = useCallback(() => {
     const id = getId();
-    dispatch(addTask({value: task, id, time: Date.now()}));
+    dispatch(addTask({value: task, id, time: Date.now(), status: 'active'}));
     dispatch(setSelectTask({[id]: false}));
   }, [dispatch, task]);
 

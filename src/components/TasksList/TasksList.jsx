@@ -1,15 +1,16 @@
 import React, { useCallback, useMemo } from 'react';
 import { BlockTask } from './BlockTasks/BlockTask';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCheckedTask, selectTasks } from '../../store/selector';
-import { Checkbox } from '../common/Checkbox/Checkbox';
-import { setSelectTask } from '../../store/actions';
-import s from './TaskList.module.css';
+import { Checkbox } from '../../common/models/Checkbox/Checkbox';
+import { setSelectTask } from '../../store/selects/actionsSelects';
+import { getCheckedTasks } from '../../store/selects/selectorSelects';
+import { getTasks } from '../../store/tasks/selectorTasks';
+import s from './TasksList.module.css';
 
-export const TaskList = () => {
+export const TasksList = () => {
   const dispatch = useDispatch();
-  const tasks = useSelector(selectTasks);
-  const selectedTasks = useSelector(selectCheckedTask);
+  const tasks = useSelector(getTasks);
+  const selectedTasks = useSelector(getCheckedTasks);
 
   const handleChange = useCallback(({target}) => {
     const {checked} = target;
@@ -30,10 +31,10 @@ export const TaskList = () => {
   }, [selectedTasks]);
 
   return (
-    <div className={s.TaskList}>
-      <div className={s.TaskList__option}>
+    <div className={s.TasksList}>
+      <div className={s.TasksList__option}>
         <Checkbox name='checkedAll' type='checkbox' onChange={handleChange} checked={checkedAll}/>
-        <span className={s.TaskList__option_name}>Selected all tasks</span>
+        <span className={s.TasksList__option_name}>Selected all tasks</span>
       </div>
       {tasks.map(item => <BlockTask {...item} selected={selectedTasks[item.id]}/>)}
     </div>
