@@ -1,13 +1,15 @@
 import React from 'react';
 import s from './TaskList.module.css';
-import BlockTasks from './BlockTasks/BlockTasks';
+import { BlockTask } from './BlockTasks/BlockTask';
+import { useSelector } from 'react-redux';
+import { selectTasks } from '../../store/selector';
 
-function TaskList() {
+export const TaskList = () => {
+  const tasks = useSelector(selectTasks);
+
   return (
     <div className={s.TaskList}>
-      <BlockTasks/>
+      {tasks.map(item => <BlockTask {...item} />)}
     </div>
   );
-}
-
-export default TaskList;
+};

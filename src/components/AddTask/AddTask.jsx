@@ -1,25 +1,30 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTask } from '../../store/actions';
 import { getId } from '../../helpers/getUniqId';
+import { Button } from '../common/Button/Button';
+import { Input } from '../common/Input/Input';
 
-
-function AddTask() {
+export const AddTask = () => {
   const dispatch = useDispatch();
-  const inputRef = useRef(null);
+  const [task, setTask] = useState();
 
-  const onSubmitTask = useCallback(() => {
-    const {value} = inputRef?.current;
+  const handleSubmitTask = useCallback(() => {
+    console.log('event');
+    dispatch(addTask({value: task, id: getId(), time: Date.now()}));
+  }, [dispatch, task]);
 
-    dispatch(addTask({value, id: getId(), time: Date.now()}));
-  }, [dispatch]);
+  const handleChangeValue = useCallback(({target}) => {
+    const {value} = target;
+    setTask(value);
+  }, []);
 
   return (
     <div>
-      <input ref={inputRef} placeholder="Enter task" />
-      <button onClick={onSubmitTask}>Add</button>
+      <Input onChange={handleChangeValue} placeholder='Enter task'/>
+      <Button onClick={handleSubmitTask}>
+        Add task
+      </Button>
     </div>
   );
-}
-
-export default AddTask;
+};
