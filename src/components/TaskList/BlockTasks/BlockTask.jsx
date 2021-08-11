@@ -15,7 +15,7 @@ export const BlockTask = ({value, id, selected}) => {
 
   return (
     <div className={s.blockTask}>
-      <Checkbox type='checkbox' onChange={handleChangeSelect} checked={selected}/>
+      <Checkbox onChange={handleChangeSelect} checked={selected}/>
       <Input value={value} disabled/>
     </div>
   );
