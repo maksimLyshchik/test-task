@@ -32,7 +32,7 @@ const todoTask = (state, id) => {
   return {...state, [id]: newTask};
 };
 
-export const tasksReducer = (state = [], action) => {
+export const tasks = (state = [], action) => {
   switch (action.type) {
     case ADD_TASK:
       return addTask(state, action.payload);

@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { Input } from '../../../common/modules/Input/Input';
 import { useDispatch } from 'react-redux';
-import { setSelectTask } from '../../../store/selects/actionsSelects';
+import { setSelectTask } from '../../../store/selectedEntity/actionsSelects';
 import { Checkbox } from '../../../common/modules/Checkbox/Checkbox';
 import { Button } from '../../../common/modules/Button/Button';
 import { Icon } from '../../../common/modules/Icons/Icons';
@@ -47,13 +47,25 @@ export const BlockTask = ({value, id, selected, status}) => {
       <Checkbox onChange={handleChangeSelect} checked={selected} />
       <Input value={value} disabled />
       <div className={s.blockTask__button} >
-        <Button color='warning' onClick={handleRejectedTask} disabled={isStatusButtonWarning} >
-          <Icon className={s.blockTask__icon_rejected} type={REJECTED}/>
+        <Button
+          color='warning'
+          onClick={handleRejectedTask}
+          disabled={isStatusButtonWarning}
+        >
+          <Icon className={s.blockTask__icon_rejected} type={REJECTED} />
         </Button>
-        <Button color='info' onClick={handleTodoTask} disabled={isStatusButtonInfo} >
+        <Button
+          color='info'
+          onClick={handleTodoTask}
+          disabled={isStatusButtonInfo}
+        >
           <Icon type={IN_PROGRESS} />
         </Button>
-        <Button color='success' onClick={handleCompletedTask} disabled={isStatusButtonSuccess} >
+        <Button
+          color='success'
+          onClick={handleCompletedTask}
+          disabled={isStatusButtonSuccess}
+        >
           <Icon type={COMPLETED} />
         </Button>
       </div>

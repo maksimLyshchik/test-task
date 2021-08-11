@@ -2,8 +2,8 @@ import React, { useCallback, useMemo } from 'react';
 import { BlockTask } from './BlockTasks/BlockTask';
 import { useDispatch, useSelector } from 'react-redux';
 import { Checkbox } from '../../common/modules/Checkbox/Checkbox';
-import { setSelectTask } from '../../store/selects/actionsSelects';
-import { selectCheckedTask } from '../../store/selects/selectorSelects';
+import { setSelectTask } from '../../store/selectedEntity/actionsSelects';
+import { selectCheckedTask } from '../../store/selectedEntity/selectorSelects';
 import { selectTasks } from '../../store/tasks/selectorTasks';
 import s from './TasksList.module.css';
 
@@ -32,9 +32,9 @@ export const TasksList = () => {
 
   return (
     <div className={s.TasksList} >
-      <div className={s.TasksList__option} >
+      <div className={s.TasksList__header} >
         <Checkbox name='checkedAll' onChange={handleChange} checked={checkedAll} />
-        <span className={s.TasksList__option_name} >Selected all tasks</span>
+        <span className={s.TasksList__header_name} >Selected all tasks</span>
       </div>
       {tasks.map(item => <BlockTask {...item} selected={selectedTasks[item.id]} />)}
     </div>

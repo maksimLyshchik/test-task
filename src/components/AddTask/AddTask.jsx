@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setSelectTask } from '../../store/selects/actionsSelects';
+import { setSelectTask } from '../../store/selectedEntity/actionsSelects';
 import { getId } from '../../helpers/getUniqId';
 import { Button } from '../../common/modules/Button/Button';
 import { Input } from '../../common/modules/Input/Input';

@@ -10,14 +10,14 @@
   background-color: var(--white-blue-tint);
 }
 
-.TasksList__option {
+.TasksList__header {
   display: flex;
   min-height: 40px;
   padding-left: 12px;
   padding-bottom: 12px;
 }
 
-.TasksList__option_name {
+.TasksList__header_name {
   padding: 10px;
 
   font-size: 1.2em;
