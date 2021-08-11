@@ -1,0 +1,39 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 6px;
+  border: 2px solid var(--white-gray-tint);
+  min-width: 100px;
+  min-height: 40px;
+
+  text-transform: uppercase;
+  background-color: var(--main-blue);
+  color: var(--white);
+
+  cursor: pointer;
+}
+
+.button:disabled {
+  background-color: var(--gray-disable);
+
+  cursor: not-allowed;
+}
+
+.button_primary {
+  background-color: var(--main-blue);
+  color: var(--white-gray-tint);
+}
+
+.button_warning {
+  background-color: var(--red-delete);
+}
+
+.button_success {
+  background-color: var(--green-complete);
+}
+
+.button_info {
+  background-color: var(--yelow-info);
+}

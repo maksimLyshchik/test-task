@@ -2,9 +2,9 @@ import s from './Button.module.css';
 
 const buttonColors = {
   primary: s.button_primary,
-  rejected: s.button_delete,
-  completed: s.button_complete,
-  todo: s.button_progress,
+  warning: s.button_warning,
+  success: s.button_success,
+  info: s.button_info,
 };
 
 export const Button = ({color = 'primary', ...props}) => {

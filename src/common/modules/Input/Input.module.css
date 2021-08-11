@@ -1,6 +1,6 @@
 .input {
   min-height: 36px;
-  min-width: 500px;
+  min-width: 200px;
 }
 
 .label {
@@ -8,5 +8,5 @@
 }
 
 .input:disabled .input_disabled {
-  background-color: var(--bg-color-disable);
+  background-color: var(--gray-disable);
 }

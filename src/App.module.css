@@ -1,14 +1,17 @@
 :root {
-  --bg-color: #0764e5;
-  --bg-color-disable: #cbd0d2;
-  --bg-color-delete: #e04545;
-  --bg-color-complete: #24b226;
-  --bg-color-progress: #d5a800;
-  --bg-color-list: #c5daf8;
-  --check-bg-color-disable: #87adf6;
-  --element-bg-color: #ffffff;
-  --brd-color: #dcdce7;
-  --block-task-br-color: #578cd5;
+  --main-blue: #0764e5;
+  --gray-disable: #cbd0d2;
+  --red-delete: #e04545;
+  --light-red-delete: #a67272;
+  --green-complete: #24b226;
+  --light-green-complete: #aecca3;
+  --yelow-info: #e1c404;
+  --light-yelow-info: #dad1a9;
+  --white-blue-tint: #c5daf8;
+  --light-blue: #87adf6;
+  --white: #ffffff;
+  --white-gray-tint: #dcdce7;
+  --blue-dull: #578cd5;
 }
 
 .app_section {

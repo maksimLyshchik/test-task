@@ -3,11 +3,11 @@
   flex-direction: column;
 
   padding: 10px 10px 0 10px;
-  min-width: 900px;
-  border: 2px solid var(--block-task-br-color);
+  min-width: 610px;
+  border: 2px solid var(--blue-dull);
   border-radius: 8px;
 
-  background-color: var(--bg-color-list);
+  background-color: var(--white-blue-tint);
 }
 
 .TasksList__option {
@@ -21,6 +21,6 @@
   padding: 10px;
 
   font-size: 1.2em;
-  color: var(--bg-color);
+  color: var(--main-blue);
   text-transform: uppercase;
 }
