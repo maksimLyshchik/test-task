@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { RadioButton } from '../../../common/modules/RadioButton/RadioButton';
 import { useDispatch } from 'react-redux';
 import { setFilterTasks } from '../../../store/filter/actionsFilter';
-import { COMPLETED, IN_PROGRESS, REJECTED } from '../../../common/constants/constantsTasks/constantsTasks';
+import { COMPLETED, IN_PROGRESS, REJECTED, TODO } from '../../../common/constants/constantsTasks/constantsTasks';
 import s from './TasksFilter.module.css';
 
 export const TasksFilter = () => {
@@ -10,6 +10,7 @@ export const TasksFilter = () => {
 
   const handleChangeFilter = useCallback(({target}) => {
     const {value} = target;
+
     dispatch(setFilterTasks({condition: value}));
   }, [dispatch]);
 
@@ -20,6 +21,7 @@ export const TasksFilter = () => {
         <RadioButton onClick={handleChangeFilter} value={COMPLETED} name='filter'>completed</RadioButton>
         <RadioButton onClick={handleChangeFilter} value={REJECTED} name='filter' >rejected</RadioButton>
         <RadioButton onClick={handleChangeFilter} value={IN_PROGRESS} name='filter' >in progress</RadioButton>
+        <RadioButton onClick={handleChangeFilter} value={TODO} name='filter' >show all</RadioButton>
       </div>
     </div>
   );

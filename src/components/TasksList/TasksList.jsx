@@ -64,7 +64,7 @@ export const TasksList = () => {
         </div>
         <TasksFilter />
       </div>
-      {filtredTasks.map(item => <BlockTask {...item} selected={selectedTasks[item.id]}/>)}
+      {filtredTasks.map(item => <BlockTask {...item} selected={selectedTasks[item.id]} />)}
     </div>
   );
 };

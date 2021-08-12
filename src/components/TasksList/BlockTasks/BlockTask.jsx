@@ -5,7 +5,7 @@ import { setSelectTask } from '../../../store/selectedEntity/actionsSelects';
 import { Checkbox } from '../../../common/modules/Checkbox/Checkbox';
 import { Button } from '../../../common/modules/Button/Button';
 import { Icon } from '../../../common/modules/Icons/Icons';
-import { completedTask, rejectedTask, todoTask } from '../../../store/tasks/actionsTasks';
+import { completedTask, rejectedTask, taskChangeTime, todoTask } from '../../../store/tasks/actionsTasks';
 import { COMPLETED, IN_PROGRESS, REJECTED } from '../../../common/constants/constantsTasks/constantsTasks';
 import s from './BlockTasks.module.css';
 
@@ -26,14 +26,17 @@ export const BlockTask = ({value, id, selected, status}) => {
 
   const handleRejectedTask = useCallback(() => {
     dispatch(rejectedTask(id));
+    dispatch(taskChangeTime(id));
   }, [dispatch, id]);
 
   const handleCompletedTask = useCallback(() => {
     dispatch(completedTask(id));
+    dispatch(taskChangeTime(id));
   }, [dispatch, id]);
 
   const handleTodoTask = useCallback(() => {
     dispatch(todoTask(id));
+    dispatch(taskChangeTime(id));
   }, [dispatch, id]);
 
   const isStatusButtonWarning = status === REJECTED || status === COMPLETED;
