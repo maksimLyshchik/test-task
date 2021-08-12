@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { taskReducer } from './reducer';
+import { tasks } from './tasks/reducerTasks';
+import { selectedTasks } from './selectedEntity/reducerSelects';
 
 export default configureStore({
   reducer: {
-    tasks: taskReducer,
+    tasks: tasks,
+    selects: selectedTasks,
   }
 });

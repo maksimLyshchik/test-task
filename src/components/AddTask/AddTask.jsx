@@ -1,17 +1,21 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addTask } from '../../store/actions';
+import { setSelectTask } from '../../store/selectedEntity/actionsSelects';
 import { getId } from '../../helpers/getUniqId';
-import { Button } from '../common/Button/Button';
-import { Input } from '../common/Input/Input';
+import { Button } from '../../common/modules/Button/Button';
+import { Input } from '../../common/modules/Input/Input';
+import { addTask } from '../../store/tasks/actionsTasks';
+import { TODO } from '../../common/constants/constantsTasks/constantsTasks';
+import s from './AddTask.module.css';
 
 export const AddTask = () => {
   const dispatch = useDispatch();
   const [task, setTask] = useState();
 
   const handleSubmitTask = useCallback(() => {
-    console.log('event');
-    dispatch(addTask({value: task, id: getId(), time: Date.now()}));
+    const id = getId();
+    dispatch(addTask({value: task, id, time: Date.now(), status: TODO}));
+    dispatch(setSelectTask({[id]: false}));
   }, [dispatch, task]);
 
   const handleChangeValue = useCallback(({target}) => {
@@ -20,9 +24,9 @@ export const AddTask = () => {
   }, []);
 
   return (
-    <div>
-      <Input onChange={handleChangeValue} placeholder='Enter task'/>
-      <Button onClick={handleSubmitTask}>
+    <div className={s.add_task} >
+      <Input onChange={handleChangeValue} placeholder='Enter task' />
+      <Button onClick={handleSubmitTask} >
         Add task
       </Button>
     </div>

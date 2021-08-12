@@ -1,0 +1,26 @@
+.TasksList {
+  display: flex;
+  flex-direction: column;
+
+  padding: 10px 10px 0 10px;
+  min-width: 610px;
+  border: 2px solid var(--blue-dull);
+  border-radius: 8px;
+
+  background-color: var(--white-blue-tint);
+}
+
+.TasksList__header {
+  display: flex;
+  min-height: 40px;
+  padding-left: 12px;
+  padding-bottom: 12px;
+}
+
+.TasksList__header_name {
+  padding: 10px;
+
+  font-size: 1.2em;
+  color: var(--main-blue);
+  text-transform: uppercase;
+}

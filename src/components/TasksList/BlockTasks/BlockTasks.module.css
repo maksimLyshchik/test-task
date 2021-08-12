@@ -1,0 +1,35 @@
+.blockTask {
+  display: flex;
+
+  margin-bottom: 12px;
+  border: 2px solid var(--blue-dull);
+  border-radius: 8px;
+  padding: 10px;
+
+  background-color: var(--white);
+}
+
+.blockTask__button {
+  display: flex;
+  justify-content: space-between;
+  min-width: 320px;
+}
+
+.blockTask__icon_rejected {
+  padding: 2px;
+}
+
+.completed {
+  border: 2px solid var(--green-complete);
+  background-color: var(--light-green-complete);
+}
+
+.rejected {
+  border: 2px solid var(--red-delete);
+  background-color: var(--light-red-delete);
+}
+
+.inProgress {
+  border: 2px solid var(--yelow-info);
+  background-color: var(--light-yelow-info);
+}
