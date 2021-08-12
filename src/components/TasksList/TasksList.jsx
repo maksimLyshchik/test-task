@@ -6,12 +6,23 @@ import { setSelectTask } from '../../store/selectedEntity/actionsSelects';
 import { selectCheckedTask } from '../../store/selectedEntity/selectorSelects';
 import { selectTasks } from '../../store/tasks/selectorTasks';
 import { TasksFilter } from './TasksFilter/TasksFilter';
+import {
+  selectCompletedTasks,
+  selectFilter,
+  selectInProgressTasks,
+  selectRejectedTasks
+} from '../../store/filter/selectorFilter';
+import { COMPLETED, IN_PROGRESS, REJECTED } from '../../common/constants/constantsTasks/constantsTasks';
 import s from './TasksList.module.css';
 
 export const TasksList = () => {
   const dispatch = useDispatch();
   const tasks = useSelector(selectTasks);
   const selectedTasks = useSelector(selectCheckedTask);
+  const filterStatus = useSelector(selectFilter);
+  const completedTasks = useSelector(selectCompletedTasks);
+  const rejectedTasks = useSelector(selectRejectedTasks);
+  const inProgressTasks = useSelector(selectInProgressTasks);
 
   const handleChange = useCallback(({target}) => {
     const {checked} = target;
@@ -31,6 +42,19 @@ export const TasksList = () => {
     return Boolean(length) && length === taskIds.filter(value => value).length;
   }, [selectedTasks]);
 
+  const filtredTasks = useMemo(() => {
+    const conditionsFilter = filterStatus.condition;
+
+    if (conditionsFilter === COMPLETED) {
+      return completedTasks;
+    } else if (conditionsFilter === REJECTED) {
+      return rejectedTasks;
+    } else if (conditionsFilter === IN_PROGRESS) {
+      return inProgressTasks;
+    }
+    return tasks;
+  }, [completedTasks, filterStatus, inProgressTasks, rejectedTasks, tasks]);
+
   return (
     <div className={s.TasksList} >
       <div className={s.TasksList__header} >
@@ -40,7 +64,7 @@ export const TasksList = () => {
         </div>
         <TasksFilter />
       </div>
-      {tasks.map(item => <BlockTask {...item} selected={selectedTasks[item.id]} />)}
+      {filtredTasks.map(item => <BlockTask {...item} selected={selectedTasks[item.id]}/>)}
     </div>
   );
 };
