@@ -55,6 +55,15 @@ export const TasksList = () => {
     return tasks;
   }, [completedTasks, filterStatus, inProgressTasks, rejectedTasks, tasks]);
 
+  const sortedTasks = filtredTasks.sort((itemPrev, itemPres) => {
+    if (itemPrev.timeChange > itemPres.timeChange) {
+      return 1
+    } else if (itemPrev.timeChange < itemPres.timeChange) {
+      return -1
+    }
+    return 0
+  });
+
   return (
     <div className={s.TasksList} >
       <div className={s.TasksList__header} >
@@ -64,7 +73,7 @@ export const TasksList = () => {
         </div>
         <TasksFilter />
       </div>
-      {filtredTasks.map(item => <BlockTask {...item} selected={selectedTasks[item.id]} />)}
+      {sortedTasks.map(item => <BlockTask {...item} selected={selectedTasks[item.id]} />)}
     </div>
   );
 };
