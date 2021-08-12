@@ -57,11 +57,11 @@ export const TasksList = () => {
 
   const sortedTasks = filtredTasks.sort((itemPrev, itemPres) => {
     if (itemPrev.timeChange > itemPres.timeChange) {
-      return 1
+      return 1;
     } else if (itemPrev.timeChange < itemPres.timeChange) {
-      return -1
+      return -1;
     }
-    return 0
+    return 0;
   });
 
   return (
