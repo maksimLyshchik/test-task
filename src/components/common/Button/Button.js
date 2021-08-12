@@ -1,5 +1,4 @@
 import s from './Button.module.css';
-import { useMemo } from 'react';
 
 const buttonType = {
   disabled: s.button_disable,
@@ -8,9 +7,8 @@ const buttonType = {
 
 export const Button = ({type = 'primary', ...props}) => {
   const isDisabled = type === 'disabled';
-  const composeStyle = useMemo(() => [s.button, buttonType[type]].join(' '), [type]);
 
   return (
-    <button className={composeStyle} disabled={isDisabled} {...props}>{props.children}</button>
+    <button className={`${s.button} ${buttonType[type]}`} disabled={isDisabled} {...props}>{props.children}</button>
   );
 };

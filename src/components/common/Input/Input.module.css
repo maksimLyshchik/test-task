@@ -1,5 +1,8 @@
-.input {
-  margin: 10px;
-  min-height: 35px;
+.input_style {
+  min-height: 36px;
   min-width: 500px;
+}
+
+.label_style {
+  margin: 0 10px 0 0;
 }
