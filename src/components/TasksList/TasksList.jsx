@@ -5,6 +5,7 @@ import { Checkbox } from '../../common/modules/Checkbox/Checkbox';
 import { setSelectTask } from '../../store/selectedEntity/actionsSelects';
 import { selectCheckedTask } from '../../store/selectedEntity/selectorSelects';
 import { selectTasks } from '../../store/tasks/selectorTasks';
+import { TasksFilter } from './TasksFilter/TasksFilter';
 import s from './TasksList.module.css';
 
 export const TasksList = () => {
@@ -33,8 +34,11 @@ export const TasksList = () => {
   return (
     <div className={s.TasksList} >
       <div className={s.TasksList__header} >
-        <Checkbox name='checkedAll' onChange={handleChange} checked={checkedAll} />
-        <span className={s.TasksList__header_name} >Selected all tasks</span>
+        <div className={s.TasksList__header_checkbox} >
+          <Checkbox name='checkedAll' onChange={handleChange} checked={checkedAll} />
+          <span className={s.TasksList__header_name} >Selected all tasks</span>
+        </div>
+        <TasksFilter />
       </div>
       {tasks.map(item => <BlockTask {...item} selected={selectedTasks[item.id]} />)}
     </div>

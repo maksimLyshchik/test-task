@@ -12,6 +12,7 @@
 
 .TasksList__header {
   display: flex;
+  align-items: flex-end;
   min-height: 40px;
   padding-left: 12px;
   padding-bottom: 12px;
@@ -23,4 +24,8 @@
   font-size: 1.2em;
   color: var(--main-blue);
   text-transform: uppercase;
+}
+
+.TasksList__header_checkbox {
+  display: flex;
 }
