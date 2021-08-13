@@ -18,6 +18,9 @@ const blockTaskClass = {
 
 export const BlockTask = ({value, id, selected, status}) => {
   const dispatch = useDispatch();
+  const isRejectedTask = status === REJECTED;
+  const isSuccessTask = status === COMPLETED;
+  const isStatusButtonInfo = isRejectedTask || isSuccessTask || status === IN_PROGRESS;
 
   const handleChangeSelect = useCallback(({target}) => {
     const {checked} = target;
@@ -38,12 +41,6 @@ export const BlockTask = ({value, id, selected, status}) => {
     dispatch(taskChangeTime(id));
   }, [dispatch, id]);
 
-  const isStatusButtonWarning = status === REJECTED || status === COMPLETED;
-
-  const isStatusButtonSuccess = status === REJECTED || status === COMPLETED;
-
-  const isStatusButtonInfo = status === REJECTED || status === COMPLETED || status === IN_PROGRESS;
-
   return (
     <div className={`${s.blockTask} ${blockTaskClass[status]}`} >
       <Checkbox onChange={handleChangeSelect} checked={selected} />
@@ -52,7 +49,7 @@ export const BlockTask = ({value, id, selected, status}) => {
         <Button
           color='warning'
           onClick={handleRejectedTask}
-          disabled={isStatusButtonWarning}
+          disabled={isRejectedTask || isSuccessTask}
         >
           <Icon className={s.blockTask__icon_rejected} type={REJECTED} />
         </Button>
@@ -66,7 +63,7 @@ export const BlockTask = ({value, id, selected, status}) => {
         <Button
           color='success'
           onClick={handleCompletedTask}
-          disabled={isStatusButtonSuccess}
+          disabled={isSuccessTask || isRejectedTask}
         >
           <Icon type={COMPLETED} />
         </Button>
