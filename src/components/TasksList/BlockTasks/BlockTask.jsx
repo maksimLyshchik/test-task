@@ -26,7 +26,6 @@ export const BlockTask = ({value, id, selected, status}) => {
 
   const handleRejectedTask = useCallback(() => {
     dispatch(rejectedTask(id));
-    dispatch(taskChangeTime(id));
   }, [dispatch, id]);
 
   const handleCompletedTask = useCallback(() => {

@@ -1,9 +1,10 @@
-import { COMPLETED, IN_PROGRESS, REJECTED } from '../../common/constants/constantsTasks/constantsTasks';
+import { createSelector } from 'reselect';
+import { selectTasks } from '../tasks/selectorTasks';
 
-export const selectFilter = store => store.filter;
+const selectFilter = store => store.filter;
 
-export const selectCompletedTasks = store => Object.values(store.tasks).filter(item => item.status === COMPLETED);
-
-export const selectRejectedTasks = store => Object.values(store.tasks).filter(item => item.status === REJECTED);
-
-export const selectInProgressTasks = store => Object.values(store.tasks).filter(item => item.status === IN_PROGRESS);
+export const selectFiltredTasks = createSelector(
+  selectTasks,
+  selectFilter,
+  (tasks, filter) => tasks.filter(item => item.status === filter.condition && item)
+);

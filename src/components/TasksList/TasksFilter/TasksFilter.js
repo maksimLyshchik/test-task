@@ -21,7 +21,7 @@ export const TasksFilter = () => {
         <RadioButton onClick={handleChangeFilter} value={COMPLETED} name='filter'>completed</RadioButton>
         <RadioButton onClick={handleChangeFilter} value={REJECTED} name='filter' >rejected</RadioButton>
         <RadioButton onClick={handleChangeFilter} value={IN_PROGRESS} name='filter' >in progress</RadioButton>
-        <RadioButton onClick={handleChangeFilter} value={TODO} name='filter' >show all</RadioButton>
+        <RadioButton onClick={handleChangeFilter} value={TODO} name='filter' >show todo</RadioButton>
       </div>
     </div>
   );

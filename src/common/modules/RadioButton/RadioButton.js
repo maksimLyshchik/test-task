@@ -1,13 +1,13 @@
 import React from 'react';
 import s from './RadioButton.module.css';
 
-export const RadioButton = ({...props}) => {
+export const RadioButton = ({name, value, onClick, children, ...props}) => {
 
   return (
     <div className={s.radioButton} >
-      <input className={s.radioButton__input} type='radio' name={props.name} value={props.value} onClick={props.onClick} />
       <label className={s.radioButton__label} >
-        {props.children}
+      <input className={s.radioButton__input} type='radio' name={name} value={value} onClick={onClick} {...props}/>
+        {children}
       </label>
     </div>
   );

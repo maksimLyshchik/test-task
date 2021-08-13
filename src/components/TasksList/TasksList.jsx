@@ -4,25 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Checkbox } from '../../common/modules/Checkbox/Checkbox';
 import { setSelectTask } from '../../store/selectedEntity/actionsSelects';
 import { selectCheckedTask } from '../../store/selectedEntity/selectorSelects';
-import { selectTasks } from '../../store/tasks/selectorTasks';
 import { TasksFilter } from './TasksFilter/TasksFilter';
-import {
-  selectCompletedTasks,
-  selectFilter,
-  selectInProgressTasks,
-  selectRejectedTasks
-} from '../../store/filter/selectorFilter';
-import { COMPLETED, IN_PROGRESS, REJECTED } from '../../common/constants/constantsTasks/constantsTasks';
+import { selectFiltredTasks } from '../../store/filter/selectorFilter';
 import s from './TasksList.module.css';
 
 export const TasksList = () => {
   const dispatch = useDispatch();
-  const tasks = useSelector(selectTasks);
   const selectedTasks = useSelector(selectCheckedTask);
-  const filterStatus = useSelector(selectFilter);
-  const completedTasks = useSelector(selectCompletedTasks);
-  const rejectedTasks = useSelector(selectRejectedTasks);
-  const inProgressTasks = useSelector(selectInProgressTasks);
+  const filtredTasks = useSelector(selectFiltredTasks);
 
   const handleChange = useCallback(({target}) => {
     const {checked} = target;
@@ -42,23 +31,10 @@ export const TasksList = () => {
     return Boolean(length) && length === taskIds.filter(value => value).length;
   }, [selectedTasks]);
 
-  const filtredTasks = useMemo(() => {
-    const conditionsFilter = filterStatus.condition;
-
-    if (conditionsFilter === COMPLETED) {
-      return completedTasks;
-    } else if (conditionsFilter === REJECTED) {
-      return rejectedTasks;
-    } else if (conditionsFilter === IN_PROGRESS) {
-      return inProgressTasks;
-    }
-    return tasks;
-  }, [completedTasks, filterStatus, inProgressTasks, rejectedTasks, tasks]);
-
   const sortedTasks = filtredTasks.sort((itemPrev, itemPres) => {
     if (itemPrev.timeChange > itemPres.timeChange) {
       return 1;
-    } else if (itemPrev.timeChange < itemPres.timeChange) {
+    } if (itemPrev.timeChange < itemPres.timeChange) {
       return -1;
     }
     return 0;
