@@ -1,11 +1,13 @@
 .blockTask {
   display: flex;
+  flex-direction: column;
 
   margin-bottom: 12px;
   border: 2px solid var(--blue-dull);
   border-radius: 8px;
   padding: 10px;
 
+  color: var(--main-blue);
   background-color: var(--white);
 }
 
@@ -32,4 +34,12 @@
 .inProgress {
   border: 2px solid var(--yelow-info);
   background-color: var(--light-yelow-info);
+}
+
+.blockTask__main {
+  display: flex;
+}
+
+.blockTask__block_time {
+  padding-left: 48px;
 }

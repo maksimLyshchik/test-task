@@ -16,7 +16,7 @@ const blockTaskClass = {
   in_progress: s.inProgress,
 };
 
-export const BlockTask = ({value, id, selected, status}) => {
+export const BlockTask = ({value, id, time, timeChange, selected, status}) => {
   const dispatch = useDispatch();
   const isRejectedTask = status === REJECTED;
   const isSuccessTask = status === COMPLETED;
@@ -43,30 +43,35 @@ export const BlockTask = ({value, id, selected, status}) => {
 
   return (
     <div className={`${s.blockTask} ${blockTaskClass[status]}`} >
-      <Checkbox onChange={handleChangeSelect} checked={selected} />
-      <Input value={value} disabled />
-      <div className={s.blockTask__button} >
-        <Button
-          color='warning'
-          onClick={handleRejectedTask}
-          disabled={isRejectedTask || isSuccessTask}
-        >
-          <Icon className={s.blockTask__icon_rejected} type={REJECTED} />
-        </Button>
-        <Button
-          color='info'
-          onClick={handleTodoTask}
-          disabled={isStatusButtonInfo}
-        >
-          <Icon type={IN_PROGRESS} />
-        </Button>
-        <Button
-          color='success'
-          onClick={handleCompletedTask}
-          disabled={isSuccessTask || isRejectedTask}
-        >
-          <Icon type={COMPLETED} />
-        </Button>
+      <div className={s.blockTask__main} >
+        <Checkbox onChange={handleChangeSelect} checked={selected} />
+        <Input value={value} disabled />
+        <div className={s.blockTask__button} >
+          <Button
+            color='warning'
+            onClick={handleRejectedTask}
+            disabled={isRejectedTask || isSuccessTask}
+          >
+            <Icon className={s.blockTask__icon_rejected} type={REJECTED} />
+          </Button>
+          <Button
+            color='info'
+            onClick={handleTodoTask}
+            disabled={isStatusButtonInfo}
+          >
+            <Icon type={IN_PROGRESS} />
+          </Button>
+          <Button
+            color='success'
+            onClick={handleCompletedTask}
+            disabled={isSuccessTask || isRejectedTask}
+          >
+            <Icon type={COMPLETED} />
+          </Button>
+        </div>
+      </div>
+      <div className={s.blockTask__block_time}>
+        <div>Time change task: {timeChange}</div>
       </div>
     </div>
   );
