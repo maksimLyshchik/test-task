@@ -1,8 +1,8 @@
 import React from 'react';
 import { TasksFilter } from './TasksFilter/TasksFilter';
-import s from './SideBar.module.css';
+import s from './SideBarLeft.module.css';
 
-export const SideBar = () => {
+export const SideBarLeft = () => {
 
   return (
     <div className={s.sideBar} >

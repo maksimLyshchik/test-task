@@ -34,12 +34,10 @@ export const BlockTask = ({value, id, time, timeChange, selected, status}) => {
 
   const handleCompletedTask = useCallback(() => {
     dispatch(completedTask(id));
-    dispatch(taskChangeTime(id));
   }, [dispatch, id]);
 
   const handleTodoTask = useCallback(() => {
     dispatch(todoTask(id));
-    dispatch(taskChangeTime(id));
   }, [dispatch, id]);
 
   return (
