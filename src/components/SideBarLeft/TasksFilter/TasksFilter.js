@@ -3,8 +3,8 @@ import { RadioButton } from '../../../common/modules/RadioButton/RadioButton';
 import { useDispatch } from 'react-redux';
 import { setFilterTasks } from '../../../store/filter/actionsFilter';
 import { COMPLETED, IN_PROGRESS, REJECTED, TODO } from '../../../common/constants/constantsTasks/constantsTasks';
-import s from './TasksFilter.module.css';
 import { INFO, PRIMARY, SUCCESS, WARNING } from '../../../common/constants/constantsColorButton/constantsColorButton';
+import s from './TasksFilter.module.css';
 
 export const TasksFilter = () => {
   const dispatch = useDispatch();
