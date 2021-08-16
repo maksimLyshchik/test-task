@@ -14,7 +14,14 @@ export const RadioButton = ({name, value, onClick, children, type = PRIMARY, ...
   return (
     <div className={s.radioButton} >
       <label className={`${s.radioButton__label} ${radioButtonColors[type]}`} >
-      <input className={`${s.radioButton__input} ${radioButtonColors[type]}`} type='radio' name={name} value={value} onClick={onClick} {...props}/>
+      <input
+        className={`${s.radioButton__input} ${radioButtonColors[type]}`}
+        type='radio'
+        name={name}
+        value={value}
+        onClick={onClick}
+        {...props}
+      />
         {children}
       </label>
     </div>

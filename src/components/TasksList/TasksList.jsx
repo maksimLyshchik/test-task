@@ -16,7 +16,7 @@ export const TasksList = () => {
   const selectedTasks = useSelector(selectCheckedTask);
   const filtredTasks = useSelector(selectFiltredTasks);
   const sortingRule = useSelector(selectSorting);
-  const typeIcons = sortingRule === ASCENDING ? 'arrow_down' : 'arrow_up';
+  const typeIcons = sortingRule === ASCENDING ? 'arrowDown' : 'arrowUp';
 
   const sortedTasks = filtredTasks.sort((itemPrev, itemPres) => {
     if (itemPrev.timeChange > itemPres.timeChange) {
