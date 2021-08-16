@@ -37,3 +37,14 @@
 .button_info {
   background-color: var(--yelow-info);
 }
+
+.button_transparent {
+  border: 2px solid var(--light-blue);
+  min-width: 40px;
+
+  background-color: transparent;
+}
+
+.button_transparent:hover {
+  background-color: var(--light-blue);
+}

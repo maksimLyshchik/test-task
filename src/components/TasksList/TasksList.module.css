@@ -12,10 +12,10 @@
 
 .TasksList__header {
   display: flex;
-  align-items: flex-end;
+  justify-content: space-between;
+
   min-height: 40px;
-  padding-left: 12px;
-  padding-bottom: 12px;
+  padding: 0 12px 12px 12px;
 }
 
 .TasksList__header_name {
@@ -28,4 +28,12 @@
 
 .TasksList__header_checkbox {
   display: flex;
+}
+
+.TasksList__header__controle_line {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  padding: 10px 0 0 0;
 }

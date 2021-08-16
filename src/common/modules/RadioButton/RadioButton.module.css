@@ -1,6 +1,7 @@
 .radioButton{
   display: flex;
   align-items: center;
+  margin-bottom: 5px;
 }
 
 .radioButton__label {
@@ -11,6 +12,8 @@
   padding: 4px;
 
   text-transform: uppercase;
+
+  cursor: pointer;
 }
 
 .radioButton__input {
@@ -20,15 +23,31 @@
   height: 16px;
   width: 16px;
 
-  border: 2px solid var(--main-blue);
+  border: 2px solid;
   margin: 0 5px 0 0;
 
   cursor: pointer;
 }
 
 .radioButton__input:checked {
-  border: 2px solid  var(--light-blue);
+  border: 2px solid;
   background-color: var(--main-blue);
 
   cursor: default;
+}
+
+.radioButton_primary {
+  color: var(--main-blue);
+}
+
+.radioButton_warning {
+  color: var(--red-delete);
+}
+
+.radioButton_success {
+  color: var(--green-complete);;
+}
+
+.radioButton_info {
+  color: var(--yelow-info);
 }

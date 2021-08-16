@@ -1,0 +1,11 @@
+.sideBar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 10px;
+
+  min-height: 100%;
+  min-width: 200px;
+
+  background-color: var(--light-blue);
+}

@@ -4,6 +4,8 @@ import { ALL } from '../../common/constants/constantsTasks/constantsTasks';
 
 export const selectFilter = store => store.filter;
 
+export const selectSorting = store => store.filter.sorting;
+
 export const selectFiltredTasks = createSelector(
   selectTasks,
   selectFilter,

@@ -3,18 +3,20 @@
   flex-direction: column;
   align-items: center;
 
+  width: 90%;
   border: 2px solid var(--main-blue);
   border-radius: 8px;
   padding: 4px;
 
   color: var(--main-blue);
+  background-color: var(--white);
 }
 
 .tasksFilter__name {
   text-transform: uppercase;
+  margin-bottom: 8px;
 }
 
 .tasksFilter__list {
-  display: flex;
   font-size: 0.8em;
 }

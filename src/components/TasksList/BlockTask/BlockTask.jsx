@@ -7,7 +7,8 @@ import { Button } from '../../../common/modules/Button/Button';
 import { Icon } from '../../../common/modules/Icons/Icons';
 import { completedTask, rejectedTask, taskChangeTime, todoTask } from '../../../store/tasks/actionsTasks';
 import { COMPLETED, IN_PROGRESS, REJECTED } from '../../../common/constants/constantsTasks/constantsTasks';
-import s from './BlockTasks.module.css';
+import { INFO, SUCCESS, WARNING } from '../../../common/constants/constantsColorButton/constantsColorButton';
+import s from './BlockTask.module.css';
 
 const blockTaskClass = {
   primary: s.blockTask,
@@ -48,21 +49,21 @@ export const BlockTask = ({value, id, time, timeChange, selected, status}) => {
         <Input value={value} disabled />
         <div className={s.blockTask__button} >
           <Button
-            color='warning'
+            color={WARNING}
             onClick={handleRejectedTask}
             disabled={isRejectedTask || isSuccessTask}
           >
             <Icon className={s.blockTask__icon_rejected} type={REJECTED} />
           </Button>
           <Button
-            color='info'
+            color={INFO}
             onClick={handleTodoTask}
             disabled={isStatusButtonInfo}
           >
             <Icon type={IN_PROGRESS} />
           </Button>
           <Button
-            color='success'
+            color={SUCCESS}
             onClick={handleCompletedTask}
             disabled={isSuccessTask || isRejectedTask}
           >
