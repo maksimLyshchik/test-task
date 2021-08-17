@@ -14,12 +14,12 @@
   --blue-dull: #578cd5;
 }
 
-.app_section {
+.app_main {
   display: flex;
   justify-content: center;
 }
 
-.app_section__container {
+.app_main__container {
   display: flex;
   flex-direction: column;
 }

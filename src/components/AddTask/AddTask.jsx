@@ -14,7 +14,7 @@ export const AddTask = () => {
 
   const handleSubmitTask = useCallback(() => {
     const id = getId();
-    dispatch(addTask({value: task, id, time: Date.now(), status: TODO}));
+    dispatch(addTask({value: task, id, time: Date.now(), status: TODO, timeChange: Date.now()}));
     dispatch(setSelectTask({[id]: false}));
   }, [dispatch, task]);
 

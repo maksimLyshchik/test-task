@@ -12,6 +12,7 @@ const rejectTask = (state, id) => {
   const newTask = {
     ...state[id],
     status: REJECTED,
+    timeChange: Date.now(),
   };
   return {...state, [id]: newTask};
 };
@@ -20,6 +21,7 @@ const completeTask = (state, id) => {
   const newTask = {
     ...state[id],
     status: COMPLETED,
+    timeChange: Date.now(),
   };
   return {...state, [id]: newTask};
 };
@@ -28,6 +30,7 @@ const todoTask = (state, id) => {
   const newTask = {
     ...state[id],
     status: IN_PROGRESS,
+    timeChange: Date.now(),
   };
   return {...state, [id]: newTask};
 };
