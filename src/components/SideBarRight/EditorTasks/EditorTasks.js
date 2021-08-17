@@ -11,7 +11,7 @@ import s from './EditTasks.module.css';
 
 export const EditorTasks = () => {
   const dispatch = useDispatch();
-  const markTasksId = useSelector(selectMarkedTask)
+  const markTasksId = useSelector(selectMarkedTask);
 
   const handleRejectedTask = useCallback(() => {
 
