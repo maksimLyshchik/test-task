@@ -15,23 +15,26 @@ export const EditorTasks = () => {
 
   const handleRejectedTask = useCallback(() => {
 
-    markTasksId.map(id => dispatch(rejectedTask(id)));
-
-    markTasksId.map(id => dispatch(setSelectTask({[id]: false})));
+    markTasksId.forEach((id) => {
+      dispatch(rejectedTask(id));
+      dispatch(setSelectTask({[id]: false}));
+    });
   }, [dispatch, markTasksId]);
 
   const handleCompletedTask = useCallback(() => {
 
-    markTasksId.map(id => dispatch(completedTask(id)));
-
-    markTasksId.map(id => dispatch(setSelectTask({[id]: false})));
+    markTasksId.forEach((id) => {
+      dispatch(completedTask(id));
+      dispatch(setSelectTask({[id]: false}));
+    });
   }, [dispatch, markTasksId]);
 
   const handleTodoTask = useCallback(() => {
 
-    markTasksId.map(id => dispatch(todoTask(id)));
-
-    markTasksId.map(id => dispatch(setSelectTask({[id]: false})));
+    markTasksId.forEach((id) => {
+      dispatch(todoTask(id));
+      dispatch(setSelectTask({[id]: false}));
+    });
   }, [dispatch, markTasksId]);
 
   return (
