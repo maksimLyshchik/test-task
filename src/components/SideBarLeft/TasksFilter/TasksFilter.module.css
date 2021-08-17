@@ -3,10 +3,11 @@
   flex-direction: column;
   align-items: center;
 
-  width: 90%;
+  flex: 1 0 100%;
+
   border: 2px solid var(--main-blue);
   border-radius: 8px;
-  padding: 4px;
+  padding: 8px;
 
   color: var(--main-blue);
   background-color: var(--white);
@@ -18,5 +19,11 @@
 }
 
 .tasksFilter__list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  min-width: 90%;
+
   font-size: 0.8em;
 }

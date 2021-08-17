@@ -8,6 +8,7 @@ import { Icon } from '../../../common/modules/Icons/Icons';
 import { completedTask, rejectedTask, taskChangeTime, todoTask } from '../../../store/tasks/actionsTasks';
 import { COMPLETED, IN_PROGRESS, REJECTED } from '../../../common/constants/constantsTasks/constantsTasks';
 import { INFO, SUCCESS, WARNING } from '../../../common/constants/constantsColorButton/constantsColorButton';
+import { TextArea } from '../../../common/modules/TextArea/TextArea';
 import s from './BlockTask.module.css';
 
 const blockTaskClass = {
@@ -44,7 +45,7 @@ export const BlockTask = ({value, id, time, timeChange, selected, status}) => {
     <div className={`${s.blockTask} ${blockTaskClass[status]}`} >
       <div className={s.blockTask__main} >
         <Checkbox onChange={handleChangeSelect} checked={selected} />
-        <Input value={value} disabled />
+        <TextArea value={value} disabled />
         <div className={s.blockTask__button} >
           <Button
             color={WARNING}

@@ -3,10 +3,10 @@
   flex-direction: column;
   align-items: center;
 
-  width: 90%;
   border: 2px solid var(--main-blue);
   border-radius: 8px;
-  padding: 4px;
+  padding: 8px;
+  margin-bottom: 10px;
 
   color: var(--main-blue);
   background-color: var(--white);
