@@ -1,7 +1,4 @@
 .blockTask {
-  display: flex;
-  flex-direction: column;
-
   margin-bottom: 12px;
   border: 2px solid var(--blue-dull);
   border-radius: 8px;

@@ -18,8 +18,3 @@
   display: flex;
   justify-content: center;
 }
-
-.app_section__container {
-  display: flex;
-  flex-direction: column;
-}
