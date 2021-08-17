@@ -51,3 +51,7 @@
 .radioButton_info {
   color: var(--yelow-info);
 }
+
+.radioButton__label:checked {
+  background-color: var(--main-blue);
+}

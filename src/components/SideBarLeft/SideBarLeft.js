@@ -20,8 +20,8 @@ export const SideBarLeft = () => {
       <Button color='transparent' className={s.sideBar__button_expand} onClick={handleSideBarPosition} >
         <Icon type={typeIcons} width='20px' height='20px'/>
       </Button>
-      <EditorTasks />
       <TasksFilter />
+      <EditorTasks />
     </div>
   );
 };

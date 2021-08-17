@@ -44,7 +44,7 @@ export const BlockTask = ({value, id, time, timeChange, selected, status}) => {
   return (
     <div className={`${s.blockTask} ${blockTaskClass[status]}`} >
       <div className={s.blockTask__main} >
-        <Checkbox onChange={handleChangeSelect} checked={selected} />
+        <Checkbox onChange={handleChangeSelect} checked={selected} disabled={isRejectedTask || isSuccessTask}/>
         <TextArea value={value} disabled />
         <div className={s.blockTask__button} >
           <Button

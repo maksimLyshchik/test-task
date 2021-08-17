@@ -39,12 +39,12 @@
 }
 
 .button_transparent {
-  border: 2px solid var(--light-blue);
+  border: 2px solid var(--main-blue);
   min-width: 40px;
 
-  background-color: transparent;
+  background-color: var(--light-blue);
 }
 
 .button_transparent:hover {
-  background-color: var(--light-blue);
+  background-color: var(--main-blue);
 }

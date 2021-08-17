@@ -17,10 +17,16 @@
 
   height: 72px;
   width: 40px;
-  border: 2px solid var(--blue-dull);
+  border: 2px solid var(--main-blue);
   border-radius: 8px;
 
-  background-color: var(--white-blue-tint);
+  background-color: var(--light-blue);
+
+  cursor: pointer;
+}
+
+.sideBar__button_expand:hover {
+  background-color: var(--main-blue);
 }
 
 .collapsed {

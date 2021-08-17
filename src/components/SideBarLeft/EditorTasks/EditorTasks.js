@@ -1,17 +1,18 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Button } from '../../../common/modules/Button/Button';
 import { INFO, SUCCESS, WARNING } from '../../../common/constants/constantsColorButton/constantsColorButton';
 import { Icon } from '../../../common/modules/Icons/Icons';
 import { COMPLETED, IN_PROGRESS, REJECTED } from '../../../common/constants/constantsTasks/constantsTasks';
 import { completedTask, rejectedTask, todoTask } from '../../../store/tasks/actionsTasks';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectMarkedTask } from '../../../store/selectedEntity/selectorSelects';
+import { selectCheckedTask, selectMarkedTask } from '../../../store/selectedEntity/selectorSelects';
 import { setSelectTask } from '../../../store/selectedEntity/actionsSelects';
 import s from './EditTasks.module.css';
 
 export const EditorTasks = () => {
   const dispatch = useDispatch();
   const markTasksId = useSelector(selectMarkedTask);
+  const selectedTasks = useSelector(selectCheckedTask);
 
   const handleRejectedTask = useCallback(() => {
 
@@ -37,8 +38,14 @@ export const EditorTasks = () => {
     });
   }, [dispatch, markTasksId]);
 
+  const handleEditorPosition = useMemo( () => {
+    const editorPosition = Object.values(selectedTasks).filter(item => item === true).length;
+
+    return editorPosition ? s.expanded : s.collapsed;
+  }, [selectedTasks]);
+
   return (
-    <div className={s.tasksEditor}>
+    <div className={`${s.tasksEditor} ${handleEditorPosition}`} >
       <span className={s.tasksEditor__name}>Tasks manager</span>
       <div className={s.tasksEditor__panel}>
         <Button color={WARNING} onClick={handleRejectedTask} >

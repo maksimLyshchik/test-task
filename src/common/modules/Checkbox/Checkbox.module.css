@@ -56,3 +56,10 @@
   border-width: 0 4px 4px 0;
   -webkit-transform: rotate(45deg);
 }
+
+.checkbox_primary input:disabled~ .checkmark {
+  background-color: var(--gray-disable);
+  border: 2px solid var(--white-gray-tint);
+
+  cursor: not-allowed;
+}
