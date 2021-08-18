@@ -14,8 +14,7 @@ export const RadioButton = ({name, value, onClick, children, type = PRIMARY, id,
   return (
     <div className={s.radioButton} >
       <input
-        className={`${s.radioButton__input}
-        ${radioButtonColors[type]}`}
+        className={`${s.radioButton__input} ${radioButtonColors[type]}`}
         type='radio'
         name={name}
         value={value}

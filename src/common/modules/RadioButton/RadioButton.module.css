@@ -1,14 +1,14 @@
 .radioButton{
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
 .radioButton__label {
   display: flex;
   align-items: center;
 
-  margin-right: 5px;
+  margin-right: 6px;
   padding: 4px;
 
   text-transform: uppercase;
@@ -24,7 +24,7 @@
   width: 16px;
 
   border: 2px solid;
-  margin: 0 10px 0 0;
+  margin-right: 10px;
 
   cursor: pointer;
 }
