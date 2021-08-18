@@ -15,7 +15,6 @@ export const EditorTasks = () => {
   const selectedTasks = useSelector(selectCheckedTask);
 
   const handleRejectedTask = useCallback(() => {
-
     markTasksId.forEach((id) => {
       dispatch(rejectedTask(id));
       dispatch(setSelectTask({[id]: false}));
@@ -23,7 +22,6 @@ export const EditorTasks = () => {
   }, [dispatch, markTasksId]);
 
   const handleCompletedTask = useCallback(() => {
-
     markTasksId.forEach((id) => {
       dispatch(completedTask(id));
       dispatch(setSelectTask({[id]: false}));
@@ -31,15 +29,14 @@ export const EditorTasks = () => {
   }, [dispatch, markTasksId]);
 
   const handleTodoTask = useCallback(() => {
-
     markTasksId.forEach((id) => {
       dispatch(todoTask(id));
       dispatch(setSelectTask({[id]: false}));
     });
   }, [dispatch, markTasksId]);
 
-  const handleEditorPosition = useMemo( () => {
-    const editorPosition = Object.values(selectedTasks).filter(item => item === true).length;
+  const handleEditorPosition = useMemo(() => {
+    const editorPosition = Object.values(selectedTasks).filter(item => item).length;
 
     return editorPosition ? s.expanded : s.collapsed;
   }, [selectedTasks]);

@@ -9,7 +9,7 @@ export const SideBarLeft = () => {
   const [sideBarPosition, setSideBarPosition] = useState(s.collapsed);
   const typeIcons = sideBarPosition === s.collapsed ? 'arrowRight' : 'arrowLeft';
 
-  const handleSideBarPosition = useCallback( () => {
+  const handleSideBarPosition = useCallback(() => {
     const changeSideBarPosition = sideBarPosition === s.collapsed ? s.expanded : s.collapsed;
 
     setSideBarPosition(changeSideBarPosition);

@@ -31,7 +31,8 @@ export const TasksList = () => {
   const handleChange = useCallback(({target}) => {
     const {checked} = target;
     let selectAll = {};
-    filtredTasks.map(item => item.id).forEach(key => selectAll[key] = checked);
+    console.log(filtredTasks);
+    filtredTasks.forEach(({id}) => selectAll[id] = checked);
     dispatch(setSelectTask(selectAll));
   }, [dispatch, filtredTasks]);
 
@@ -40,10 +41,7 @@ export const TasksList = () => {
       return false;
     }
 
-    const taskIds = filtredTasks.map(item => item.id);
-    const {length} = taskIds;
-
-    return Boolean(length) && length === Object.values(selectedTasks).filter(value => value).length;
+    return Boolean(filtredTasks.length) && filtredTasks.length === Object.values(selectedTasks).filter(value => value).length;
   }, [selectedTasks, filtredTasks]);
 
   const handleChangeSort = useCallback(() => {
