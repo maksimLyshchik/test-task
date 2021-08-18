@@ -3,9 +3,16 @@
   flex-direction: column;
   align-items: center;
 
-  position: absolute;
-  left: 12px;
+  position: relative;
+  top: 180px;
+  left: -992px;
 
+  opacity: 1;
+  transition: all 0.6s;
+  transform: translate(0px, 0px);
+
+  height: 186px;
+  min-width: 130px;
   border: 2px solid var(--main-blue);
   border-radius: 8px;
   padding: 8px;
@@ -15,6 +22,7 @@
 }
 
 .tasksEditor__name {
+  text-align: center;
   text-transform: uppercase;
   margin-bottom: 8px;
 }
@@ -28,11 +36,8 @@
 }
 
 .collapsed {
-  bottom: -154px;
-  transition: bottom 0.8s;
-}
-
-.expanded {
-  bottom: 10px;
-  transition: bottom 0.8s;
+  visibility: hidden;
+  opacity: 0;
+  transform: translate(0px, 250%);
+  transition: all 0.6s;
 }

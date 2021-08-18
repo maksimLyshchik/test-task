@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
 import { TasksFilter } from './TasksFilter/TasksFilter';
-import { EditorTasks } from './EditorTasks/EditorTasks';
 import { Button } from '../../common/modules/Button/Button';
 import { Icon } from '../../common/modules/Icons/Icons';
 import s from './SideBarLeft.module.css';
@@ -21,7 +20,6 @@ export const SideBarLeft = () => {
         <Icon type={typeIcons} width='20px' height='20px'/>
       </Button>
       <TasksFilter />
-      <EditorTasks />
     </div>
   );
 };
