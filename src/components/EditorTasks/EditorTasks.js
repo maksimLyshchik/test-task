@@ -13,6 +13,7 @@ export const EditorTasks = () => {
   const dispatch = useDispatch();
   const markTasksId = useSelector(selectMarkedTask);
   const selectedTasks = useSelector(selectCheckedTask);
+  const isVisebled = Object.values(selectedTasks).filter(item => item).length;
 
   const handleRejectedTask = useCallback(() => {
     markTasksId.forEach((id) => {
@@ -36,10 +37,12 @@ export const EditorTasks = () => {
   }, [dispatch, markTasksId]);
 
   const handleEditorPosition = useMemo(() => {
-    const editorPosition = Object.values(selectedTasks).filter(item => item).length;
-
-    return editorPosition ? s.expanded : s.collapsed;
+    return isVisebled && s.collapsed;
   }, [selectedTasks]);
+
+  if(!isVisebled) {
+    return null;
+  }
 
   return (
     <div className={`${s.tasksEditor} ${handleEditorPosition}`} >

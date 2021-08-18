@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
 
-  position: absolute;
+  position: fixed;
   left: -180px;
   top: 0;
 
@@ -10,22 +10,30 @@
   min-width: 180px;
 }
 
-.sideBar__button_expand {
+.sideBar__button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   position: absolute;
-  left: 170px;
+  left: 160px;
   top: 60px;
 
-  height: 72px;
-  width: 40px;
+  height: 50px;
+  width: 72px;
   border: 2px solid var(--main-blue);
   border-radius: 8px;
 
+  color: var(--main-blue);
   background-color: var(--light-blue);
+  text-transform: uppercase;
 
   cursor: pointer;
+  transform: rotate(-90deg);
 }
 
-.sideBar__button_expand:hover {
+.sideBar__button:hover {
   background-color: var(--main-blue);
 }
 

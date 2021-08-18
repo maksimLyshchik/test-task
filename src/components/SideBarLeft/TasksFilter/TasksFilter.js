@@ -16,15 +16,57 @@ export const TasksFilter = () => {
   }, [dispatch]);
 
   return (
-    <div className={s.tasksFilter} >
-      <span className={s.tasksFilter__name} >filter </span>
-      <div className={s.tasksFilter__list} >
-        <RadioButton onClick={handleChangeFilter} value={COMPLETED} name='filter' type={SUCCESS} id={SUCCESS} for={SUCCESS} >completed</RadioButton>
-        <RadioButton onClick={handleChangeFilter} value={REJECTED} name='filter' type={WARNING} id={WARNING} for={WARNING} >rejected</RadioButton>
-        <RadioButton onClick={handleChangeFilter} value={IN_PROGRESS} name='filter' type={INFO} id={INFO} for={INFO} >in progress</RadioButton>
-        <RadioButton onClick={handleChangeFilter} value={TODO} name='filter' type={PRIMARY} id={PRIMARY} for={PRIMARY} >show todo</RadioButton>
-        <RadioButton onClick={handleChangeFilter} value='all' name='filter' type={PRIMARY} id={`${PRIMARY} 2`} for={`${PRIMARY} 2`} >show all</RadioButton>
-      </div>
+    <div className={s.tasksFilter__list}>
+      <RadioButton
+        onClick={handleChangeFilter}
+        value={COMPLETED}
+        name='filter'
+        type={SUCCESS}
+        id={SUCCESS}
+        for={SUCCESS}
+      >
+        completed
+      </RadioButton>
+      <RadioButton
+        onClick={handleChangeFilter}
+        value={REJECTED}
+        name='filter'
+        type={WARNING}
+        id={WARNING}
+        for={WARNING}
+      >
+        rejected
+      </RadioButton>
+      <RadioButton
+        onClick={handleChangeFilter}
+        value={IN_PROGRESS}
+        name='filter'
+        type={INFO}
+        id={INFO}
+        for={INFO}
+      >
+        in progress
+      </RadioButton>
+      <RadioButton
+        onClick={handleChangeFilter}
+        value={TODO}
+        name='filter'
+        type={PRIMARY}
+        id={PRIMARY}
+        for={PRIMARY}
+      >
+        show todo
+      </RadioButton>
+      <RadioButton
+        onClick={handleChangeFilter}
+        value='all'
+        name='filter'
+        type={PRIMARY}
+        id={`${PRIMARY} 2`}
+        for={`${PRIMARY} 2`}
+      >
+        show all
+      </RadioButton>
     </div>
   );
 };
