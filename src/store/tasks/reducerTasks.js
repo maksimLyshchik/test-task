@@ -35,6 +35,15 @@ const todoTask = (state, id) => {
   return {...state, [id]: newTask};
 };
 
+const collapsedTasks = (state, id) => {
+  const newTask = {
+    ...state[id],
+    value: [],
+    timeChange: Date.now(),
+  };
+  return {...state, [id]: newTask};
+};
+
 export const tasks = (state = [], action) => {
   switch (action.type) {
     case ADD_TASK:
