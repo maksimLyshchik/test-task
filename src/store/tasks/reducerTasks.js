@@ -1,5 +1,6 @@
-import { ADD_TASK, COMPLETED_TASK, REJECTED_TASK, TODO_TASK } from './actionsTasks';
+import { ADD_TASK, COMPLETED_TASK, DELETE_TASK, REJECTED_TASK, TASKS_COLLAPSED, TODO_TASK } from './actionsTasks';
 import { COMPLETED, IN_PROGRESS, REJECTED } from '../../common/constants/constantsTasks/constantsTasks';
+import { getId } from '../../helpers/getUniqId';
 
 const addTask = (state, task) => {
   return {
@@ -35,13 +36,22 @@ const todoTask = (state, id) => {
   return {...state, [id]: newTask};
 };
 
-const collapsedTasks = (state, id) => {
-  const newTask = {
-    ...state[id],
-    value: [],
-    timeChange: Date.now(),
+const collapsedTasks = (state, tasks) => {
+  const idTasks = getId();
+  return {
+    ...state,
+    [idTasks]: tasks,
   };
-  return {...state, [id]: newTask};
+};
+
+const deleteTask = (state, id) => {
+  console.log(...state);
+  return {
+    ...state,
+    newTasks: {
+      delete state.id
+    }
+  };
 };
 
 export const tasks = (state = [], action) => {
@@ -54,6 +64,10 @@ export const tasks = (state = [], action) => {
       return completeTask(state, action.id);
     case TODO_TASK:
       return todoTask(state, action.id);
+    case DELETE_TASK:
+      return deleteTask(state, action.id);
+    case TASKS_COLLAPSED:
+      return collapsedTasks(state, action.payload);
     default:
       return state;
   }
