@@ -50,9 +50,9 @@ export const EditorTasks = () => {
     const collapsedTasks = tasks.filter(item => markTasksId.includes(item.id))
 
     dispatch(tasksCollapsed({...collapsedTasks}));
-    dispatch(setSelectTask({[id]: false}));
     markTasksId.forEach((id) => {
-      dispatch(deleteTask(id))
+      dispatch(deleteTask(id));
+      dispatch(setSelectTask({[id]: false}));
     })
   }, [dispatch, markTasksId, tasks]);
 

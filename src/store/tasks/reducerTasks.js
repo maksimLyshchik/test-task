@@ -45,12 +45,11 @@ const collapsedTasks = (state, tasks) => {
 };
 
 const deleteTask = (state, id) => {
-  console.log(...state);
+  const newState = Object.assign({}, state);
+  delete newState[id];
+  state = newState;
   return {
-    ...state,
-    newTasks: {
-      delete state.id
-    }
+    ...state
   };
 };
 
