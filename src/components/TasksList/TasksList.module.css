@@ -1,9 +1,6 @@
 .TasksList {
-  display: flex;
-  flex-direction: column;
-
   padding: 10px 10px 0 10px;
-  min-width: 610px;
+  min-width: 714px;
   border: 2px solid var(--blue-dull);
   border-radius: 8px;
 

@@ -24,7 +24,7 @@
   width: 16px;
 
   border: 2px solid;
-  margin-right: 6px;
+  margin-right: 10px;
 
   cursor: pointer;
 }
@@ -50,4 +50,21 @@
 
 .radioButton_info {
   color: var(--yelow-info);
+}
+
+.radioButton__input:checked+label {
+  border: 2px solid var(--main-blue);
+  border-radius: 8px;
+}
+
+.radioButton_info:checked+label {
+  border: 2px solid;
+}
+
+.radioButton_success:checked+label {
+  border: 2px solid;
+}
+
+.radioButton_warning:checked+label {
+  border: 2px solid;
 }

@@ -16,7 +16,8 @@
 
 .app_main {
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  padding-left: 260px;
 }
 
 .app_main__container {

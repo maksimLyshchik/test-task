@@ -9,19 +9,23 @@ const radioButtonColors = {
   info: s.radioButton_info,
 };
 
-export const RadioButton = ({name, value, onClick, children, type = PRIMARY, ...props}) => {
+export const RadioButton = ({name, value, onClick, children, type = PRIMARY, id,  ...props}) => {
 
   return (
     <div className={s.radioButton} >
-      <label className={`${s.radioButton__label} ${radioButtonColors[type]}`} >
       <input
         className={`${s.radioButton__input} ${radioButtonColors[type]}`}
         type='radio'
         name={name}
         value={value}
         onClick={onClick}
+        id={id}
         {...props}
       />
+      <label
+        className={`${s.radioButton__label} ${radioButtonColors[type]}`}
+        for={props.for}
+      >
         {children}
       </label>
     </div>

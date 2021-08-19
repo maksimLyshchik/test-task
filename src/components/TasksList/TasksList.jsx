@@ -31,20 +31,18 @@ export const TasksList = () => {
   const handleChange = useCallback(({target}) => {
     const {checked} = target;
     let selectAll = {};
-    Object.keys(selectedTasks).forEach(key => selectAll[key] = checked);
+    console.log(filtredTasks);
+    filtredTasks.forEach(({id}) => selectAll[id] = checked);
     dispatch(setSelectTask(selectAll));
-  }, [dispatch, selectedTasks]);
+  }, [dispatch, filtredTasks]);
 
   const checkedAll = useMemo(() => {
     if (!selectedTasks) {
       return false;
     }
 
-    const taskIds = Object.values(selectedTasks);
-    const {length} = taskIds;
-
-    return Boolean(length) && length === taskIds.filter(value => value).length;
-  }, [selectedTasks]);
+    return Boolean(filtredTasks.length) && filtredTasks.length === Object.values(selectedTasks).filter(value => value).length;
+  }, [selectedTasks, filtredTasks]);
 
   const handleChangeSort = useCallback(() => {
     const changeSortingRule = sortingRule === ASCENDING ? DESCENDING : ASCENDING;
