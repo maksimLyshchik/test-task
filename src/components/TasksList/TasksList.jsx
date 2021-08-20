@@ -9,6 +9,7 @@ import { Button } from '../../common/modules/Button/Button';
 import { setSorterTasks } from '../../store/filter/actionsFilter';
 import { Icon } from '../../common/modules/Icons/Icons';
 import { ASCENDING, DESCENDING } from '../../common/constants/constantsSort/constantsSort';
+import { selectObjectTasks } from '../../store/tasks/selectorTasks';
 import s from './TasksList.module.css';
 
 export const TasksList = () => {
@@ -16,7 +17,18 @@ export const TasksList = () => {
   const selectedTasks = useSelector(selectCheckedTask);
   const filtredTasks = useSelector(selectFiltredTasks);
   const sortingRule = useSelector(selectSorting);
+  const tasks = useSelector(selectObjectTasks);
   const typeIcons = sortingRule === ASCENDING ? 'arrowDown' : 'arrowUp';
+
+/*  console.log(Object.entries(tasks).map(([key, value]) => value));
+  const tasksAll = Object.entries(tasks).map(([key, value]) => {
+    console.log(Boolean(value));
+    return value
+  })
+
+  if(typeof tasks === 'object' && tasks !== null){
+
+  }*/
 
   const sortedTasks = filtredTasks.sort((itemPrev, itemPres) => {
     if (itemPrev.timeChange > itemPres.timeChange) {
