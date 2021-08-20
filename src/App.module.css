@@ -17,10 +17,12 @@
 .app_main {
   display: flex;
   justify-content: left;
-  padding-left: 260px;
+  height: 100%;
 }
 
 .app_main__container {
   display: flex;
   flex-direction: column;
+
+  padding-left: 260px;
 }
