@@ -7,6 +7,7 @@ import s from './SideBarLeft.module.css';
 export const SideBarLeft = () => {
   const [sideBarPosition, setSideBarPosition] = useState(s.collapsed);
   const typeIcons = sideBarPosition === s.collapsed ? 'arrowDown' : 'arrowUp';
+  const isVisibled = sideBarPosition === s.collapsed;
 
   const handleSideBarPosition = useCallback(() => {
     const isVisebled = sideBarPosition === s.collapsed ? s.expanded : s.collapsed;
@@ -18,7 +19,7 @@ export const SideBarLeft = () => {
     <div className={`${s.sideBar} ${sideBarPosition}`} >
       <Button color='transparent' className={s.sideBar__button} onClick={handleSideBarPosition} >
         <Icon type={typeIcons} width='20px' height='20px'/>
-        {sideBarPosition === s.collapsed && <span>Filter</span>}
+        {isVisibled && <span>Filter</span>}
       </Button>
       <TasksFilter />
     </div>

@@ -31,7 +31,6 @@ export const TasksList = () => {
   const handleChange = useCallback(({target}) => {
     const {checked} = target;
     let selectAll = {};
-    console.log(filtredTasks);
     filtredTasks.forEach(({id}) => selectAll[id] = checked);
     dispatch(setSelectTask(selectAll));
   }, [dispatch, filtredTasks]);
