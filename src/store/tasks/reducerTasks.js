@@ -40,7 +40,7 @@ const collapsedTasks = (state, tasks) => {
   const idTasks = getId();
   return {
     ...state,
-    [idTasks]: tasks,
+    [idTasks]: ...tasks,
   };
 };
 

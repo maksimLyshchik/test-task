@@ -13,14 +13,14 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCheckedTask, selectMarkedTask } from '../../store/selectedEntity/selectorSelects';
 import { setSelectTask } from '../../store/selectedEntity/actionsSelects';
-import { selectTasks } from '../../store/tasks/selectorTasks';
+import { selectObjectTasks } from '../../store/tasks/selectorTasks';
 import s from './EditTasks.module.css';
 
 export const EditorTasks = () => {
   const dispatch = useDispatch();
   const markTasksId = useSelector(selectMarkedTask);
   const selectedTasks = useSelector(selectCheckedTask);
-  const tasks = useSelector(selectTasks);
+  const tasks = useSelector(selectObjectTasks);
   const isVisebled = Object.values(selectedTasks).filter(item => item).length;
 
   const handleRejectedTask = useCallback(() => {
@@ -47,9 +47,15 @@ export const EditorTasks = () => {
   const handleEditorPosition = useMemo(() => isVisebled && s.collapsed, [selectedTasks]);
 
   const handleCollapsedRejectedTask = useCallback(() => {
-    const collapsedTasks = tasks.filter(item => markTasksId.includes(item.id))
+    const collapsedTasks = {};
 
-    dispatch(tasksCollapsed({...collapsedTasks}));
+    markTasksId.forEach(item => {
+      const collapsedTask = tasks[item];
+      return collapsedTasks[item] = collapsedTask;
+    });
+
+    dispatch(tasksCollapsed(collapsedTasks));
+
     markTasksId.forEach((id) => {
       dispatch(deleteTask(id));
       dispatch(setSelectTask({[id]: false}));
