@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Checkbox } from '../../common/modules/Checkbox/Checkbox';
 import { setSelectTask } from '../../store/selectedEntity/actionsSelects';
 import { selectCheckedTask } from '../../store/selectedEntity/selectorSelects';
-import { selectFiltredTasks, selectFilter, selectSorting } from '../../store/filter/selectorFilter';
+import { selectFiltredTasks, selectSorting } from '../../store/filter/selectorFilter';
 import { Button } from '../../common/modules/Button/Button';
 import { setSorterTasks } from '../../store/filter/actionsFilter';
 import { Icon } from '../../common/modules/Icons/Icons';

@@ -38,7 +38,7 @@ export const EditorTasks = () => {
 
   const handleEditorPosition = useMemo(() => {
     return isVisebled && s.collapsed;
-  }, [selectedTasks]);
+  }, [isVisebled]);
 
   if(!isVisebled) {
     return null;
