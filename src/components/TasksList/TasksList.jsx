@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Checkbox } from '../../common/modules/Checkbox/Checkbox';
 import { setSelectTask } from '../../store/selectedEntity/actionsSelects';
 import { selectCheckedTask } from '../../store/selectedEntity/selectorSelects';
-import { selectFiltredTasks, selectFilter, selectSorting } from '../../store/filter/selectorFilter';
+import { selectFiltredTasks, selectSorting } from '../../store/filter/selectorFilter';
 import { Button } from '../../common/modules/Button/Button';
 import { setSorterTasks } from '../../store/filter/actionsFilter';
 import { Icon } from '../../common/modules/Icons/Icons';
 import { ASCENDING, DESCENDING } from '../../common/constants/constantsSort/constantsSort';
+import { TRANSPARENT } from '../../common/constants/constantsColorButton/constantsColorButton';
 import s from './TasksList.module.css';
 
 export const TasksList = () => {
@@ -31,7 +32,6 @@ export const TasksList = () => {
   const handleChange = useCallback(({target}) => {
     const {checked} = target;
     let selectAll = {};
-    console.log(filtredTasks);
     filtredTasks.forEach(({id}) => selectAll[id] = checked);
     dispatch(setSelectTask(selectAll));
   }, [dispatch, filtredTasks]);
@@ -50,6 +50,14 @@ export const TasksList = () => {
     dispatch(setSorterTasks({sorting: changeSortingRule}));
   }, [dispatch, sortingRule]);
 
+  if(!sortedTasks || !sortedTasks.length) {
+    return (
+      <div className={s.initialText} >
+        <span >Nothing to show </span>
+      </div>
+    )
+  }
+
   return (
     <div className={s.TasksList} >
       <div className={s.TasksList__header} >
@@ -57,7 +65,7 @@ export const TasksList = () => {
           <Checkbox name='checkedAll' onChange={handleChange} checked={checkedAll} />
           <span className={s.TasksList__header_name} >Selected all tasks </span>
         </div>
-        <Button color='transparent' onClick={handleChangeSort} >
+        <Button color={TRANSPARENT} onClick={handleChangeSort} >
           <Icon type={typeIcons} width='20px' height='20px'/>
         </Button>
       </div>

@@ -35,6 +35,7 @@
 
 .sideBar__button:hover {
   background-color: var(--main-blue);
+  color: var(--white);
 }
 
 .collapsed {
