@@ -18,6 +18,21 @@
 
   color: var(--main-blue);
   background-color: var(--white);
+
+  animation-duration: 0.6s;
+  animation-name: slideFromBottom;
+  animation-iteration-count: 1;
+}
+
+@keyframes slideFromBottom {
+  from {
+    margin-bottom: -4%;
+    width: 100%;
+  }
+
+  to {
+    margin-bottom: 0;
+  }
 }
 
 .tasksEditor__name {
