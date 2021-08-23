@@ -9,7 +9,7 @@
 
   visibility: hidden;
   opacity: 1;
-  transition: all 0.6s;
+  transition: all 0.8s;
   transform: translate(0px, 100%);
 
   border: 2px solid var(--main-blue);
@@ -42,5 +42,9 @@
 .collapsed {
   visibility: visible;
   transform: translate(0px, 0px);
-  transition: all 0.6s;
+  transition: all 0.8s;
+}
+
+.stretch {
+  left: 0;
 }

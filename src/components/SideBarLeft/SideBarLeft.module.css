@@ -40,10 +40,10 @@
 
 .collapsed {
   left: -180px;
-  transition: left 1s;
+  transition: left 0.8s;
 }
 
 .expanded {
   left: 0;
-  transition: left 1s;
+  transition: left 0.8s;
 }
