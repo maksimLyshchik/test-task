@@ -1,4 +1,12 @@
-import { ADD_TASK, COMPLETED_TASK, DELETE_TASK, REJECTED_TASK, TASKS_COLLAPSED, TODO_TASK } from './actionsTasks';
+import {
+  ADD_TASK,
+  COMPLETED_TASK,
+  DELETE_TASK,
+  REJECTED_TASK,
+  SPLIT_TASK,
+  TASKS_COLLAPSED,
+  TODO_TASK
+} from './actionsTasks';
 import { COMPLETED, IN_PROGRESS, REJECTED } from '../../common/constants/constantsTasks/constantsTasks';
 
 const addTask = (state, task) => {
@@ -51,6 +59,13 @@ const deleteTask = (state, id) => {
   };
 };
 
+const splitTask = (state, tasks) => {
+  return {
+    ...state,
+    [tasks.id]: {...tasks},
+  };
+};
+
 export const tasks = (state = [], action) => {
   switch (action.type) {
     case ADD_TASK:
@@ -65,6 +80,8 @@ export const tasks = (state = [], action) => {
       return deleteTask(state, action.id);
     case TASKS_COLLAPSED:
       return collapsedTasks(state, action.payload);
+    case SPLIT_TASK:
+      return splitTask(state, action.id);
     default:
       return state;
   }

@@ -68,6 +68,10 @@ export const EditorTasks = () => {
     })
   }, [dispatch, markTasksId, tasks]);
 
+  const handleSplitTask = () => {
+    
+  }
+
   if(!isVisebled) {
     return null;
   }
@@ -87,6 +91,9 @@ export const EditorTasks = () => {
         </Button>
         <Button color={PRIMARY} onClick={handleCollapsedTask} >
           <Icon type='collapsed' />
+        </Button>
+        <Button color={PRIMARY} onClick={handleSplitTask} >
+          <Icon type='breakUp' />
         </Button>
       </div>
     </div>

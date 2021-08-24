@@ -5,6 +5,7 @@ export const TODO_TASK = 'TODO_TASK';
 export const TASK_CHANGE_TIME = 'TASK_CHANGE_TIME';
 export const TASKS_COLLAPSED = 'TASKS_COLLAPSED';
 export const DELETE_TASK = 'DELETE_TASK';
+export const SPLIT_TASK = 'SPLIT_TASK';
 
 export const addTask = (payload) => ({type: ADD_TASK, payload});
 
@@ -19,3 +20,5 @@ export const taskChangeTime = (id) => ({type: TASK_CHANGE_TIME, id});
 export const tasksCollapsed = (payload) => ({type: TASKS_COLLAPSED, payload});
 
 export const deleteTask = (id) => ({type: DELETE_TASK, id});
+
+export const splitTask = (id) => ({type: SPLIT_TASK, id});
