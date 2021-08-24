@@ -23,7 +23,7 @@ export const TasksFilter = () => {
         name='filter'
         type={SUCCESS}
         id={SUCCESS}
-        for={SUCCESS}
+        htmlFor={SUCCESS}
       >
         completed
       </RadioButton>
@@ -33,7 +33,7 @@ export const TasksFilter = () => {
         name='filter'
         type={WARNING}
         id={WARNING}
-        for={WARNING}
+        htmlFor={WARNING}
       >
         rejected
       </RadioButton>
@@ -43,7 +43,7 @@ export const TasksFilter = () => {
         name='filter'
         type={INFO}
         id={INFO}
-        for={INFO}
+        htmlFor={INFO}
       >
         in progress
       </RadioButton>
@@ -53,7 +53,7 @@ export const TasksFilter = () => {
         name='filter'
         type={PRIMARY}
         id={PRIMARY}
-        for={PRIMARY}
+        htmlFor={PRIMARY}
       >
         show todo
       </RadioButton>
@@ -63,7 +63,7 @@ export const TasksFilter = () => {
         name='filter'
         type={PRIMARY}
         id={`${PRIMARY} 2`}
-        for={`${PRIMARY} 2`}
+        htmlFor={`${PRIMARY} 2`}
       >
         show all
       </RadioButton>

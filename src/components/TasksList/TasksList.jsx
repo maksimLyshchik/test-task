@@ -60,7 +60,7 @@ export const TasksList = () => {
           <Icon type={typeIcons} width='20px' height='20px' />
         </Button>
       </div>
-      {sortedTasks.map(item => <Task task={item} />)}
+      {sortedTasks.map(item => <Task key={item.id} task={item} />)}
     </div>
   );
 };

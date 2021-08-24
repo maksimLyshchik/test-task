@@ -9,7 +9,7 @@ const radioButtonColors = {
   info: s.radioButton_info,
 };
 
-export const RadioButton = ({name, value, onClick, children, type = PRIMARY, id,  ...props}) => {
+export const RadioButton = ({name, value, onClick, children, type = PRIMARY, id, htmlFor, ...props}) => {
 
   return (
     <div className={s.radioButton} >
@@ -24,7 +24,7 @@ export const RadioButton = ({name, value, onClick, children, type = PRIMARY, id,
       />
       <label
         className={`${s.radioButton__label} ${radioButtonColors[type]}`}
-        for={props.for}
+        htmlFor={htmlFor}
       >
         {children}
       </label>
