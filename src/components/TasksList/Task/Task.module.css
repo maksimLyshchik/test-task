@@ -1,4 +1,4 @@
-.blockTask {
+.task {
   margin-bottom: 12px;
   border: 2px solid var(--blue-dull);
   border-radius: 8px;
@@ -6,16 +6,6 @@
 
   color: var(--main-blue);
   background-color: var(--white);
-}
-
-.blockTask__button {
-  display: flex;
-  justify-content: space-between;
-  min-width: 320px;
-}
-
-.blockTask__icon_rejected {
-  padding: 2px;
 }
 
 .completed {

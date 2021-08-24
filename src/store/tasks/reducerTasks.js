@@ -1,6 +1,5 @@
 import { ADD_TASK, COMPLETED_TASK, DELETE_TASK, REJECTED_TASK, TASKS_COLLAPSED, TODO_TASK } from './actionsTasks';
 import { COMPLETED, IN_PROGRESS, REJECTED } from '../../common/constants/constantsTasks/constantsTasks';
-import { getId } from '../../helpers/getUniqId';
 
 const addTask = (state, task) => {
   return {
@@ -37,10 +36,9 @@ const todoTask = (state, id) => {
 };
 
 const collapsedTasks = (state, tasks) => {
-  const idTasks = getId();
   return {
     ...state,
-    [idTasks]: {...tasks},
+    [tasks.id]: {...tasks},
   };
 };
 

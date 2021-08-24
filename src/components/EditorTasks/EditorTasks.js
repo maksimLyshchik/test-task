@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
 import { Button } from '../../common/modules/Button/Button';
-import { INFO, SUCCESS, WARNING } from '../../common/constants/constantsColorButton/constantsColorButton';
+import { INFO, PRIMARY, SUCCESS, WARNING } from '../../common/constants/constantsColorButton/constantsColorButton';
 import { Icon } from '../../common/modules/Icons/Icons';
-import { COMPLETED, IN_PROGRESS, REJECTED } from '../../common/constants/constantsTasks/constantsTasks';
+import { COMPLETED, IN_PROGRESS, REJECTED, TODO } from '../../common/constants/constantsTasks/constantsTasks';
 import {
   completedTask,
   deleteTask,
@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectCheckedTask, selectMarkedTask } from '../../store/selectedEntity/selectorSelects';
 import { setSelectTask } from '../../store/selectedEntity/actionsSelects';
 import { selectObjectTasks } from '../../store/tasks/selectorTasks';
+import { getId } from '../../helpers/getUniqId';
 import s from './EditTasks.module.css';
 
 export const EditorTasks = () => {
@@ -44,17 +45,22 @@ export const EditorTasks = () => {
     });
   }, [dispatch, markTasksId]);
 
-  const handleEditorPosition = useMemo(() => isVisebled && s.collapsed, [selectedTasks]);
+  const handleEditorPosition = useMemo(() => isVisebled && s.collapsed, [isVisebled]);
 
-  const handleCollapsedRejectedTask = useCallback(() => {
+  const handleCollapsedTask = useCallback(() => {
     const collapsedTasks = {};
+    const id = getId();
 
     markTasksId.forEach(item => {
-      const collapsedTask = tasks[item];
+      const collapsedTask = {};
+      collapsedTask.value = tasks[item].value;
+      collapsedTask.id = tasks[item].id;
+
       return collapsedTasks[item] = collapsedTask;
     });
 
-    dispatch(tasksCollapsed(collapsedTasks));
+    dispatch(tasksCollapsed({id, time: Date.now(), status: TODO, timeChange: Date.now(), subtasks: collapsedTasks, }));
+    dispatch(setSelectTask({[id]: false}));
 
     markTasksId.forEach((id) => {
       dispatch(deleteTask(id));
@@ -70,7 +76,7 @@ export const EditorTasks = () => {
     <div className={`${s.tasksEditor} ${handleEditorPosition}`} >
       <span className={s.tasksEditor__name}>Tasks manager</span>
       <div className={s.tasksEditor__panel}>
-        <Button color={WARNING} onClick={handleCollapsedRejectedTask} >
+        <Button color={WARNING} onClick={handleRejectedTask} >
           <Icon type={REJECTED} />
         </Button>
         <Button color={INFO} onClick={handleTodoTask} >
@@ -78,6 +84,9 @@ export const EditorTasks = () => {
         </Button>
         <Button color={SUCCESS} onClick={handleCompletedTask} >
           <Icon type={COMPLETED} />
+        </Button>
+        <Button color={PRIMARY} onClick={handleCollapsedTask} >
+          <Icon type='collapsed' />
         </Button>
       </div>
     </div>
