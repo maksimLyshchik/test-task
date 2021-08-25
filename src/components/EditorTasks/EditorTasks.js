@@ -7,6 +7,7 @@ import {
   completedTask,
   deleteTask,
   rejectedTask,
+  splitTask,
   tasksCollapsed,
   todoTask
 } from '../../store/tasks/actionsTasks';
@@ -69,8 +70,20 @@ export const EditorTasks = () => {
   }, [dispatch, markTasksId, tasks]);
 
   const handleSplitTask = () => {
-    
-  }
+    markTasksId.forEach(item => {
+      if (tasks[item].subtasks) {
+        Object.values(tasks[item].subtasks).forEach((subtask) => {
+          const restoredTask = {...subtask};
+          restoredTask.time = tasks[item].time;
+          restoredTask.status = tasks[item].status;
+          restoredTask.timeChange = tasks[item].timeChange;
+          dispatch(splitTask({...restoredTask}));
+          dispatch(deleteTask(item));
+        });
+      }
+    dispatch(setSelectTask({[item]: false}));
+    });
+  };
 
   if(!isVisebled) {
     return null;

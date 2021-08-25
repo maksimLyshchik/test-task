@@ -21,4 +21,4 @@ export const tasksCollapsed = (payload) => ({type: TASKS_COLLAPSED, payload});
 
 export const deleteTask = (id) => ({type: DELETE_TASK, id});
 
-export const splitTask = (id) => ({type: SPLIT_TASK, id});
+export const splitTask = (payload) => ({type: SPLIT_TASK, payload});

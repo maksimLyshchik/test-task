@@ -81,7 +81,7 @@ export const tasks = (state = [], action) => {
     case TASKS_COLLAPSED:
       return collapsedTasks(state, action.payload);
     case SPLIT_TASK:
-      return splitTask(state, action.id);
+      return splitTask(state, action.payload);
     default:
       return state;
   }
