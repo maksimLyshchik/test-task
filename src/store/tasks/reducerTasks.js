@@ -35,15 +35,8 @@ const todoTask = (state, id) => {
   return {...state, [id]: newTask};
 };
 
-const collapsedTasks = (state, tasks) => {
-  return {
-    ...state,
-    [tasks.id]: {...tasks},
-  };
-};
-
 const deleteTask = (state, id) => {
-  const newState = Object.assign({}, state);
+  const newState = {...state};
   delete newState[id];
   state = newState;
   return {
@@ -63,8 +56,6 @@ export const tasks = (state = [], action) => {
       return todoTask(state, action.id);
     case DELETE_TASK:
       return deleteTask(state, action.id);
-    case TASKS_COLLAPSED:
-      return collapsedTasks(state, action.payload);
     default:
       return state;
   }
