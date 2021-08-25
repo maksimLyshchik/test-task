@@ -60,6 +60,6 @@
   transition: all 0.8s;
 }
 
-.stretch {
+.tasksEditor__stretch {
   left: 0;
 }

@@ -10,16 +10,16 @@ import s from './SideBarLeft.module.css';
 
 export const SideBarLeft = () => {
   const dispatch = useDispatch();
-  const {isVisibledSidebar} = useSelector(selectSettings);
+  const { isVisibledSidebar } = useSelector(selectSettings);
   const isVisibled = isVisibledSidebar === 'collapsed';
   const typeIcons = isVisibled ? 'arrowDown' : 'arrowUp';
   const sideBarPosition = isVisibled ? s.collapsed : s.expanded;
-  const isChangeVisibled = isVisibled ? 'expanded' : 'collapsed';
 
   const handleSideBarPosition = useCallback(() => {
+    const isChangeVisibled = isVisibled ? 'expanded' : 'collapsed';
 
-    dispatch(setVisibledSidebar({isVisibledSidebar: isChangeVisibled}));
-  }, [dispatch, isChangeVisibled]);
+    dispatch(setVisibledSidebar({ isVisibledSidebar: isChangeVisibled }));
+  }, [dispatch, isVisibled]);
 
   return (
     <div className={`${s.sideBar} ${sideBarPosition}`} >

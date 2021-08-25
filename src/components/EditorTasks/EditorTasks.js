@@ -14,9 +14,9 @@ export const EditorTasks = () => {
   const dispatch = useDispatch();
   const markTasksId = useSelector(selectMarkedTask);
   const selectedTasks = useSelector(selectCheckedTask);
-  const {isVisibledSidebar} = useSelector(selectSettings);
+  const { isVisibledSidebar } = useSelector(selectSettings);
   const isVisebled = Object.values(selectedTasks).filter(item => item).length;
-  const stretch = isVisibledSidebar === 'collapsed' ? s.stretch : '';
+  const tasksEditor__stretch = isVisibledSidebar === 'collapsed' ? s.tasksEditor__stretch : '';
 
   const handleRejectedTask = useCallback(() => {
     markTasksId.forEach((id) => {
@@ -46,7 +46,7 @@ export const EditorTasks = () => {
   }
 
   return (
-    <div className={`${s.tasksEditor} ${handleEditorPosition} ${stretch}`} >
+    <div className={`${s.tasksEditor} ${handleEditorPosition} ${tasksEditor__stretch}`} >
       <span className={s.tasksEditor__name}>Tasks manager</span>
       <div className={s.tasksEditor__panel}>
         <Button color={WARNING} onClick={handleRejectedTask} >
