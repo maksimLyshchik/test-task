@@ -13,7 +13,7 @@ import {
 } from '../../store/tasks/actionsTasks';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCheckedTask, selectMarkedTask } from '../../store/selectedEntity/selectorSelects';
-import { setSelectTask } from '../../store/selectedEntity/actionsSelects';
+import { deleteSelectTask, setSelectTask } from '../../store/selectedEntity/actionsSelects';
 import { selectObjectTasks } from '../../store/tasks/selectorTasks';
 import { getId } from '../../helpers/getUniqId';
 import s from './EditTasks.module.css';
@@ -71,17 +71,22 @@ export const EditorTasks = () => {
 
   const handleSplitTask = () => {
     markTasksId.forEach(item => {
+
       if (tasks[item].subtasks) {
         Object.values(tasks[item].subtasks).forEach((subtask) => {
           const restoredTask = {...subtask};
+
           restoredTask.time = tasks[item].time;
           restoredTask.status = tasks[item].status;
           restoredTask.timeChange = tasks[item].timeChange;
+
           dispatch(splitTask({...restoredTask}));
           dispatch(deleteTask(item));
+          dispatch(deleteSelectTask(item));
         });
+      } else {
+        dispatch(setSelectTask({[item]: false}));
       }
-    dispatch(setSelectTask({[item]: false}));
     });
   };
 
