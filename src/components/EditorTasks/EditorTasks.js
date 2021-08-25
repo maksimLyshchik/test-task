@@ -74,11 +74,12 @@ export const EditorTasks = () => {
 
       if (tasks[item].subtasks) {
         Object.values(tasks[item].subtasks).forEach((subtask) => {
-          const restoredTask = {...subtask};
-
-          restoredTask.time = tasks[item].time;
-          restoredTask.status = tasks[item].status;
-          restoredTask.timeChange = tasks[item].timeChange;
+          const restoredTask = {
+            ...subtask,
+            time: tasks[item].time,
+            status: tasks[item].status,
+            timeChange: tasks[item].timeChange,
+          };
 
           dispatch(splitTask({...restoredTask}));
           dispatch(deleteTask(item));
