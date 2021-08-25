@@ -60,7 +60,10 @@ export const EditorTasks = () => {
       return collapsedTasks[item] = collapsedTask;
     });
 
-    dispatch(tasksCollapsed({id, time: Date.now(), status: TODO, timeChange: Date.now(), subtasks: collapsedTasks, }));
+    const statusesTasks = markTasksId.map((item => tasks[item].status));
+    const isStatus = statusesTasks.every(item => item === IN_PROGRESS) ? IN_PROGRESS : TODO;
+
+    dispatch(tasksCollapsed({id, time: Date.now(), status: isStatus, timeChange: Date.now(), subtasks: collapsedTasks, }));
     dispatch(setSelectTask({[id]: false}));
 
     markTasksId.forEach((id) => {
@@ -91,6 +94,10 @@ export const EditorTasks = () => {
     });
   };
 
+  const isDisabled = useMemo(() => {
+    return markTasksId.filter(item => tasks[item].subtasks).length !== markTasksId.length;
+  }, [tasks, markTasksId]);
+
   if(!isVisebled) {
     return null;
   }
@@ -108,10 +115,10 @@ export const EditorTasks = () => {
         <Button color={SUCCESS} onClick={handleCompletedTask} >
           <Icon type={COMPLETED} />
         </Button>
-        <Button color={PRIMARY} onClick={handleCollapsedTask} >
+        <Button color={PRIMARY} onClick={handleCollapsedTask} disabled={!isDisabled} >
           <Icon type='collapsed' />
         </Button>
-        <Button color={PRIMARY} onClick={handleSplitTask} >
+        <Button color={PRIMARY} onClick={handleSplitTask} disabled={isDisabled} >
           <Icon type='breakUp' />
         </Button>
       </div>
