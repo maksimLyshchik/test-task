@@ -13,7 +13,6 @@ export const TaskActions = ({id, status}) => {
   const isSuccessTask = status === COMPLETED;
   const isStatusButtonInfo = isRejectedTask || isSuccessTask || status === IN_PROGRESS;
 
-
   const handleRejectedTask = useCallback(() => {
     dispatch(rejectedTask(id));
   }, [dispatch, id]);
@@ -25,7 +24,6 @@ export const TaskActions = ({id, status}) => {
   const handleTodoTask = useCallback(() => {
     dispatch(todoTask(id));
   }, [dispatch, id]);
-
 
   return (
     <div className={s.blockTask__button} >

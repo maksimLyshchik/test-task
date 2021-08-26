@@ -24,6 +24,7 @@ export const EditorTasks = () => {
   const selectedTasks = useSelector(selectCheckedTask);
   const tasks = useSelector(selectObjectTasks);
   const isVisebled = Object.values(selectedTasks).filter(item => item).length;
+  const isChangePosition = isVisebled && s.collapsed;
 
   const handleRejectedTask = useCallback(() => {
     markTasksId.forEach((id) => {
@@ -45,8 +46,6 @@ export const EditorTasks = () => {
       dispatch(setSelectTask({ [id]: false }));
     });
   }, [dispatch, markTasksId]);
-
-  const handleEditorPosition = useMemo(() => isVisebled && s.collapsed, [isVisebled]);
 
   const handleCollapsedTask = useCallback(() => {
     let subtasks = {};
@@ -73,7 +72,7 @@ export const EditorTasks = () => {
 
     dispatch(addTask({
       id,
-      time: Date.now(),
+      timeCreation: Date.now(),
       status: TODO,
       timeChange: Date.now(),
       subtasks,
@@ -117,7 +116,7 @@ export const EditorTasks = () => {
   }
 
   return (
-    <div className={`${s.tasksEditor} ${handleEditorPosition}`}>
+    <div className={`${s.tasksEditor} ${isChangePosition}`}>
       <span className={s.tasksEditor__name}>Tasks manager</span>
       <div className={s.tasksEditor__panel}>
         <Button color={WARNING} onClick={handleRejectedTask}>
