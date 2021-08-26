@@ -4,11 +4,11 @@ import { INFO, PRIMARY, SUCCESS, WARNING } from '../../common/constants/constant
 import { Icon } from '../../common/modules/Icons/Icons';
 import { COMPLETED, IN_PROGRESS, REJECTED, TODO } from '../../common/constants/constantsTasks/constantsTasks';
 import {
+  addTask,
   completedTask,
   deleteTask,
   rejectedTask,
   splitTask,
-  tasksCollapsed,
   todoTask
 } from '../../store/tasks/actionsTasks';
 import { useDispatch, useSelector } from 'react-redux';
@@ -49,33 +49,34 @@ export const EditorTasks = () => {
   const handleEditorPosition = useMemo(() => isVisebled && s.collapsed, [isVisebled]);
 
   const handleCollapsedTask = useCallback(() => {
-    const statusesTasks = markTasksId.map((item => tasks[item].status));
-    const isStatus = statusesTasks.every(item => item === IN_PROGRESS) ? IN_PROGRESS : TODO;
-    let collapsedTasks = {};
+    let subtasks = {};
     const id = getId();
 
-    markTasksId.forEach(item => {
-      if (tasks[item].subtasks) {
-        collapsedTasks = {
-          ...collapsedTasks,
-          ...tasks[item].subtasks };
-        return  collapsedTasks;
+    const markTasks = Object.values(tasks).filter(task => markTasksId.includes(task.id));
+
+    markTasks.forEach(task => {
+      if (task.subtasks) {
+        subtasks = {
+          ...subtasks,
+          ...task.subtasks,
+        };
+        return;
       }
-
-      let collapsedTask = {};
-      collapsedTask.value = tasks[item].value;
-      collapsedTask.id = tasks[item].id;
-      collapsedTasks[item] = collapsedTask;
-
-      return collapsedTasks;
+      subtasks = {
+        ...subtasks,
+        [task.id]: {
+          value: task.value,
+          id: task.id,
+        }
+      };
     });
 
-    dispatch(tasksCollapsed({
+    dispatch(addTask({
       id,
       time: Date.now(),
-      status: isStatus,
+      status: TODO,
       timeChange: Date.now(),
-      subtasks: collapsedTasks,
+      subtasks,
     }));
     dispatch(setSelectTask({ [id]: false }));
 
@@ -108,7 +109,7 @@ export const EditorTasks = () => {
   };
 
   const isDisabled = useMemo(() => {
-    return markTasksId.filter(item => tasks[item].subtasks).length !== markTasksId.length;
+    return markTasksId.filter(id => tasks[id].subtasks).length !== markTasksId.length;
   }, [tasks, markTasksId]);
 
   if (!isVisebled) {
