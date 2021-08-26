@@ -20,7 +20,7 @@ const taskClass = {
 
 export const Task = ({task}) => {
   const dispatch = useDispatch();
-  const isMultiplayTask = task?.subtasks;
+  const isMultiplayTask = !!task?.subtasks;
   const {value, id, status, timeCreation, timeChange} = task;
   const selectedTasks = useSelector(selectCheckedTask);
   const isRejectedTask = status === REJECTED;
