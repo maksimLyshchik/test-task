@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectTask } from '../../../store/selectedEntity/actionsSelects';
 import { Checkbox } from '../../../common/modules/Checkbox/Checkbox';
@@ -6,7 +6,6 @@ import { COMPLETED, REJECTED } from '../../../common/constants/constantsTasks/co
 import { TaskActions } from './TaskActions/TaskActions';
 import { selectCheckedTask } from '../../../store/selectedEntity/selectorSelects';
 import { TaskContent } from './TaskContent/TaskContent';
-import { TextArea } from '../../../common/modules/TextArea/TextArea';
 import { BlockWithTime } from './BlockWithTime/BlockWithTime';
 import s from './Task.module.css';
 
@@ -20,8 +19,7 @@ const taskClass = {
 
 export const Task = ({task}) => {
   const dispatch = useDispatch();
-  const isMultiplayTask = !!task?.subtasks;
-  const {value, id, status, timeCreation, timeChange} = task;
+  const {id, status, timeCreation, timeChange} = task;
   const selectedTasks = useSelector(selectCheckedTask);
   const isRejectedTask = status === REJECTED;
   const isSuccessTask = status === COMPLETED;
@@ -31,14 +29,6 @@ export const Task = ({task}) => {
     dispatch(setSelectTask({[id]: checked}));
   }, [dispatch, id]);
 
-  const content = useMemo(() => {
-    if (isMultiplayTask) {
-      return Object.values(task.subtasks).map(item => <TextArea key={item.id} value={item.value} />);
-    }
-
-    return <TextArea value={value} />;
-  }, [isMultiplayTask, task, value]);
-
   return (
     <div className={`${s.task} ${taskClass[status]}`} >
       <div className={s.blockTask__main}>
@@ -47,7 +37,7 @@ export const Task = ({task}) => {
           checked={selectedTasks[id]}
           disabled={isRejectedTask || isSuccessTask}
         />
-        <TaskContent content={content} />
+        <TaskContent task={task} />
         <TaskActions id={id} status={status} />
       </div>
       <BlockWithTime
