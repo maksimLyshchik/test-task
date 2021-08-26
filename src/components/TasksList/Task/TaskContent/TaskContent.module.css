@@ -1,0 +1,4 @@
+.taskContent {
+  display: flex;
+  flex-direction: column;
+}
