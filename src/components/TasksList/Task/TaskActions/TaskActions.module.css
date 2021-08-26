@@ -1,0 +1,7 @@
+.blockTask__button {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  min-width: 320px;
+}

@@ -36,7 +36,7 @@ export const TasksFilter = () => {
         name='filter'
         type={SUCCESS}
         id={SUCCESS}
-        for={SUCCESS}
+        htmlFor={SUCCESS}
         checked={condition === COMPLETED}
       >
         completed
@@ -47,7 +47,7 @@ export const TasksFilter = () => {
         name='filter'
         type={WARNING}
         id={WARNING}
-        for={WARNING}
+        htmlFor={WARNING}
         checked={condition === REJECTED}
       >
         rejected
@@ -58,7 +58,7 @@ export const TasksFilter = () => {
         name='filter'
         type={INFO}
         id={INFO}
-        for={INFO}
+        htmlFor={INFO}
         checked={condition === IN_PROGRESS}
       >
         in progress
@@ -69,10 +69,20 @@ export const TasksFilter = () => {
         name='filter'
         type={PRIMARY}
         id={PRIMARY}
-        for={PRIMARY}
+        htmlFor={PRIMARY}
         checked={condition === TODO}
       >
         todo
+      </RadioButton>
+      <RadioButton
+        onClick={handleChangeFilter}
+        value='all'
+        name='filter'
+        type={PRIMARY}
+        id={`${PRIMARY} 2`}
+        htmlFor={`${PRIMARY} 2`}
+      >
+        show all
       </RadioButton>
     </div>
   );

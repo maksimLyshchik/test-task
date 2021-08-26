@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { BlockTask } from './BlockTask/BlockTask';
+import { Task } from './Task/Task';
 import { useDispatch, useSelector } from 'react-redux';
 import { Checkbox } from '../../common/modules/Checkbox/Checkbox';
 import { setSelectTask } from '../../store/selectedEntity/actionsSelects';
@@ -66,10 +66,10 @@ export const TasksList = () => {
           <span className={s.TasksList__header_name} >Selected all tasks </span>
         </div>
         <Button color={TRANSPARENT} onClick={handleChangeSort} >
-          <Icon type={typeIcons} width='20px' height='20px'/>
+          <Icon type={typeIcons} width='20px' height='20px' />
         </Button>
       </div>
-      {sortedTasks.map(item => <BlockTask {...item} selected={selectedTasks[item.id]} />)}
+      {sortedTasks.map(item => <Task key={item.id} task={item} />)}
     </div>
   );
 };
