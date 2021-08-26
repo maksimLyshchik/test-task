@@ -4,11 +4,11 @@ import { INFO, PRIMARY, SUCCESS, WARNING } from '../../common/constants/constant
 import { Icon } from '../../common/modules/Icons/Icons';
 import { COMPLETED, IN_PROGRESS, REJECTED, TODO } from '../../common/constants/constantsTasks/constantsTasks';
 import {
+  addTask,
   completedTask,
   deleteTask,
   rejectedTask,
   splitTask,
-  tasksCollapsed,
   todoTask
 } from '../../store/tasks/actionsTasks';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,6 +24,7 @@ export const EditorTasks = () => {
   const selectedTasks = useSelector(selectCheckedTask);
   const tasks = useSelector(selectObjectTasks);
   const isVisebled = Object.values(selectedTasks).filter(item => item).length;
+  const isChangePosition = isVisebled && s.collapsed;
 
   const handleRejectedTask = useCallback(() => {
     markTasksId.forEach((id) => {
@@ -46,8 +47,6 @@ export const EditorTasks = () => {
     });
   }, [dispatch, markTasksId]);
 
-  const handleEditorPosition = useMemo(() => isVisebled && s.collapsed, [isVisebled]);
-
   const handleCollapsedTask = useCallback(() => {
     const collapsedTasks = {};
     const id = getId();
@@ -60,7 +59,7 @@ export const EditorTasks = () => {
       return collapsedTasks[item] = collapsedTask;
     });
 
-    dispatch(tasksCollapsed({id, time: Date.now(), status: TODO, timeChange: Date.now(), subtasks: collapsedTasks, }));
+    dispatch(addTask({id, timeCreation: Date.now(), status: TODO, timeChange: Date.now(), subtasks: collapsedTasks, }));
     dispatch(setSelectTask({[id]: false}));
 
     markTasksId.forEach((id) => {
@@ -96,7 +95,7 @@ export const EditorTasks = () => {
   }
 
   return (
-    <div className={`${s.tasksEditor} ${handleEditorPosition}`} >
+    <div className={`${s.tasksEditor} ${isChangePosition}`} >
       <span className={s.tasksEditor__name}>Tasks manager</span>
       <div className={s.tasksEditor__panel}>
         <Button color={WARNING} onClick={handleRejectedTask} >
