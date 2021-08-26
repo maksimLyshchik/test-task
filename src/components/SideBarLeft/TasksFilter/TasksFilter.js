@@ -25,7 +25,7 @@ export const TasksFilter = () => {
         name='filter'
         type={PRIMARY}
         id={`${PRIMARY} 2`}
-        for={`${PRIMARY} 2`}
+        htmlFor={`${PRIMARY} 2`}
         checked={condition === ALL}
       >
         show all
@@ -73,16 +73,6 @@ export const TasksFilter = () => {
         checked={condition === TODO}
       >
         todo
-      </RadioButton>
-      <RadioButton
-        onClick={handleChangeFilter}
-        value='all'
-        name='filter'
-        type={PRIMARY}
-        id={`${PRIMARY} 2`}
-        htmlFor={`${PRIMARY} 2`}
-      >
-        show all
       </RadioButton>
     </div>
   );
