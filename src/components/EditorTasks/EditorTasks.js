@@ -28,48 +28,61 @@ export const EditorTasks = () => {
   const handleRejectedTask = useCallback(() => {
     markTasksId.forEach((id) => {
       dispatch(rejectedTask(id));
-      dispatch(setSelectTask({[id]: false}));
+      dispatch(setSelectTask({ [id]: false }));
     });
   }, [dispatch, markTasksId]);
 
   const handleCompletedTask = useCallback(() => {
     markTasksId.forEach((id) => {
       dispatch(completedTask(id));
-      dispatch(setSelectTask({[id]: false}));
+      dispatch(setSelectTask({ [id]: false }));
     });
   }, [dispatch, markTasksId]);
 
   const handleTodoTask = useCallback(() => {
     markTasksId.forEach((id) => {
       dispatch(todoTask(id));
-      dispatch(setSelectTask({[id]: false}));
+      dispatch(setSelectTask({ [id]: false }));
     });
   }, [dispatch, markTasksId]);
 
   const handleEditorPosition = useMemo(() => isVisebled && s.collapsed, [isVisebled]);
 
   const handleCollapsedTask = useCallback(() => {
-    const collapsedTasks = {};
+    const statusesTasks = markTasksId.map((item => tasks[item].status));
+    const isStatus = statusesTasks.every(item => item === IN_PROGRESS) ? IN_PROGRESS : TODO;
+    let collapsedTasks = {};
     const id = getId();
 
     markTasksId.forEach(item => {
-      const collapsedTask = {};
+      if (tasks[item].subtasks) {
+        collapsedTasks = {
+          ...collapsedTasks,
+          ...tasks[item].subtasks };
+        return  collapsedTasks;
+      }
+
+      let collapsedTask = {};
       collapsedTask.value = tasks[item].value;
       collapsedTask.id = tasks[item].id;
+      collapsedTasks[item] = collapsedTask;
 
-      return collapsedTasks[item] = collapsedTask;
+      return collapsedTasks;
     });
 
-    const statusesTasks = markTasksId.map((item => tasks[item].status));
-    const isStatus = statusesTasks.every(item => item === IN_PROGRESS) ? IN_PROGRESS : TODO;
-
-    dispatch(tasksCollapsed({id, time: Date.now(), status: isStatus, timeChange: Date.now(), subtasks: collapsedTasks, }));
-    dispatch(setSelectTask({[id]: false}));
+    dispatch(tasksCollapsed({
+      id,
+      time: Date.now(),
+      status: isStatus,
+      timeChange: Date.now(),
+      subtasks: collapsedTasks,
+    }));
+    dispatch(setSelectTask({ [id]: false }));
 
     markTasksId.forEach((id) => {
       dispatch(deleteTask(id));
-      dispatch(setSelectTask({[id]: false}));
-    })
+      dispatch(setSelectTask({ [id]: false }));
+    });
   }, [dispatch, markTasksId, tasks]);
 
   const handleSplitTask = () => {
@@ -84,12 +97,12 @@ export const EditorTasks = () => {
             timeChange: tasks[item].timeChange,
           };
 
-          dispatch(splitTask({...restoredTask}));
+          dispatch(splitTask({ ...restoredTask }));
           dispatch(deleteTask(item));
           dispatch(deleteSelectTask(item));
         });
       } else {
-        dispatch(setSelectTask({[item]: false}));
+        dispatch(setSelectTask({ [item]: false }));
       }
     });
   };
@@ -98,27 +111,27 @@ export const EditorTasks = () => {
     return markTasksId.filter(item => tasks[item].subtasks).length !== markTasksId.length;
   }, [tasks, markTasksId]);
 
-  if(!isVisebled) {
+  if (!isVisebled) {
     return null;
   }
 
   return (
-    <div className={`${s.tasksEditor} ${handleEditorPosition}`} >
+    <div className={`${s.tasksEditor} ${handleEditorPosition}`}>
       <span className={s.tasksEditor__name}>Tasks manager</span>
       <div className={s.tasksEditor__panel}>
-        <Button color={WARNING} onClick={handleRejectedTask} >
+        <Button color={WARNING} onClick={handleRejectedTask}>
           <Icon type={REJECTED} />
         </Button>
-        <Button color={INFO} onClick={handleTodoTask} >
+        <Button color={INFO} onClick={handleTodoTask}>
           <Icon type={IN_PROGRESS} />
         </Button>
-        <Button color={SUCCESS} onClick={handleCompletedTask} >
+        <Button color={SUCCESS} onClick={handleCompletedTask}>
           <Icon type={COMPLETED} />
         </Button>
-        <Button color={PRIMARY} onClick={handleCollapsedTask} disabled={!isDisabled} >
+        <Button color={PRIMARY} onClick={handleCollapsedTask} disabled={!isDisabled}>
           <Icon type='collapsed' />
         </Button>
-        <Button color={PRIMARY} onClick={handleSplitTask} disabled={isDisabled} >
+        <Button color={PRIMARY} onClick={handleSplitTask} disabled={isDisabled}>
           <Icon type='breakUp' />
         </Button>
       </div>
