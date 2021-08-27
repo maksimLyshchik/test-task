@@ -8,11 +8,12 @@ import {
   completedTask,
   deleteTask,
   rejectedTask,
+  splitTask,
   todoTask
 } from '../../store/tasks/actionsTasks';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCheckedTask, selectMarkedTask } from '../../store/selectedEntity/selectorSelects';
-import { setSelectTask } from '../../store/selectedEntity/actionsSelects';
+import { deleteSelectTask, setSelectTask } from '../../store/selectedEntity/actionsSelects';
 import { selectObjectTasks } from '../../store/tasks/selectorTasks';
 import { getId } from '../../helpers/getUniqId';
 import { selectSettings } from '../../store/componentsSettings/selectorcomponentsSettings';
@@ -54,9 +55,10 @@ export const EditorTasks = () => {
     const id = getId();
 
     markTasksId.forEach(item => {
-      const value = tasks[item].value;
-      const id = tasks[item].id;
-      const collapsedTask =  Object.assign({}, {value}, {id})
+      const collapsedTask = {
+        value: tasks[item].value,
+        id: tasks[item].id,
+      };
 
       return collapsedTasks[item] = collapsedTask;
     });
@@ -69,6 +71,28 @@ export const EditorTasks = () => {
       dispatch(setSelectTask({[id]: false}));
     })
   }, [dispatch, markTasksId, tasks]);
+
+  const handleSplitTask = () => {
+    markTasksId.forEach(item => {
+
+      if (tasks[item].subtasks) {
+        Object.values(tasks[item].subtasks).forEach((subtask) => {
+          const restoredTask = {
+            ...subtask,
+            time: tasks[item].time,
+            status: tasks[item].status,
+            timeChange: tasks[item].timeChange,
+          };
+
+          dispatch(splitTask({...restoredTask}));
+          dispatch(deleteTask(item));
+          dispatch(deleteSelectTask(item));
+        });
+      } else {
+        dispatch(setSelectTask({[item]: false}));
+      }
+    });
+  };
 
   if(!isVisebled) {
     return null;
@@ -89,6 +113,9 @@ export const EditorTasks = () => {
         </Button>
         <Button color={PRIMARY} onClick={handleCollapsedTask} >
           <Icon type='collapsed' />
+        </Button>
+        <Button color={PRIMARY} onClick={handleSplitTask} >
+          <Icon type='breakUp' />
         </Button>
       </div>
     </div>
