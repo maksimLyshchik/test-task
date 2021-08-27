@@ -9,7 +9,7 @@ import { completedTask, rejectedTask, taskChangeTime, todoTask } from '../../../
 import { COMPLETED, IN_PROGRESS, REJECTED } from '../../../common/constants/constantsTasks/constantsTasks';
 import { INFO, SUCCESS, WARNING } from '../../../common/constants/constantsColorButton/constantsColorButton';
 import { TextArea } from '../../../common/modules/TextArea/TextArea';
-import { getDateNow } from '../../../helpers/getDateNow';
+import { formatDate } from '../../../helpers/formatDate';
 import s from './BlockTask.module.css';
 
 const blockTaskClass = {
@@ -24,6 +24,7 @@ export const BlockTask = ({value, id, time, timeChange, selected, status}) => {
   const isRejectedTask = status === REJECTED;
   const isSuccessTask = status === COMPLETED;
   const isStatusButtonInfo = isRejectedTask || isSuccessTask || status === IN_PROGRESS;
+  const isVisibledTimeChange = time !== timeChange;
 
   const handleChangeSelect = useCallback(({target}) => {
     const {checked} = target;
@@ -72,8 +73,8 @@ export const BlockTask = ({value, id, time, timeChange, selected, status}) => {
         </div>
       </div>
       <div className={s.blockTask__block_time}>
-        <div>Time created task: {getDateNow(time)} </div>
-        {time !== timeChange && <div>Time {status} task: {getDateNow(timeChange)} </div>}
+        <div>Time created task: {formatDate(time)} </div>
+        {isVisibledTimeChange && <div>Time {status} task: {formatDate(timeChange)} </div>}
       </div>
     </div>
   );

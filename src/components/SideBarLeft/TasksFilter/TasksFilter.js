@@ -10,6 +10,11 @@ import { selectFilter } from '../../../store/filter/selectorFilter';
 export const TasksFilter = () => {
   const dispatch = useDispatch();
   const {condition} = useSelector(selectFilter)
+  const isChackedRadioButtonAll = condition === ALL;
+  const isChackedRadioButtonCompleted = condition === COMPLETED;
+  const isChackedRadioButtonRejected = condition === REJECTED;
+  const isChackedRadioButtonInProgress = condition === IN_PROGRESS;
+  const isChackedRadioButtonTodo = condition === TODO;
 
   const handleChangeFilter = useCallback(({target}) => {
     const {value} = target;
@@ -26,7 +31,7 @@ export const TasksFilter = () => {
         type={PRIMARY}
         id={`${PRIMARY} 2`}
         htmlFor={`${PRIMARY} 2`}
-        checked={condition === ALL}
+        checked={isChackedRadioButtonAll}
       >
         show all
       </RadioButton>
@@ -37,7 +42,7 @@ export const TasksFilter = () => {
         type={SUCCESS}
         id={SUCCESS}
         htmlFor={SUCCESS}
-        checked={condition === COMPLETED}
+        checked={isChackedRadioButtonCompleted}
       >
         completed
       </RadioButton>
@@ -48,7 +53,7 @@ export const TasksFilter = () => {
         type={WARNING}
         id={WARNING}
         htmlFor={WARNING}
-        checked={condition === REJECTED}
+        checked={isChackedRadioButtonRejected}
       >
         rejected
       </RadioButton>
@@ -59,7 +64,7 @@ export const TasksFilter = () => {
         type={INFO}
         id={INFO}
         htmlFor={INFO}
-        checked={condition === IN_PROGRESS}
+        checked={isChackedRadioButtonInProgress}
       >
         in progress
       </RadioButton>
@@ -70,7 +75,7 @@ export const TasksFilter = () => {
         type={PRIMARY}
         id={PRIMARY}
         htmlFor={PRIMARY}
-        checked={condition === TODO}
+        checked={isChackedRadioButtonTodo}
       >
         todo
       </RadioButton>

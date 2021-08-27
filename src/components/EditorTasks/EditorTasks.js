@@ -12,7 +12,11 @@ import {
   todoTask
 } from '../../store/tasks/actionsTasks';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCheckedTask, selectMarkedTask } from '../../store/selectedEntity/selectorSelects';
+import {
+  selectCheckedTask,
+  selectMarkedTask,
+  selectMarkedTaskLength
+} from '../../store/selectedEntity/selectorSelects';
 import { deleteSelectTask, setSelectTask } from '../../store/selectedEntity/actionsSelects';
 import { selectObjectTasks } from '../../store/tasks/selectorTasks';
 import { getId } from '../../helpers/getUniqId';
@@ -23,7 +27,8 @@ export const EditorTasks = () => {
   const markTasksId = useSelector(selectMarkedTask);
   const selectedTasks = useSelector(selectCheckedTask);
   const tasks = useSelector(selectObjectTasks);
-  const isVisebled = Object.values(selectedTasks).filter(item => item).length;
+  const lengthMarkTasksId = useSelector(selectMarkedTaskLength);
+  const isVisebled = !!Object.values(selectedTasks).filter(item => item).length;
   const isChangePosition = isVisebled && s.collapsed;
 
   const handleRejectedTask = useCallback(() => {
@@ -107,9 +112,9 @@ export const EditorTasks = () => {
     });
   };
 
-  const isDisabled = useMemo(() => {
-    return markTasksId.filter(id => tasks[id].subtasks).length !== markTasksId.length;
-  }, [tasks, markTasksId]);
+  const isDisabledCollapsedAndSplitButton = useMemo(() => {
+    return lengthMarkTasksId;
+  }, [lengthMarkTasksId]);
 
   if (!isVisebled) {
     return null;
@@ -128,10 +133,10 @@ export const EditorTasks = () => {
         <Button color={SUCCESS} onClick={handleCompletedTask}>
           <Icon type={COMPLETED} />
         </Button>
-        <Button color={PRIMARY} onClick={handleCollapsedTask} disabled={!isDisabled}>
+        <Button color={PRIMARY} onClick={handleCollapsedTask} disabled={!isDisabledCollapsedAndSplitButton}>
           <Icon type='collapsed' />
         </Button>
-        <Button color={PRIMARY} onClick={handleSplitTask} disabled={isDisabled}>
+        <Button color={PRIMARY} onClick={handleSplitTask} disabled={isDisabledCollapsedAndSplitButton}>
           <Icon type='breakUp' />
         </Button>
       </div>
