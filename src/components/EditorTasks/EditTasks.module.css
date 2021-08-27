@@ -9,7 +9,7 @@
 
   visibility: hidden;
   opacity: 1;
-  transition: all 0.6s;
+  transition: all 0.8s;
   transform: translate(0px, 100%);
 
   border: 2px solid var(--main-blue);
@@ -18,6 +18,21 @@
 
   color: var(--main-blue);
   background-color: var(--white);
+
+  animation-duration: 0.6s;
+  animation-name: slideFromBottom;
+  animation-iteration-count: 1;
+}
+
+@keyframes slideFromBottom {
+  from {
+    margin-bottom: -4%;
+    width: 100%;
+  }
+
+  to {
+    margin-bottom: 0;
+  }
 }
 
 .tasksEditor__name {
@@ -42,5 +57,9 @@
 .collapsed {
   visibility: visible;
   transform: translate(0px, 0px);
-  transition: all 0.6s;
+  transition: all 0.8s;
+}
+
+.tasksEditor__stretch {
+  left: 0;
 }

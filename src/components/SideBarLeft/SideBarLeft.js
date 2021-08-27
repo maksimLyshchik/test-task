@@ -1,20 +1,25 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { TasksFilter } from './TasksFilter/TasksFilter';
 import { Button } from '../../common/modules/Button/Button';
 import { Icon } from '../../common/modules/Icons/Icons';
 import { TRANSPARENT } from '../../common/constants/constantsColorButton/constantsColorButton';
+import { setVisibledSidebar } from '../../store/componentsSettings/actionSettings';
+import { selectSettings } from '../../store/componentsSettings/selectorcomponentsSettings';
 import s from './SideBarLeft.module.css';
 
 export const SideBarLeft = () => {
-  const [sideBarPosition, setSideBarPosition] = useState(s.collapsed);
-  const typeIcons = sideBarPosition === s.collapsed ? 'arrowDown' : 'arrowUp';
-  const isVisibled = sideBarPosition === s.collapsed;
+  const dispatch = useDispatch();
+  const { isVisibledSidebar } = useSelector(selectSettings);
+  const isVisibled = isVisibledSidebar === 'collapsed';
+  const typeIcons = isVisibled ? 'arrowDown' : 'arrowUp';
+  const sideBarPosition = isVisibled ? s.collapsed : s.expanded;
 
   const handleSideBarPosition = useCallback(() => {
-    const isVisebled = sideBarPosition === s.collapsed ? s.expanded : s.collapsed;
+    const isChangeVisibled = isVisibled ? 'expanded' : 'collapsed';
 
-    setSideBarPosition(isVisebled);
-  }, [sideBarPosition]);
+    dispatch(setVisibledSidebar({ isVisibledSidebar: isChangeVisibled }));
+  }, [dispatch, isVisibled]);
 
   return (
     <div className={`${s.sideBar} ${sideBarPosition}`} >

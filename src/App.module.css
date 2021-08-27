@@ -26,3 +26,7 @@
 
   padding-left: 260px;
 }
+
+.app_main__popup_container {
+  display: flex;
+}

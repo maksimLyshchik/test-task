@@ -15,6 +15,7 @@ import { selectCheckedTask, selectMarkedTask } from '../../store/selectedEntity/
 import { setSelectTask } from '../../store/selectedEntity/actionsSelects';
 import { selectObjectTasks } from '../../store/tasks/selectorTasks';
 import { getId } from '../../helpers/getUniqId';
+import { selectSettings } from '../../store/componentsSettings/selectorcomponentsSettings';
 import s from './EditTasks.module.css';
 
 export const EditorTasks = () => {
@@ -22,8 +23,10 @@ export const EditorTasks = () => {
   const markTasksId = useSelector(selectMarkedTask);
   const selectedTasks = useSelector(selectCheckedTask);
   const tasks = useSelector(selectObjectTasks);
+  const { isVisibledSidebar } = useSelector(selectSettings);
   const isVisebled = Object.values(selectedTasks).filter(item => item).length;
   const isChangePosition = isVisebled && s.collapsed;
+  const tasksEditor__stretch = isVisibledSidebar === 'collapsed' ? s.tasksEditor__stretch : '';
 
   const handleRejectedTask = useCallback(() => {
     markTasksId.forEach((id) => {
@@ -72,7 +75,7 @@ export const EditorTasks = () => {
   }
 
   return (
-    <div className={`${s.tasksEditor} ${isChangePosition}`} >
+    <div className={`${s.tasksEditor} ${isChangePosition} ${tasksEditor__stretch}`} >
       <span className={s.tasksEditor__name}>Tasks manager</span>
       <div className={s.tasksEditor__panel}>
         <Button color={WARNING} onClick={handleRejectedTask} >
