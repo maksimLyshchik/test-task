@@ -52,9 +52,10 @@ export const EditorTasks = () => {
     const id = getId();
 
     markTasksId.forEach(item => {
-      const collapsedTask = {};
-      collapsedTask.value = tasks[item].value;
-      collapsedTask.id = tasks[item].id;
+      const collapsedTask = {
+        value: tasks[item].value,
+        id: tasks[item].id,
+      };
 
       return collapsedTasks[item] = collapsedTask;
     });
