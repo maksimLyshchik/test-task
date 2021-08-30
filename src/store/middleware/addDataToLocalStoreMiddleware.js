@@ -1,11 +1,10 @@
+import { throttle } from '../../helpers/throttle';
+
 export const addDataToLocalStoreMiddleware = store => next => action => {
-  const isStartInterval = !Object.values(store.getState().tasks).length;
 
-  const setLocalStore = () => localStorage.setItem('store', JSON.stringify(store.getState()));
+  let setLocalStore = () => localStorage.setItem('store', JSON.stringify(store.getState()));
 
-  if (isStartInterval) {
-    setInterval(setLocalStore, 10000)
-  }
+  throttle(setLocalStore, 5000);
 
   return next(action);
 };
