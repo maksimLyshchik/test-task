@@ -1,4 +1,4 @@
-export const getDateNow = (time) => {
+export const formatDate = (time) => {
   const formatTime = new Date(time).toLocaleTimeString('en-GB', { hour12: false });
   const formatDate = new Date(time).toLocaleDateString('en-GB');
 

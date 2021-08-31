@@ -6,7 +6,7 @@ import { COMPLETED, REJECTED } from '../../../common/constants/constantsTasks/co
 import { TaskActions } from './TaskActions/TaskActions';
 import { selectCheckedTask } from '../../../store/selectedEntity/selectorSelects';
 import { TaskContent } from './TaskContent/TaskContent';
-import { BlockWithTime } from './BlockWithTime/BlockWithTime';
+import { BlockWithTimeTask } from './BlockWithTimeTask/BlockWithTimeTask';
 import s from './Task.module.css';
 
 const taskClass = {
@@ -40,7 +40,7 @@ export const Task = ({task}) => {
         <TaskContent task={task} />
         <TaskActions id={id} status={status} />
       </div>
-      <BlockWithTime
+      <BlockWithTimeTask
         timeCreation={timeCreation}
         timeChange={timeChange}
         status={status}

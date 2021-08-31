@@ -12,7 +12,11 @@ import {
   todoTask
 } from '../../store/tasks/actionsTasks';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCheckedTask, selectMarkedTask } from '../../store/selectedEntity/selectorSelects';
+import {
+  selectCheckedTask,
+  selectMarkedTask,
+  selectMarkedTaskLength
+} from '../../store/selectedEntity/selectorSelects';
 import { deleteSelectTask, setSelectTask } from '../../store/selectedEntity/actionsSelects';
 import { selectObjectTasks } from '../../store/tasks/selectorTasks';
 import { getId } from '../../helpers/getUniqId';
@@ -25,51 +29,69 @@ export const EditorTasks = () => {
   const selectedTasks = useSelector(selectCheckedTask);
   const tasks = useSelector(selectObjectTasks);
   const { isVisibledSidebar } = useSelector(selectSettings);
-  const isVisebled = Object.values(selectedTasks).filter(item => item).length;
+  const lengthMarkTasksId = useSelector(selectMarkedTaskLength);
+  const isVisebled = !!Object.values(selectedTasks).filter(item => item).length;
   const isChangePosition = isVisebled && s.collapsed;
+  const isDisabledCollapsedAndSplitButton = lengthMarkTasksId;
   const tasksEditor__stretch = isVisibledSidebar === 'collapsed' ? s.tasksEditor__stretch : '';
 
   const handleRejectedTask = useCallback(() => {
     markTasksId.forEach((id) => {
       dispatch(rejectedTask(id));
-      dispatch(setSelectTask({[id]: false}));
+      dispatch(setSelectTask({ [id]: false }));
     });
   }, [dispatch, markTasksId]);
 
   const handleCompletedTask = useCallback(() => {
     markTasksId.forEach((id) => {
       dispatch(completedTask(id));
-      dispatch(setSelectTask({[id]: false}));
+      dispatch(setSelectTask({ [id]: false }));
     });
   }, [dispatch, markTasksId]);
 
   const handleTodoTask = useCallback(() => {
     markTasksId.forEach((id) => {
       dispatch(todoTask(id));
-      dispatch(setSelectTask({[id]: false}));
+      dispatch(setSelectTask({ [id]: false }));
     });
   }, [dispatch, markTasksId]);
 
   const handleCollapsedTask = useCallback(() => {
-    const collapsedTasks = {};
+    let subtasks = {};
     const id = getId();
 
-    markTasksId.forEach(item => {
-      const collapsedTask = {
-        value: tasks[item].value,
-        id: tasks[item].id,
-      };
+    const markTasks = Object.values(tasks).filter(task => markTasksId.includes(task.id));
 
-      return collapsedTasks[item] = collapsedTask;
+    markTasks.forEach(task => {
+      if (task.subtasks) {
+        subtasks = {
+          ...subtasks,
+          ...task.subtasks,
+        };
+        return;
+      }
+      subtasks = {
+        ...subtasks,
+        [task.id]: {
+          value: task.value,
+          id: task.id,
+        }
+      };
     });
 
-    dispatch(addTask({id, timeCreation: Date.now(), status: TODO, timeChange: Date.now(), subtasks: collapsedTasks, }));
-    dispatch(setSelectTask({[id]: false}));
+    dispatch(addTask({
+      id,
+      timeCreation: Date.now(),
+      status: TODO,
+      timeChange: Date.now(),
+      subtasks,
+    }));
+    dispatch(setSelectTask({ [id]: false }));
 
     markTasksId.forEach((id) => {
       dispatch(deleteTask(id));
-      dispatch(setSelectTask({[id]: false}));
-    })
+      dispatch(setSelectTask({ [id]: false }));
+    });
   }, [dispatch, markTasksId, tasks]);
 
   const handleSplitTask = () => {
@@ -84,37 +106,37 @@ export const EditorTasks = () => {
             timeChange: tasks[item].timeChange,
           };
 
-          dispatch(splitTask({...restoredTask}));
+          dispatch(splitTask({ ...restoredTask }));
           dispatch(deleteTask(item));
           dispatch(deleteSelectTask(item));
         });
       } else {
-        dispatch(setSelectTask({[item]: false}));
+        dispatch(setSelectTask({ [item]: false }));
       }
     });
   };
 
-  if(!isVisebled) {
+  if (!isVisebled) {
     return null;
   }
 
   return (
-    <div className={`${s.tasksEditor} ${isChangePosition} ${tasksEditor__stretch}`} >
+    <div className={`${s.tasksEditor} ${isChangePosition} ${tasksEditor__stretch}`}>
       <span className={s.tasksEditor__name}>Tasks manager</span>
       <div className={s.tasksEditor__panel}>
-        <Button color={WARNING} onClick={handleRejectedTask} >
+        <Button color={WARNING} onClick={handleRejectedTask}>
           <Icon type={REJECTED} />
         </Button>
-        <Button color={INFO} onClick={handleTodoTask} >
+        <Button color={INFO} onClick={handleTodoTask}>
           <Icon type={IN_PROGRESS} />
         </Button>
-        <Button color={SUCCESS} onClick={handleCompletedTask} >
+        <Button color={SUCCESS} onClick={handleCompletedTask}>
           <Icon type={COMPLETED} />
         </Button>
-        <Button color={PRIMARY} onClick={handleCollapsedTask} >
+        <Button color={PRIMARY} onClick={handleCollapsedTask} disabled={!isDisabledCollapsedAndSplitButton}>
           <Icon type='collapsed' />
         </Button>
-        <Button color={PRIMARY} onClick={handleSplitTask} >
+        <Button color={PRIMARY} onClick={handleSplitTask} disabled={isDisabledCollapsedAndSplitButton}>
           <Icon type='breakUp' />
         </Button>
       </div>
