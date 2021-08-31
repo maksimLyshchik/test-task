@@ -25,7 +25,6 @@ export const App = () => {
       store.dispatch(setSelectTask({
         [task.id]: false
       }));
-
     });
   }, [])
 
