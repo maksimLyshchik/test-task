@@ -30,6 +30,7 @@ export const EditorTasks = () => {
   const lengthMarkTasksId = useSelector(selectMarkedTaskLength);
   const isVisebled = !!Object.values(selectedTasks).filter(item => item).length;
   const isChangePosition = isVisebled && s.collapsed;
+  const isDisabledCollapsedAndSplitButton = lengthMarkTasksId;
 
   const handleRejectedTask = useCallback(() => {
     markTasksId.forEach((id) => {
@@ -111,10 +112,6 @@ export const EditorTasks = () => {
       }
     });
   };
-
-  const isDisabledCollapsedAndSplitButton = useMemo(() => {
-    return lengthMarkTasksId;
-  }, [lengthMarkTasksId]);
 
   if (!isVisebled) {
     return null;

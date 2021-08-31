@@ -10,11 +10,11 @@ import { selectFilter } from '../../../store/filter/selectorFilter';
 export const TasksFilter = () => {
   const dispatch = useDispatch();
   const {condition} = useSelector(selectFilter)
-  const isChackedRadioButtonAll = condition === ALL;
-  const isChackedRadioButtonCompleted = condition === COMPLETED;
-  const isChackedRadioButtonRejected = condition === REJECTED;
-  const isChackedRadioButtonInProgress = condition === IN_PROGRESS;
-  const isChackedRadioButtonTodo = condition === TODO;
+  const isCheckedRadioButtonAll = condition === ALL;
+  const isCheckedRadioButtonCompleted = condition === COMPLETED;
+  const isCheckedRadioButtonRejected = condition === REJECTED;
+  const isCheckedRadioButtonInProgress = condition === IN_PROGRESS;
+  const isCheckedRadioButtonTodo = condition === TODO;
 
   const handleChangeFilter = useCallback(({target}) => {
     const {value} = target;
@@ -31,7 +31,7 @@ export const TasksFilter = () => {
         type={PRIMARY}
         id={`${PRIMARY} 2`}
         htmlFor={`${PRIMARY} 2`}
-        checked={isChackedRadioButtonAll}
+        checked={isCheckedRadioButtonAll}
       >
         show all
       </RadioButton>
@@ -42,7 +42,7 @@ export const TasksFilter = () => {
         type={SUCCESS}
         id={SUCCESS}
         htmlFor={SUCCESS}
-        checked={isChackedRadioButtonCompleted}
+        checked={isCheckedRadioButtonCompleted}
       >
         completed
       </RadioButton>
@@ -53,7 +53,7 @@ export const TasksFilter = () => {
         type={WARNING}
         id={WARNING}
         htmlFor={WARNING}
-        checked={isChackedRadioButtonRejected}
+        checked={isCheckedRadioButtonRejected}
       >
         rejected
       </RadioButton>
@@ -64,7 +64,7 @@ export const TasksFilter = () => {
         type={INFO}
         id={INFO}
         htmlFor={INFO}
-        checked={isChackedRadioButtonInProgress}
+        checked={isCheckedRadioButtonInProgress}
       >
         in progress
       </RadioButton>
@@ -75,7 +75,7 @@ export const TasksFilter = () => {
         type={PRIMARY}
         id={PRIMARY}
         htmlFor={PRIMARY}
-        checked={isChackedRadioButtonTodo}
+        checked={isCheckedRadioButtonTodo}
       >
         todo
       </RadioButton>
