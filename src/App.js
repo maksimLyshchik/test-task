@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AddTask } from './components/AddTask/AddTask';
 import { TasksList } from './components/TasksList/TasksList';
 import { SideBarLeft } from './components/SideBarLeft/SideBarLeft';
@@ -11,7 +11,7 @@ import s from './App.module.css';
 export const App = () => {
   const initialState = JSON.parse(localStorage.getItem('store'));
 
-  window.onload = () => {
+  useEffect(() => {
     Object.values(initialState.tasks).map(task => {
 
       store.dispatch(addTask({
@@ -27,7 +27,7 @@ export const App = () => {
       }));
 
     });
-  };
+  }, [])
 
   return (
     <div className={s.app_main}>
