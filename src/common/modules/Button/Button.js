@@ -6,7 +6,7 @@ const buttonColors = {
   warning: s.button_warning,
   success: s.button_success,
   info: s.button_info,
-  transparent: s.button_transparent,
+  outline: s.button_outline,
 };
 
 export const Button = ({color = PRIMARY, ...props}) => {
