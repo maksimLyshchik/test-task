@@ -1,10 +1,11 @@
 import { throttle } from '../../helpers/throttle';
 
 export const addDataToLocalStoreMiddleware = store => next => action => {
+  const result = next(action);
+  const setLocalStore = () => localStorage.setItem('store', JSON.stringify(store.getState()));
+  const throttleLocalStore = throttle(setLocalStore, 10000);
 
-  let setLocalStore = () => localStorage.setItem('store', JSON.stringify(store.getState()));
+  throttleLocalStore();
 
-  throttle(setLocalStore, 5000);
-
-  return next(action);
+  return result;
 };

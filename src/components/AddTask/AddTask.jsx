@@ -12,12 +12,12 @@ import s from './AddTask.module.css';
 export const AddTask = () => {
   const dispatch = useDispatch();
   const [task, setTask] = useState();
-  const tasksCount = useSelector(selectTasksCount);
+  let tasksCount = useSelector(selectTasksCount);
+  const taskId = ++tasksCount;
 
   const handleSubmitTask = useCallback(() => {
-    const id = getId();
-    dispatch(addTask({value: task, id: tasksCount + id, timeCreation: Date.now(), status: TODO, timeChange: Date.now()}));
-    dispatch(setSelectTask({[tasksCount + id]: false}));
+    dispatch(addTask({value: task, id: taskId, timeCreation: Date.now(), status: TODO, timeChange: Date.now()}));
+    dispatch(setSelectTask({[taskId]: false}));
   }, [dispatch, task, tasksCount]);
 
   const handleChangeValue = useCallback(({target}) => {
