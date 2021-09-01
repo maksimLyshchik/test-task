@@ -1,37 +1,29 @@
-export const throttle = (func, ms, immediate = true) => {
+let isThrottled = false,
+  savedArgs = null,
+  savedThis = null;
 
-  let timeout = null;
-  let initialCall = false;
-  let savedArgs;
-  let savedThis;
+export const throttle = (func, ms) => {
 
   function wrapper() {
-    const callNow = immediate && initialCall;
 
-    if (initialCall) {
+    if (isThrottled) {
       savedArgs = arguments;
       savedThis = this;
       return;
     }
-    const next = () => {
+
+    func.apply(this, arguments);
+
+    isThrottled = true;
+
+    setTimeout(function () {
+      isThrottled = false;
       if (savedArgs) {
         wrapper.apply(savedThis, savedArgs);
         savedArgs = savedThis = null;
       }
-
-      func.apply(this, arguments);
-      timeout = false;
-    };
-
-    if (callNow) {
-      next();
-      initialCall = true;
-    }
-
-    if (!timeout) {
-      timeout = setTimeout(next, ms);
-    }
-  }
+    }, ms);
+  };
 
   return wrapper;
 };

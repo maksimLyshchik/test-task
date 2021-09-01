@@ -1,9 +1,9 @@
 import { throttle } from '../../helpers/throttle';
+import { setLocalStore } from '../../index';
 
-export const addDataToLocalStoreMiddleware = store => next => action => {
+export const addDataToLocalStoreMiddleware = () => next => action => {
   const result = next(action);
-  const setLocalStore = () => localStorage.setItem('store', JSON.stringify(store.getState()));
-  const throttleLocalStore = throttle(setLocalStore, 10000);
+  const throttleLocalStore = throttle(setLocalStore, 60000);
 
   throttleLocalStore();
 

@@ -3,7 +3,6 @@ import { tasks } from './tasks/reducerTasks';
 import { selectedTasks } from './selectedEntity/reducerSelects';
 import { filterTasks } from './filter/reducerFilter';
 import { componentsSettings } from './componentsSettings/reducerSettings';
-import { loggerMiddleware } from './middleware/loggerMiddleware';
 import { addDataToLocalStoreMiddleware } from './middleware/addDataToLocalStoreMiddleware';
 
 export default configureStore({
@@ -13,5 +12,5 @@ export default configureStore({
     filter: filterTasks,
     sidebar: componentsSettings,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(addDataToLocalStoreMiddleware, loggerMiddleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(addDataToLocalStoreMiddleware),
 });
