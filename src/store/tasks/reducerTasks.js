@@ -1,14 +1,15 @@
 import {
-  ADD_TASK,
+  ADD_TASK, addTask,
   COMPLETED_TASK,
   DELETE_TASK,
   REJECTED_TASK,
   SPLIT_TASK,
-  TODO_TASK
+  TODO_TASK,
 } from './actionsTasks';
-import { COMPLETED, IN_PROGRESS, REJECTED } from '../../common/constants/constantsTasks/constantsTasks';
+import { COMPLETED, IN_PROGRESS, REJECTED, TODO } from '../../common/constants/constantsTasks/constantsTasks';
+import { setSelectTask } from '../selectedEntity/actionsSelects';
 
-const addTask = (state, task) => {
+const setTask = (state, task) => {
   return {
     ...state,
     [task.id]: task,
@@ -61,7 +62,7 @@ const splitTask = (state, tasks) => {
 export const tasks = (state = [], action) => {
   switch (action.type) {
     case ADD_TASK:
-      return addTask(state, action.payload);
+      return setTask(state, action.payload);
     case REJECTED_TASK:
       return rejectTask(state, action.id);
     case COMPLETED_TASK:
@@ -75,4 +76,15 @@ export const tasks = (state = [], action) => {
     default:
       return state;
   }
+};
+
+export const addTaskThunkCreator = (task, tasksCount) => (dispatch) => {
+  dispatch(addTask({
+    value: task,
+    id: ++tasksCount,
+    timeCreation: Date.now(),
+    status: TODO,
+    timeChange: Date.now(),
+  }));
+  dispatch(setSelectTask({ [++tasksCount]: false }));
 };
