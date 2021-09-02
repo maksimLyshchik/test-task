@@ -7,8 +7,8 @@ export const SearchTasks = () => {
 
   return (
     <div className={s.searchTasks}>
+      <Icon type='search' fill='var(--light-blue)' />
       <Input type='search' placeholder='Search task' />
-      <Icon type='search' />
     </div>
   );
 };

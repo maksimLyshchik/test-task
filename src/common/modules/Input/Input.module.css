@@ -5,6 +5,11 @@
   padding-left: 8px;
 }
 
+.input:active, :hover, :focus {
+  outline: var(--light-blue);
+  outline-offset: var(--light-blue);
+}
+
 .label {
   margin: 0 10px 0 0;
 }
@@ -14,6 +19,12 @@
 }
 
 .input_search {
-  min-width: 200px;
-  border: 2px solid #0764e5;
+  border: none;
+  min-width: 120px;
+  background: transparent;
+}
+
+.input_search:focus {
+  outline: 0;
+  outline-offset: 0;
 }
