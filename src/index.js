@@ -24,6 +24,7 @@ window.onload = () => {
       timeCreation: task.timeCreation,
       status: task.status,
       timeChange: task.timeChange,
+      subtasks: task.subtasks,
     }));
 
     store.dispatch(setSelectTask({
