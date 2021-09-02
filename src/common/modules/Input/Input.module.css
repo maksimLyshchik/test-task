@@ -12,3 +12,8 @@
 .input:disabled .input_disabled {
   background-color: var(--gray-disable);
 }
+
+.input_search {
+  min-width: 200px;
+  border: 2px solid #0764e5;
+}

@@ -5,14 +5,12 @@
 
   flex: 1 1 100%;
 
-  border: 2px solid var(--main-blue);
-  border-radius: 8px;
-  padding: 8px;
-
   color: var(--main-blue);
+  border-radius: 12px;
   background-color: var(--white);
 
   min-width: 90%;
+  padding: 8px;
 
   font-size: 0.8em;
 }
