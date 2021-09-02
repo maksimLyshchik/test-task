@@ -2,21 +2,22 @@ import React, { useCallback } from 'react';
 import { Button } from '../../common/modules/Button/Button';
 import { INFO, PRIMARY, SUCCESS, WARNING } from '../../common/constants/constantsColorButton/constantsColorButton';
 import { Icon } from '../../common/modules/Icons/Icons';
-import { COMPLETED, IN_PROGRESS, REJECTED, TODO } from '../../common/constants/constantsTasks/constantsTasks';
+import { COMPLETED, IN_PROGRESS, REJECTED } from '../../common/constants/constantsTasks/constantsTasks';
 import {
-  addTask,
-  completedTask,
   deleteTask,
-  rejectedTask,
   splitTask,
-  todoTask
 } from '../../store/tasks/actionsTasks';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCheckedTask, selectMarkedTask } from '../../store/selectedEntity/selectorSelects';
 import { deleteSelectTask, setSelectTask } from '../../store/selectedEntity/actionsSelects';
-import { selectObjectTasks } from '../../store/tasks/selectorTasks';
-import { getId } from '../../helpers/getUniqId';
+import { selectObjectTasks, selectTasksCount } from '../../store/tasks/selectorTasks';
 import { selectSettings } from '../../store/componentsSettings/selectorcomponentsSettings';
+import {
+  collapsedTaskThunkCreator,
+  completedTaskThunkCreator,
+  rejectedTaskThunkCreator,
+  todoTaskThunkCreator,
+} from '../../store/tasks/reducerTasks';
 import s from './EditTasks.module.css';
 
 export const EditorTasks = () => {
@@ -28,49 +29,29 @@ export const EditorTasks = () => {
   const isVisebled = Object.values(selectedTasks).filter(item => item).length;
   const isChangePosition = isVisebled && s.collapsed;
   const tasksEditor__stretch = isVisibledSidebar === 'collapsed' ? s.tasksEditor__stretch : '';
+  let tasksCount = useSelector(selectTasksCount);
 
   const handleRejectedTask = useCallback(() => {
     markTasksId.forEach((id) => {
-      dispatch(rejectedTask(id));
-      dispatch(setSelectTask({[id]: false}));
+      dispatch(rejectedTaskThunkCreator(id));
     });
   }, [dispatch, markTasksId]);
 
   const handleCompletedTask = useCallback(() => {
     markTasksId.forEach((id) => {
-      dispatch(completedTask(id));
-      dispatch(setSelectTask({[id]: false}));
+      dispatch(completedTaskThunkCreator(id));
     });
   }, [dispatch, markTasksId]);
 
   const handleTodoTask = useCallback(() => {
     markTasksId.forEach((id) => {
-      dispatch(todoTask(id));
-      dispatch(setSelectTask({[id]: false}));
+      dispatch(todoTaskThunkCreator(id));
     });
   }, [dispatch, markTasksId]);
 
   const handleCollapsedTask = useCallback(() => {
-    const collapsedTasks = {};
-    const id = getId();
-
-    markTasksId.forEach(item => {
-      const collapsedTask = {
-        value: tasks[item].value,
-        id: tasks[item].id,
-      };
-
-      return collapsedTasks[item] = collapsedTask;
-    });
-
-    dispatch(addTask({id, timeCreation: Date.now(), status: TODO, timeChange: Date.now(), subtasks: collapsedTasks, }));
-    dispatch(setSelectTask({[id]: false}));
-
-    markTasksId.forEach((id) => {
-      dispatch(deleteTask(id));
-      dispatch(setSelectTask({[id]: false}));
-    })
-  }, [dispatch, markTasksId, tasks]);
+    dispatch(collapsedTaskThunkCreator(tasks, markTasksId, tasksCount));
+  }, [dispatch, markTasksId, tasks, tasksCount]);
 
   const handleSplitTask = () => {
     markTasksId.forEach(item => {
@@ -84,37 +65,37 @@ export const EditorTasks = () => {
             timeChange: tasks[item].timeChange,
           };
 
-          dispatch(splitTask({...restoredTask}));
+          dispatch(splitTask({ ...restoredTask }));
           dispatch(deleteTask(item));
           dispatch(deleteSelectTask(item));
         });
       } else {
-        dispatch(setSelectTask({[item]: false}));
+        dispatch(setSelectTask({ [item]: false }));
       }
     });
   };
 
-  if(!isVisebled) {
+  if (!isVisebled) {
     return null;
   }
 
   return (
-    <div className={`${s.tasksEditor} ${isChangePosition} ${tasksEditor__stretch}`} >
+    <div className={`${s.tasksEditor} ${isChangePosition} ${tasksEditor__stretch}`}>
       <span className={s.tasksEditor__name}>Tasks manager</span>
       <div className={s.tasksEditor__panel}>
-        <Button color={WARNING} onClick={handleRejectedTask} >
+        <Button color={WARNING} onClick={handleRejectedTask}>
           <Icon type={REJECTED} />
         </Button>
-        <Button color={INFO} onClick={handleTodoTask} >
+        <Button color={INFO} onClick={handleTodoTask}>
           <Icon type={IN_PROGRESS} />
         </Button>
-        <Button color={SUCCESS} onClick={handleCompletedTask} >
+        <Button color={SUCCESS} onClick={handleCompletedTask}>
           <Icon type={COMPLETED} />
         </Button>
-        <Button color={PRIMARY} onClick={handleCollapsedTask} >
+        <Button color={PRIMARY} onClick={handleCollapsedTask}>
           <Icon type='collapsed' />
         </Button>
-        <Button color={PRIMARY} onClick={handleSplitTask} >
+        <Button color={PRIMARY} onClick={handleSplitTask}>
           <Icon type='breakUp' />
         </Button>
       </div>
