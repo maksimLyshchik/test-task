@@ -20,13 +20,16 @@ export const TasksList = () => {
   const typeIcons = sortingRule === ASCENDING ? 'arrowDown' : 'arrowUp';
 
   const sortedTasks = filtredTasks.sort((itemPrev, itemPres) => {
-    if (itemPrev.timeChange > itemPres.timeChange) {
+    const compareTime = itemPrev.timeChange || itemPres.timeChange
+      ? 'timeChange' : 'timeCreation';
+
+    if (itemPrev[compareTime] > itemPres[compareTime]) {
       return sortingRule === DESCENDING ? -1 : 1;
     }
-    if (itemPrev.timeChange < itemPres.timeChange) {
+    if (itemPrev[compareTime] < itemPres[compareTime]) {
       return sortingRule === DESCENDING ? 1 : -1;
     }
-    return 0;
+    return null;
   });
 
   const handleChange = useCallback(({target}) => {

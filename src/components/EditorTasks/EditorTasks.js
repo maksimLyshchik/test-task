@@ -5,7 +5,7 @@ import { Icon } from '../../common/modules/Icons/Icons';
 import { COMPLETED, IN_PROGRESS, REJECTED } from '../../common/constants/constantsTasks/constantsTasks';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCheckedTask, selectMarkedTask } from '../../store/selectedEntity/selectorSelects';
-import { selectObjectTasks, selectTasksCount } from '../../store/tasks/selectorTasks';
+import { selectObjectTasks, selectTasksId } from '../../store/tasks/selectorTasks';
 import { selectSettings } from '../../store/componentsSettings/selectorcomponentsSettings';
 import {
   collapsedTaskThunkCreator,
@@ -14,6 +14,7 @@ import {
   splitTaskThunkCreator,
   todoTaskThunkCreator,
 } from '../../store/tasks/reducerTasks';
+import { getId } from '../../helpers/getUniqId';
 import s from './EditTasks.module.css';
 
 export const EditorTasks = () => {
@@ -21,11 +22,11 @@ export const EditorTasks = () => {
   const markTasksId = useSelector(selectMarkedTask);
   const selectedTasks = useSelector(selectCheckedTask);
   const tasks = useSelector(selectObjectTasks);
+  const tasksId = useSelector(selectTasksId);
   const { isVisibledSidebar } = useSelector(selectSettings);
   const isVisebled = Object.values(selectedTasks).filter(item => item).length;
   const isChangePosition = isVisebled && s.collapsed;
   const tasksEditor__stretch = isVisibledSidebar === 'collapsed' ? s.tasksEditor__stretch : '';
-  let tasksCount = useSelector(selectTasksCount);
 
   const handleRejectedTask = useCallback(() => {
     markTasksId.forEach((id) => {
@@ -46,8 +47,9 @@ export const EditorTasks = () => {
   }, [dispatch, markTasksId]);
 
   const handleCollapsedTask = useCallback(() => {
-    dispatch(collapsedTaskThunkCreator(tasks, markTasksId, tasksCount));
-  }, [dispatch, markTasksId, tasks, tasksCount]);
+    const newId = getId(tasksId);
+    dispatch(collapsedTaskThunkCreator(tasks, markTasksId, newId));
+  }, [dispatch, markTasksId, tasks, tasksId]);
 
   const handleSplitTask = useCallback(() => {
     dispatch(splitTaskThunkCreator(tasks, markTasksId));
