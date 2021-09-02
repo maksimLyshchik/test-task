@@ -3,19 +3,15 @@ import { Button } from '../../common/modules/Button/Button';
 import { INFO, PRIMARY, SUCCESS, WARNING } from '../../common/constants/constantsColorButton/constantsColorButton';
 import { Icon } from '../../common/modules/Icons/Icons';
 import { COMPLETED, IN_PROGRESS, REJECTED } from '../../common/constants/constantsTasks/constantsTasks';
-import {
-  deleteTask,
-  splitTask,
-} from '../../store/tasks/actionsTasks';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCheckedTask, selectMarkedTask } from '../../store/selectedEntity/selectorSelects';
-import { deleteSelectTask, setSelectTask } from '../../store/selectedEntity/actionsSelects';
 import { selectObjectTasks, selectTasksCount } from '../../store/tasks/selectorTasks';
 import { selectSettings } from '../../store/componentsSettings/selectorcomponentsSettings';
 import {
   collapsedTaskThunkCreator,
   completedTaskThunkCreator,
   rejectedTaskThunkCreator,
+  splitTaskThunkCreator,
   todoTaskThunkCreator,
 } from '../../store/tasks/reducerTasks';
 import s from './EditTasks.module.css';
@@ -53,27 +49,9 @@ export const EditorTasks = () => {
     dispatch(collapsedTaskThunkCreator(tasks, markTasksId, tasksCount));
   }, [dispatch, markTasksId, tasks, tasksCount]);
 
-  const handleSplitTask = () => {
-    markTasksId.forEach(item => {
-
-      if (tasks[item].subtasks) {
-        Object.values(tasks[item].subtasks).forEach((subtask) => {
-          const restoredTask = {
-            ...subtask,
-            time: tasks[item].time,
-            status: tasks[item].status,
-            timeChange: tasks[item].timeChange,
-          };
-
-          dispatch(splitTask({ ...restoredTask }));
-          dispatch(deleteTask(item));
-          dispatch(deleteSelectTask(item));
-        });
-      } else {
-        dispatch(setSelectTask({ [item]: false }));
-      }
-    });
-  };
+  const handleSplitTask = useCallback(() => {
+    dispatch(splitTaskThunkCreator(tasks, markTasksId));
+  }, [dispatch, markTasksId, tasks]);
 
   if (!isVisebled) {
     return null;

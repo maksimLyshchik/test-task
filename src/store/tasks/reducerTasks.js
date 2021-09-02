@@ -107,26 +107,48 @@ export const todoTaskThunkCreator = (id) => (dispatch) => {
 export const collapsedTaskThunkCreator = (tasks, markTasksId, tasksCount) => (dispatch) => {
   const collapsedTasks = {};
 
-  markTasksId.forEach(item => {
+  markTasksId.forEach(id => {
     const collapsedTask = {
-      value: tasks[item].value,
-      id: tasks[item].id,
+      value: tasks[id].value,
+      id: tasks[id].id,
     };
 
-    return collapsedTasks[item] = collapsedTask;
+    return collapsedTasks[id] = collapsedTask;
   });
 
   dispatch(addTask({
     id: ++tasksCount,
     timeCreation: Date.now(),
     status: TODO,
-    timeChange: Date.now(),
+    timeChange: null,
     subtasks: collapsedTasks,
   }));
-  dispatch(setSelectTask({ [++tasksCount]: false }));
+  dispatch(setSelectTask({ [tasksCount]: false }));
 
   markTasksId.forEach((id) => {
     dispatch(deleteTask(id));
-    dispatch(deleteSelectTask({ id }));
+    dispatch(deleteSelectTask(id));
+  });
+};
+
+export const splitTaskThunkCreator = (tasks, markTasksId) => (dispatch) => {
+  markTasksId.forEach(id => {
+
+    if (tasks[id].subtasks) {
+      Object.values(tasks[id].subtasks).forEach((subtask) => {
+        const restoredTask = {
+          ...subtask,
+          time: tasks[id].time,
+          status: tasks[id].status,
+          timeChange: tasks[id].timeChange,
+        };
+
+        dispatch(splitTask({ ...restoredTask }));
+        dispatch(deleteTask(id));
+        dispatch(deleteSelectTask(id));
+      });
+    } else {
+      dispatch(setSelectTask({ [id]: false }));
+    }
   });
 };
