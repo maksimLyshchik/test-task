@@ -1,6 +1,6 @@
-let isThrottled = false,
-  savedArgs = null,
-  savedThis = null;
+let isThrottled = false;
+let savedArgs = null;
+let savedThis = null;
 
 export const throttle = (func, ms) => {
 
@@ -20,7 +20,8 @@ export const throttle = (func, ms) => {
       isThrottled = false;
       if (savedArgs) {
         wrapper.apply(savedThis, savedArgs);
-        savedArgs = savedThis = null;
+        savedArgs = null;
+        savedThis = null;
       }
     }, ms);
   };

@@ -5,9 +5,9 @@ import { Provider } from 'react-redux';
 import store from './store/index';
 import { addTask } from './store/tasks/actionsTasks';
 import { setSelectTask } from './store/selectedEntity/actionsSelects';
+import { setLocalStore } from './store/middleware/addDataToLocalStoreMiddleware';
 
 export const initialState = JSON.parse(localStorage.getItem('store'));
-export const setLocalStore = () => localStorage.setItem('store', JSON.stringify(store.getState()));
 
 ReactDOM.render(
   <Provider store={store}>
