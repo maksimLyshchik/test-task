@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Checkbox } from '../../common/modules/Checkbox/Checkbox';
 import { setSelectTask } from '../../store/selectedEntity/actionsSelects';
 import { selectCheckedTask } from '../../store/selectedEntity/selectorSelects';
-import { selectFiltredTasks, selectSorting } from '../../store/filter/selectorFilter';
+import { selectFiltredTasks, selectSorting, selectValueSearch } from '../../store/filter/selectorFilter';
 import { Button } from '../../common/modules/Button/Button';
 import { setSorterTasks } from '../../store/filter/actionsFilter';
 import { Icon } from '../../common/modules/Icons/Icons';
@@ -17,9 +17,17 @@ export const TasksList = () => {
   const selectedTasks = useSelector(selectCheckedTask);
   const filtredTasks = useSelector(selectFiltredTasks);
   const sortingRule = useSelector(selectSorting);
+  const valueSearch = useSelector(selectValueSearch);
   const typeIcons = sortingRule === ASCENDING ? 'arrowDown' : 'arrowUp';
 
-  const sortedTasks = filtredTasks.sort((itemPrev, itemPres) => {
+  const searchTasks = () => {
+    if (valueSearch) {
+      return filtredTasks.filter(task => task.value.toLowerCase().indexOf(valueSearch.toLowerCase()) > -1);
+    }
+    return filtredTasks;
+  };
+
+  const sortedTasks = searchTasks().sort((itemPrev, itemPres) => {
     const compareTime = itemPrev.timeChange || itemPres.timeChange
       ? 'timeChange' : 'timeCreation';
 
@@ -32,10 +40,10 @@ export const TasksList = () => {
     return null;
   });
 
-  const handleChange = useCallback(({target}) => {
-    const {checked} = target;
+  const handleChange = useCallback(({ target }) => {
+    const { checked } = target;
     let selectAll = {};
-    filtredTasks.forEach(({id}) => selectAll[id] = checked);
+    filtredTasks.forEach(({ id }) => selectAll[id] = checked);
     dispatch(setSelectTask(selectAll));
   }, [dispatch, filtredTasks]);
 
@@ -50,25 +58,25 @@ export const TasksList = () => {
   const handleChangeSort = useCallback(() => {
     const changeSortingRule = sortingRule === ASCENDING ? DESCENDING : ASCENDING;
 
-    dispatch(setSorterTasks({sorting: changeSortingRule}));
+    dispatch(setSorterTasks({ sorting: changeSortingRule }));
   }, [dispatch, sortingRule]);
 
-  if(!sortedTasks || !sortedTasks.length) {
+  if (!sortedTasks || !sortedTasks.length) {
     return (
-      <div className={s.initialText} >
-        <span >Nothing to show </span>
+      <div className={s.initialText}>
+        <span>Nothing to show </span>
       </div>
-    )
+    );
   }
 
   return (
-    <div className={s.TasksList} >
-      <div className={s.TasksList__header} >
-        <div className={s.TasksList__header_checkbox} >
+    <div className={s.TasksList}>
+      <div className={s.TasksList__header}>
+        <div className={s.TasksList__header_checkbox}>
           <Checkbox name='checkedAll' onChange={handleChange} checked={checkedAll} />
-          <span className={s.TasksList__header_name} >Selected all tasks </span>
+          <span className={s.TasksList__header_name}>Selected all tasks </span>
         </div>
-        <Button color={TRANSPARENT} onClick={handleChangeSort} >
+        <Button color={TRANSPARENT} onClick={handleChangeSort}>
           <Icon type={typeIcons} width='20px' height='20px' />
         </Button>
       </div>

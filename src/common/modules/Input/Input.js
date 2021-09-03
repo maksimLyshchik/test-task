@@ -6,11 +6,11 @@ const inputType = {
   search: s. input_search,
 };
 
-export const Input = ({type = 'primary', ...props}) => {
+export const Input = ({type = 'primary', value, ...props}) => {
 
   return (
     <label className={s.label}>
-      <input className={`${s.input} ${inputType[type]}`} {...props} />
+      <input className={`${s.input} ${inputType[type]}`} value={value} {...props} />
     </label>
   );
 };

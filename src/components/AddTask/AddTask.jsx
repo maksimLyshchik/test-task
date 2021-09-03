@@ -13,6 +13,11 @@ export const AddTask = () => {
   const tasksId = useSelector(selectTasksId);
 
   const handleSubmitTask = useCallback(() => {
+    if (!task) {
+      alert('Enter task');
+      return;
+    }
+
     const newId = getId(tasksId);
     dispatch(addTaskThunkCreator(task, newId));
   }, [dispatch, task, tasksId]);
