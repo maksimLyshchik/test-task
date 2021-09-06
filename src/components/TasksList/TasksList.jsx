@@ -24,6 +24,7 @@ export const TasksList = () => {
     if (valueSearch) {
       return filtredTasks.filter(task => task.value.toLowerCase().indexOf(valueSearch.toLowerCase()) > -1);
     }
+
     return filtredTasks;
   };
 

@@ -17,20 +17,22 @@ ReactDOM.render(
 );
 
 window.onload = () => {
-  Object.values(initialState.tasks).forEach(task => {
-    store.dispatch(addTask({
-      id: task.id,
-      value: task.value,
-      timeCreation: task.timeCreation,
-      status: task.status,
-      timeChange: task.timeChange,
-      subtasks: task.subtasks,
-    }));
+  if (!!Object.keys(initialState).length) {
+    Object.values(initialState.tasks).forEach(task => {
+      store.dispatch(addTask({
+        id: task.id,
+        value: task.value,
+        timeCreation: task.timeCreation,
+        status: task.status,
+        timeChange: task.timeChange,
+        subtasks: task.subtasks,
+      }));
 
-    store.dispatch(setSelectTask({
-      [task.id]: false
-    }));
-  });
+      store.dispatch(setSelectTask({
+        [task.id]: false,
+      }));
+    });
+  }
 };
 
 window.onunload = () => {

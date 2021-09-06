@@ -15,6 +15,7 @@ export const AddTask = () => {
   const handleSubmitTask = useCallback(() => {
     if (!task) {
       alert('Enter task');
+
       return;
     }
 
