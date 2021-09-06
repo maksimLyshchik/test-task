@@ -27,7 +27,7 @@
 }
 
 .button_warning {
-  background-color: var(--red-delete);
+  background-color: var(--red-warning);
 }
 
 .button_success {
