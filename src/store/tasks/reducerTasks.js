@@ -1,13 +1,12 @@
 import {
-  ADD_TASK, addTask,
-  COMPLETED_TASK, completedTask,
-  DELETE_TASK, deleteTask,
-  REJECTED_TASK, rejectedTask,
-  SPLIT_TASK, splitTask,
-  TODO_TASK, todoTask,
+  ADD_TASK,
+  COMPLETED_TASK,
+  DELETE_TASK,
+  REJECTED_TASK,
+  SPLIT_TASK,
+  TODO_TASK,
 } from './actionsTasks';
-import { COMPLETED, IN_PROGRESS, REJECTED, TODO } from '../../common/constants/constantsTasks/constantsTasks';
-import { deleteSelectTask, setSelectTask } from '../selectedEntity/actionsSelects';
+import { COMPLETED, IN_PROGRESS, REJECTED } from '../../common/constants/constantsTasks/constantsTasks';
 
 const setTask = (state, task) => {
   return {
@@ -76,79 +75,4 @@ export const tasks = (state = [], action) => {
     default:
       return state;
   }
-};
-
-export const addTaskThunkCreator = (task, newId) => (dispatch) => {
-  dispatch(addTask({
-    value: task,
-    id: newId,
-    timeCreation: Date.now(),
-    status: TODO,
-    timeChange: null,
-  }));
-  dispatch(setSelectTask({ [newId]: false }));
-};
-
-export const completedTaskThunkCreator = (id) => (dispatch) => {
-  dispatch(completedTask(id));
-  dispatch(setSelectTask({ [id]: false }));
-};
-
-export const rejectedTaskThunkCreator = (id) => (dispatch) => {
-  dispatch(rejectedTask(id));
-  dispatch(setSelectTask({ [id]: false }));
-};
-
-export const todoTaskThunkCreator = (id) => (dispatch) => {
-  dispatch(todoTask(id));
-  dispatch(setSelectTask({ [id]: false }));
-};
-
-export const collapsedTaskThunkCreator = (tasks, markTasksId, newId) => (dispatch) => {
-  const collapsedTasks = {};
-
-  markTasksId.forEach(id => {
-    const collapsedTask = {
-      value: tasks[id].value,
-      id: tasks[id].id,
-    };
-
-    return collapsedTasks[id] = collapsedTask;
-  });
-
-  dispatch(addTask({
-    id: newId,
-    timeCreation: Date.now(),
-    status: TODO,
-    timeChange: null,
-    subtasks: collapsedTasks,
-  }));
-  dispatch(setSelectTask({ [newId]: false }));
-
-  markTasksId.forEach((id) => {
-    dispatch(deleteTask(id));
-    dispatch(deleteSelectTask(id));
-  });
-};
-
-export const splitTaskThunkCreator = (tasks, markTasksId) => (dispatch) => {
-  markTasksId.forEach(id => {
-
-    if (tasks[id].subtasks) {
-      Object.values(tasks[id].subtasks).forEach((subtask) => {
-        const restoredTask = {
-          ...subtask,
-          timeCreation: tasks[id].timeCreation,
-          status: tasks[id].status,
-          timeChange: Date.now(),
-        };
-
-        dispatch(splitTask({ ...restoredTask }));
-        dispatch(deleteTask(id));
-        dispatch(deleteSelectTask(id));
-      });
-    } else {
-      dispatch(setSelectTask({ [id]: false }));
-    }
-  });
 };

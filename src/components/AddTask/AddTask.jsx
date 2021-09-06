@@ -2,20 +2,16 @@ import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../../common/modules/Button/Button';
 import { Input } from '../../common/modules/Input/Input';
-import { addTaskThunkCreator } from '../../store/tasks/reducerTasks';
-import { getId } from '../../helpers/getUniqId';
-import { selectTasksId } from '../../store/tasks/selectorTasks';
+import { addingTask } from '../../store/tasks/thunkTasks';
 import s from './AddTask.module.css';
 
 export const AddTask = () => {
   const dispatch = useDispatch();
   const [task, setTask] = useState();
-  const tasksId = useSelector(selectTasksId);
 
   const handleSubmitTask = useCallback(() => {
-    const newId = getId(tasksId);
-    dispatch(addTaskThunkCreator(task, newId));
-  }, [dispatch, task, tasksId]);
+    dispatch(addingTask(task));
+  }, [dispatch, task]);
 
   const handleChangeValue = useCallback(({target}) => {
     const {value} = target;
