@@ -1,17 +1,39 @@
-import { PRIMARY } from '../../constants/constantsColorButton/constantsColorButton';
-import s from './Button.module.css';
+import styled from 'styled-components';
 
 const buttonColors = {
-  primary: s.button_primary,
-  warning: s.button_warning,
-  success: s.button_success,
-  info: s.button_info,
-  outline: s.button_outline,
+  primary: 'var(--main-blue)',
+  warning: 'var(--red-delete)',
+  success: 'var(--green-complete)',
+  info: 'var(--yelow-info)',
+  outline: 'var(--light-blue)',
 };
 
-export const Button = ({color = PRIMARY, ...props}) => {
+const StyledButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 6px;
+  border: 2px solid var(--white-gray-tint);
+  min-width: 100px;
+  min-height: 40px;
+
+  text-transform: uppercase;
+  background-color: ${props => buttonColors[props.color] || 'var(--main-blue)'};
+  color: var(--white);
+
+  cursor: pointer;
+
+  &:disabled {
+    background-color: var(--gray-disable);
+
+    cursor: not-allowed;
+  }
+`;
+
+export const Button = ({ ...props }) => {
 
   return (
-    <button className={`${s.button} ${buttonColors[color]}`} {...props} >{props.children} </button>
+    <StyledButton {...props} >{props.children} </StyledButton>
   );
 };
