@@ -44,13 +44,9 @@ export const EditorTasks = () => {
     });
   }, [dispatch, markTasksId]);
 
-  const handleCollapsedTask = useCallback(() => {
-    dispatch(collapsingTask(tasks, markTasksId));
-  }, [dispatch, markTasksId, tasks]);
+  const handleCollapsedTask = useCallback(() => dispatch(collapsingTask(tasks, markTasksId)), [dispatch, markTasksId, tasks]);
 
-  const handleSplitTask = useCallback(() => {
-    dispatch(splittingTask(tasks, markTasksId));
-  }, [dispatch, markTasksId, tasks]);
+  const handleSplitTask = useCallback(() => dispatch(splittingTask(tasks, markTasksId)), [dispatch, markTasksId, tasks]);
 
   if (!isVisebled) {
     return null;
