@@ -18,13 +18,19 @@
   background-color: var(--gray-disable);
 }
 
-.input_search {
+.input_outline {
   border: none;
   min-width: 120px;
   background: transparent;
 }
 
-.input_search:focus {
+.input_outline:focus {
   outline: 0;
   outline-offset: 0;
+}
+
+.input_warning {
+  outline: var(--red-warning);
+  border: 2px solid var(--red-warning);
+  background: var(--light-red-warning);
 }

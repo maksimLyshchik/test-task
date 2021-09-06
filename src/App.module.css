@@ -1,8 +1,8 @@
 :root {
   --main-blue: #0764e5;
   --gray-disable: #cbd0d2;
-  --red-delete: #e04545;
-  --light-red-delete: #a67272;
+  --red-warning: #e04545;
+  --light-red-warning: #e0bbbb;
   --green-complete: #24b226;
   --light-green-complete: #aecca3;
   --yelow-info: #e1c404;

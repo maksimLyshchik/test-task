@@ -20,26 +20,34 @@ export const TasksList = () => {
   const valueSearch = useSelector(selectValueSearch);
   const typeIcons = sortingRule === ASCENDING ? 'arrowDown' : 'arrowUp';
 
-  const searchTasks = () => {
+  const searchTasks = useMemo(() => {
     if (valueSearch) {
-      return filtredTasks.filter(task => task.value.toLowerCase().indexOf(valueSearch.toLowerCase()) > -1);
+      return filtredTasks.filter(
+        task => task.subtasks ?
+          Object.values(task.subtasks).filter(subtask => subtask.value?.toLowerCase().indexOf(valueSearch.toLowerCase()) > -1).length :
+          task.value?.toLowerCase().indexOf(valueSearch.toLowerCase()) > -1,
+      );
     }
 
     return filtredTasks;
-  };
+  }, [filtredTasks, valueSearch]);
 
-  const sortedTasks = searchTasks().sort((itemPrev, itemPres) => {
-    const compareTime = itemPrev.timeChange || itemPres.timeChange
-      ? 'timeChange' : 'timeCreation';
+  const sortedTasks = useMemo(() => {
+    return (
+      searchTasks.sort((itemPrev, itemPres) => {
+        const compareTime = itemPrev.timeChange || itemPres.timeChange
+          ? 'timeChange' : 'timeCreation';
 
-    if (itemPrev[compareTime] > itemPres[compareTime]) {
-      return sortingRule === DESCENDING ? -1 : 1;
-    }
-    if (itemPrev[compareTime] < itemPres[compareTime]) {
-      return sortingRule === DESCENDING ? 1 : -1;
-    }
-    return null;
-  });
+        if (itemPrev[compareTime] > itemPres[compareTime]) {
+          return sortingRule === DESCENDING ? -1 : 1;
+        }
+        if (itemPrev[compareTime] < itemPres[compareTime]) {
+          return sortingRule === DESCENDING ? 1 : -1;
+        }
+        return null;
+      })
+    );
+  }, [searchTasks, sortingRule]);
 
   const handleChange = useCallback(({ target }) => {
     const { checked } = target;

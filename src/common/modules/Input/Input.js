@@ -1,16 +1,18 @@
+import { DISABLED, OUTLINE, PRIMARY, WARNING } from '../../constants/constantTypeInput/constantTypeInput';
 import s from './Input.module.css';
 
 const inputType = {
-  primary: s.input,
-  disabled: s.input_disabled,
-  search: s. input_search,
+  [PRIMARY]: s.input,
+  [DISABLED]: s.input_disabled,
+  [OUTLINE]: s.input_outline,
+  [WARNING]: s.input_warning,
 };
 
-export const Input = ({type = 'primary', value, ...props}) => {
+export const Input = ({type = 'primary', ...props}) => {
 
   return (
     <label className={s.label}>
-      <input className={`${s.input} ${inputType[type]}`} value={value} {...props} />
+      <input className={`${s.input} ${inputType[type]}`} {...props} />
     </label>
   );
 };
