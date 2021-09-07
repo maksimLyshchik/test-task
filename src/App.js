@@ -4,6 +4,7 @@ import { TasksList } from './components/TasksList/TasksList';
 import { SideBarLeft } from './components/SideBarLeft/SideBarLeft';
 import { EditorTasks } from './components/EditorTasks/EditorTasks';
 import { MainContainer, WrapperApp } from './StyledApp';
+import s from './App.module.css';
 
 export const App = () => {
   return (
