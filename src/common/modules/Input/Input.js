@@ -1,15 +1,25 @@
-import s from './Input.module.css';
+import styled from 'styled-components';
 
-const inputType = {
-  primary: s.input,
-  disabled: s.input_disabled,
-};
+const StyledInput = styled.input`
+  min-height: 36px;
+  min-width: 300px;
 
-export const Input = ({type = 'primary', ...props}) => {
+  padding-left: 8px;
+  
+  &:disabled {
+    background-color: var(--gray-disable);
+  }
+`;
+
+const StyledLabel = styled.label`
+  margin: 0 10px 0 0;
+`;
+
+export const Input = ({ ...props }) => {
 
   return (
-    <label className={s.label}>
-      <input className={`${s.input} ${inputType[type]}`} {...props} />
-    </label>
+    <StyledLabel>
+      <StyledInput {...props} />
+    </StyledLabel>
   );
 };

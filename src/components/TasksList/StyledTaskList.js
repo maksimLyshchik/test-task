@@ -1,41 +1,35 @@
-.TasksList {
+import styled from 'styled-components';
+
+export const WrapperTaskList = styled.div`
   padding: 10px 10px 0 10px;
   min-width: 714px;
   border: 2px solid var(--blue-dull);
   border-radius: 8px;
 
   background-color: var(--white-blue-tint);
-}
+`;
 
-.TasksList__header {
+export const TaskListHeader = styled.div`
   display: flex;
   justify-content: space-between;
 
   min-height: 40px;
   padding: 0 12px 12px 12px;
-}
+`;
 
-.TasksList__header_name {
+export const HeaderName = styled.span`
   padding: 10px;
 
   font-size: 1.2em;
   color: var(--main-blue);
   text-transform: uppercase;
-}
+`;
 
-.TasksList__header_checkbox {
+export const HeaderBlockCheckbox = styled.div`
   display: flex;
-}
+`;
 
-.TasksList__header__controle_line {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-
-  padding: 10px 0 0 0;
-}
-
-.initialText {
+export const InitialText = styled.div`
   display: flex;
   justify-content: center;
 
@@ -44,4 +38,4 @@
   color: var(--main-blue);
   text-transform: uppercase;
   font-size: 1.2em;
-}
+`;

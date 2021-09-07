@@ -1,11 +1,18 @@
 import styled from 'styled-components';
+import {
+  INFO,
+  OUTLINE,
+  PRIMARY,
+  SUCCESS,
+  WARNING
+} from '../../constants/constantsColorButton/constantsColorButton';
 
 const buttonColors = {
-  primary: 'var(--main-blue)',
-  warning: 'var(--red-delete)',
-  success: 'var(--green-complete)',
-  info: 'var(--yelow-info)',
-  outline: 'var(--light-blue)',
+  [PRIMARY]: 'var(--main-blue)',
+  [WARNING]: 'var(--red-delete)',
+  [SUCCESS]: 'var(--green-complete)',
+  [INFO]: 'var(--yellow-info)',
+  [OUTLINE]: 'var(--light-blue)',
 };
 
 const StyledButton = styled.button`
@@ -28,7 +35,16 @@ const StyledButton = styled.button`
     background-color: var(--gray-disable);
 
     cursor: not-allowed;
-  }
+  };
+  
+  ${props => props.color === OUTLINE && `
+  border: 2px solid var(--main-blue);
+  min-width: 40px;
+  background-color: var(--light-blue);
+  &:hover {
+    background-color: var(--main-blue);
+  }`
+};
 `;
 
 export const Button = ({ ...props }) => {

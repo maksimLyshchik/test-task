@@ -1,4 +1,6 @@
-.tasksFilter__list {
+import styled from 'styled-components';
+
+export const WrapperTaskFilter = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -15,4 +17,4 @@
   min-width: 90%;
 
   font-size: 0.8em;
-}
+`;

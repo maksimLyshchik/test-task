@@ -1,20 +1,82 @@
 import React from 'react';
-import { PRIMARY } from '../../constants/constantsColorButton/constantsColorButton';
-import s from './RadioButton.module.css';
+import {
+  INFO,
+  PRIMARY,
+  SUCCESS,
+  WARNING,
+} from '../../constants/constantsColorButton/constantsColorButton';
+import styled from 'styled-components';
 
 const radioButtonColors = {
-  primary: s.radioButton_primary,
-  warning: s.radioButton_warning,
-  success: s.radioButton_success,
-  info: s.radioButton_info,
+  [PRIMARY]: 'var(--main-blue)',
+  [WARNING]: 'var(--red-delete)',
+  [SUCCESS]: 'var(--green-complete)',
+  [INFO]: 'var(--yellow-info)',
 };
 
-export const RadioButton = ({name, value, onClick, children, type = PRIMARY, id, htmlFor, ...props}) => {
+const StyledRadioButton = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+
+  color: var(--main-blue);
+`;
+
+const StyledLabel = styled.label`
+  display: flex;
+  align-items: center;
+
+  margin-right: 6px;
+  padding: 4px;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+`;
+
+const StyledInput = styled.input`
+  appearance: none;
+
+  border-radius: 50%;
+  height: 16px;
+  width: 16px;
+
+  border: 2px solid;
+  margin-right: 10px;
+
+  cursor: pointer;
+  
+  color: ${props => radioButtonColors[props.id] || 'var(--main-blue)'};
+  
+  &:checked {
+    background-color: ${props => radioButtonColors[props.id] || 'var(--main-blue)'};
+    border: 2px solid;
+
+    cursor: default;
+  }  
+  
+  &:checked + ${StyledLabel} {
+    border: 2px solid ${props => radioButtonColors[props.id] || 'var(--main-blue)'};
+    border-radius: 8px;
+
+    cursor: default;
+  }
+`;
+
+export const RadioButton = ({
+  name,
+  value,
+  onClick,
+  children,
+  type = PRIMARY,
+  id,
+  htmlFor,
+  ...props
+}) => {
 
   return (
-    <div className={s.radioButton} >
-      <input
-        className={`${s.radioButton__input} ${radioButtonColors[type]}`}
+    <StyledRadioButton>
+      <StyledInput
         type='radio'
         name={name}
         value={value}
@@ -22,12 +84,11 @@ export const RadioButton = ({name, value, onClick, children, type = PRIMARY, id,
         id={id}
         {...props}
       />
-      <label
-        className={`${s.radioButton__label} ${radioButtonColors[type]}`}
+      <StyledLabel
         htmlFor={htmlFor}
       >
         {children}
-      </label>
-    </div>
+      </StyledLabel>
+    </StyledRadioButton>
   );
 };

@@ -14,7 +14,7 @@
   opacity: 0;
   height: 0;
   width: 0;
-  -webkit-user-select: none;
+  select: none;
 }
 
 .checkmark {
@@ -54,7 +54,7 @@
 
   border: solid var(--white);
   border-width: 0 4px 4px 0;
-  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .checkbox_primary input:disabled~ .checkmark {

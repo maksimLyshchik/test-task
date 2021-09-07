@@ -1,21 +1,26 @@
-.sideBar {
+import styled from 'styled-components';
+import { Button } from '../../common/modules/Button/Button';
+
+export const WrapperSideBar = styled.div`
   display: flex;
   flex-direction: column;
 
   position: fixed;
-  left: -180px;
+  left: ${props => props.isVisibled ? '0' : '-180px'};
   top: 0;
   z-index: 3;
 
   min-height: 100vh;
   min-width: 180px;
-}
 
-.sideBar__button {
+  transition: left 0.8s;
+`;
+
+export const SideBarButton = styled(Button)`
   flex-direction: column;
 
   position: absolute;
-  left: 146px;
+  left: 160px;
   top: 60px;
 
   height: 50px;
@@ -25,23 +30,11 @@
 
   color: var(--main-blue);
   background-color: var(--light-blue);
-  text-transform: uppercase;
 
-  cursor: pointer;
   transform: rotate(-90deg);
-}
 
-.sideBar__button:hover {
-  background-color: var(--main-blue);
-  color: var(--white);
-}
-
-.collapsed {
-  left: -180px;
-  transition: left 0.8s;
-}
-
-.expanded {
-  left: 0;
-  transition: left 0.8s;
-}
+  &:hover {
+    background-color: var(--main-blue);
+    color: var(--white);
+  }
+`;

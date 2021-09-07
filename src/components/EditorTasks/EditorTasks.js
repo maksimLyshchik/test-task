@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { Button } from '../../common/modules/Button/Button';
 import { INFO, PRIMARY, SUCCESS, WARNING } from '../../common/constants/constantsColorButton/constantsColorButton';
 import { Icon } from '../../common/modules/Icons/Icons';
@@ -9,19 +9,19 @@ import {
   deleteTask,
   rejectedTask,
   splitTask,
-  todoTask
+  todoTask,
 } from '../../store/tasks/actionsTasks';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectCheckedTask,
   selectMarkedTask,
-  selectMarkedTaskLength
+  selectMarkedTaskLength,
 } from '../../store/selectedEntity/selectorSelects';
 import { deleteSelectTask, setSelectTask } from '../../store/selectedEntity/actionsSelects';
 import { selectObjectTasks } from '../../store/tasks/selectorTasks';
 import { getId } from '../../helpers/getUniqId';
 import { selectSettings } from '../../store/componentsSettings/selectorcomponentsSettings';
-import s from './EditTasks.module.css';
+import { TaskEditorName, TaskEditorPanel, WrapperTaskEditor } from './StyledEditorTask';
 
 export const EditorTasks = () => {
   const dispatch = useDispatch();
@@ -31,9 +31,8 @@ export const EditorTasks = () => {
   const { isVisibledSidebar } = useSelector(selectSettings);
   const lengthMarkTasksId = useSelector(selectMarkedTaskLength);
   const isVisebled = !!Object.values(selectedTasks).filter(item => item).length;
-  const isChangePosition = isVisebled && s.collapsed;
   const isDisabledCollapsedAndSplitButton = lengthMarkTasksId;
-  const tasksEditor__stretch = isVisibledSidebar === 'collapsed' ? s.tasksEditor__stretch : '';
+  const isStretch = isVisibledSidebar === 'collapsed'
 
   const handleRejectedTask = useCallback(() => {
     markTasksId.forEach((id) => {
@@ -75,7 +74,7 @@ export const EditorTasks = () => {
         [task.id]: {
           value: task.value,
           id: task.id,
-        }
+        },
       };
     });
 
@@ -121,9 +120,9 @@ export const EditorTasks = () => {
   }
 
   return (
-    <div className={`${s.tasksEditor} ${isChangePosition} ${tasksEditor__stretch}`}>
-      <span className={s.tasksEditor__name}>Tasks manager</span>
-      <div className={s.tasksEditor__panel}>
+    <WrapperTaskEditor isVisebled={isVisebled} isStretch={isStretch}>
+      <TaskEditorName>Tasks manager</TaskEditorName>
+      <TaskEditorPanel>
         <Button color={WARNING} onClick={handleRejectedTask}>
           <Icon type={REJECTED} />
         </Button>
@@ -139,7 +138,7 @@ export const EditorTasks = () => {
         <Button color={PRIMARY} onClick={handleSplitTask} disabled={isDisabledCollapsedAndSplitButton}>
           <Icon type='breakUp' />
         </Button>
-      </div>
-    </div>
+      </TaskEditorPanel>
+    </WrapperTaskEditor>
   );
 };

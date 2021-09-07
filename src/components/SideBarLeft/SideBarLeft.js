@@ -1,33 +1,39 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TasksFilter } from './TasksFilter/TasksFilter';
-import { Button } from '../../common/modules/Button/Button';
 import { Icon } from '../../common/modules/Icons/Icons';
 import { OUTLINE } from '../../common/constants/constantsColorButton/constantsColorButton';
 import { setVisibledSidebar } from '../../store/componentsSettings/actionSettings';
 import { selectSettings } from '../../store/componentsSettings/selectorcomponentsSettings';
-import s from './SideBarLeft.module.css';
+import { SideBarButton, WrapperSideBar } from './StyledSideBarLeft';
 
 export const SideBarLeft = () => {
   const dispatch = useDispatch();
   const { isVisibledSidebar } = useSelector(selectSettings);
-  const isVisibled = isVisibledSidebar === 'collapsed';
+  const isVisibled = isVisibledSidebar === 'expanded';
   const typeIcons = isVisibled ? 'arrowDown' : 'arrowUp';
-  const sideBarPosition = isVisibled ? s.collapsed : s.expanded;
 
   const handleSideBarPosition = useCallback(() => {
-    const isChangeVisibled = isVisibled ? 'expanded' : 'collapsed';
+    const isChangeVisibled = isVisibled ? 'collapsed' : 'expanded';
 
     dispatch(setVisibledSidebar({ isVisibledSidebar: isChangeVisibled }));
   }, [dispatch, isVisibled]);
 
   return (
-    <div className={`${s.sideBar} ${sideBarPosition}`} >
-      <Button color={OUTLINE} className={s.sideBar__button} onClick={handleSideBarPosition} >
-        <Icon type={typeIcons} width='20px' height='20px'/>
+    <WrapperSideBar isVisibled={isVisibled}>
+      <SideBarButton
+        color={OUTLINE}
+        onClick={handleSideBarPosition}
+
+      >
+        <Icon
+          type={typeIcons}
+          width='20px'
+          height='20px'
+        />
         {isVisibled && <span>Filter</span>}
-      </Button>
+      </SideBarButton>
       <TasksFilter />
-    </div>
+    </WrapperSideBar>
   );
 };

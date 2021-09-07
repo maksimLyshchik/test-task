@@ -6,7 +6,12 @@ import { Button } from '../../common/modules/Button/Button';
 import { Input } from '../../common/modules/Input/Input';
 import { addTask } from '../../store/tasks/actionsTasks';
 import { TODO } from '../../common/constants/constantsTasks/constantsTasks';
-import s from './AddTask.module.css';
+import styled from 'styled-components';
+
+const WrapperAddTask = styled.div`
+  display: flex;
+  padding: 0 0 10px 72px;
+`;
 
 export const AddTask = () => {
   const dispatch = useDispatch();
@@ -14,21 +19,21 @@ export const AddTask = () => {
 
   const handleSubmitTask = useCallback(() => {
     const id = getId();
-    dispatch(addTask({value: task, id, timeCreation: Date.now(), status: TODO, timeChange: Date.now()}));
-    dispatch(setSelectTask({[id]: false}));
+    dispatch(addTask({ value: task, id, timeCreation: Date.now(), status: TODO, timeChange: Date.now() }));
+    dispatch(setSelectTask({ [id]: false }));
   }, [dispatch, task]);
 
-  const handleChangeValue = useCallback(({target}) => {
-    const {value} = target;
+  const handleChangeValue = useCallback(({ target }) => {
+    const { value } = target;
     setTask(value);
   }, []);
 
   return (
-    <div className={s.add_task} >
+    <WrapperAddTask>
       <Input onChange={handleChangeValue} placeholder='Enter task' />
-      <Button onClick={handleSubmitTask} >
+      <Button onClick={handleSubmitTask}>
         Add task
       </Button>
-    </div>
+    </WrapperAddTask>
   );
 };
