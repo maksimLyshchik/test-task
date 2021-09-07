@@ -3,17 +3,17 @@ import { AddTask } from './components/AddTask/AddTask';
 import { TasksList } from './components/TasksList/TasksList';
 import { SideBarLeft } from './components/SideBarLeft/SideBarLeft';
 import { EditorTasks } from './components/EditorTasks/EditorTasks';
-import s from './App.module.css';
+import { MainContainer, WrapperApp } from './StyledApp';
 
 export const App = () => {
   return (
-    <div className={s.app_main} >
+    <WrapperApp>
       <SideBarLeft />
-      <div className={s.app_main__container} >
+      <MainContainer>
         <AddTask />
         <TasksList />
-      </div>
+      </MainContainer>
       <EditorTasks />
-    </div>
+    </WrapperApp>
   );
 };
