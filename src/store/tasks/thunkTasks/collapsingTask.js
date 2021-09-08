@@ -1,13 +1,8 @@
 import { addTask, deleteTask } from '../actionsTasks';
 import { TODO } from '../../../common/constants/constantsTasks/constantsTasks';
 import { deleteSelectTask, setSelectTask } from '../../selectedEntity/actionsSelects';
-import { useSelector } from 'react-redux';
-import { selectTasksId } from '../selectorTasks';
-import { getId } from '../../../helpers/getUniqId';
 
-export const collapsingTask = (tasks, markTasksId) => (dispatch) => {
-  const tasksId = useSelector(selectTasksId);
-  const newId = getId(tasksId);
+export const collapsingTask = (tasks, markTasksId, newId) => (dispatch) => {
   const collapsedTasks = {};
 
   markTasksId.forEach(id => {
