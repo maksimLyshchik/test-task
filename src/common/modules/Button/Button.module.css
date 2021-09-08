@@ -38,13 +38,13 @@
   background-color: var(--yelow-info);
 }
 
-.button_transparent {
+.button_outline {
   border: 2px solid var(--main-blue);
   min-width: 40px;
 
   background-color: var(--light-blue);
 }
 
-.button_transparent:hover {
+.button_outline:hover {
   background-color: var(--main-blue);
 }

@@ -4,7 +4,7 @@ import { INFO, PRIMARY, SUCCESS, WARNING } from '../../common/constants/constant
 import { Icon } from '../../common/modules/Icons/Icons';
 import { COMPLETED, IN_PROGRESS, REJECTED } from '../../common/constants/constantsTasks/constantsTasks';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCheckedTask, selectMarkedTask } from '../../store/selectedEntity/selectorSelects';
+import { selectCheckedTask, selectMarkedTask, selectMarkedTaskLength } from '../../store/selectedEntity/selectorSelects';
 import { selectObjectTasks } from '../../store/tasks/selectorTasks';
 import { selectSettings } from '../../store/componentsSettings/selectorcomponentsSettings';
 import {
@@ -22,8 +22,10 @@ export const EditorTasks = () => {
   const selectedTasks = useSelector(selectCheckedTask);
   const tasks = useSelector(selectObjectTasks);
   const { isVisibledSidebar } = useSelector(selectSettings);
-  const isVisebled = Object.values(selectedTasks).filter(item => item).length;
+  const lengthMarkTasksId = useSelector(selectMarkedTaskLength);
+  const isVisebled = !!Object.values(selectedTasks).filter(item => item).length;
   const isChangePosition = isVisebled && s.collapsed;
+  const isDisabledCollapsedAndSplitButton = lengthMarkTasksId;
   const tasksEditor__stretch = isVisibledSidebar === 'collapsed' ? s.tasksEditor__stretch : '';
 
   const handleRejectedTask = useCallback(() => {
@@ -65,10 +67,10 @@ export const EditorTasks = () => {
         <Button color={SUCCESS} onClick={handleCompletedTask}>
           <Icon type={COMPLETED} />
         </Button>
-        <Button color={PRIMARY} onClick={handleCollapsedTask}>
+        <Button color={PRIMARY} onClick={handleCollapsedTask} disabled={!isDisabledCollapsedAndSplitButton}>
           <Icon type='collapsed' />
         </Button>
-        <Button color={PRIMARY} onClick={handleSplitTask}>
+        <Button color={PRIMARY} onClick={handleSplitTask} disabled={isDisabledCollapsedAndSplitButton}>
           <Icon type='breakUp' />
         </Button>
       </div>

@@ -9,7 +9,7 @@ import { Button } from '../../common/modules/Button/Button';
 import { setSorterTasks } from '../../store/filter/actionsFilter';
 import { Icon } from '../../common/modules/Icons/Icons';
 import { ASCENDING, DESCENDING } from '../../common/constants/constantsSort/constantsSort';
-import { TRANSPARENT } from '../../common/constants/constantsColorButton/constantsColorButton';
+import { OUTLINE } from '../../common/constants/constantsColorButton/constantsColorButton';
 import s from './TasksList.module.css';
 
 export const TasksList = () => {
@@ -68,7 +68,7 @@ export const TasksList = () => {
           <Checkbox name='checkedAll' onChange={handleChange} checked={checkedAll} />
           <span className={s.TasksList__header_name} >Selected all tasks </span>
         </div>
-        <Button color={TRANSPARENT} onClick={handleChangeSort} >
+        <Button color={OUTLINE} onClick={handleChangeSort} >
           <Icon type={typeIcons} width='20px' height='20px' />
         </Button>
       </div>
