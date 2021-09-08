@@ -14,8 +14,8 @@
 }
 
 .rejected {
-  border: 2px solid var(--red-delete);
-  background-color: var(--light-red-delete);
+  border: 2px solid var(--red-warning);
+  background-color: var(--light-red-warning);
 }
 
 .inProgress {

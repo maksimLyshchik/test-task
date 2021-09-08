@@ -1,8 +1,11 @@
+import { DISABLED, OUTLINE, PRIMARY, WARNING } from '../../constants/constantTypeInput/constantTypeInput';
 import s from './Input.module.css';
 
 const inputType = {
-  primary: s.input,
-  disabled: s.input_disabled,
+  [PRIMARY]: s.input,
+  [DISABLED]: s.input_disabled,
+  [OUTLINE]: s.input_outline,
+  [WARNING]: s.input_warning,
 };
 
 export const Input = ({type = 'primary', ...props}) => {

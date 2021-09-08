@@ -6,6 +6,7 @@ import { Icon } from '../../common/modules/Icons/Icons';
 import { OUTLINE } from '../../common/constants/constantsColorButton/constantsColorButton';
 import { setVisibledSidebar } from '../../store/componentsSettings/actionSettings';
 import { selectSettings } from '../../store/componentsSettings/selectorcomponentsSettings';
+import { SearchTasks } from './SearchTasks/SearchTasks';
 import s from './SideBarLeft.module.css';
 
 export const SideBarLeft = () => {
@@ -22,11 +23,12 @@ export const SideBarLeft = () => {
   }, [dispatch, isVisibled]);
 
   return (
-    <div className={`${s.sideBar} ${sideBarPosition}`} >
+    <div className={`${s.sideBar} ${sideBarPosition}`}>
       <Button color={OUTLINE} className={s.sideBar__button} onClick={handleSideBarPosition} >
-        <Icon type={typeIcons} width='20px' height='20px'/>
+        <Icon type={typeIcons} width='20px' height='20px' />
         {isVisibled && <span>Filter</span>}
       </Button>
+      <SearchTasks />
       <TasksFilter />
     </div>
   );

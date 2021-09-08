@@ -6,10 +6,11 @@ import { EditorTasks } from './components/EditorTasks/EditorTasks';
 import s from './App.module.css';
 
 export const App = () => {
+
   return (
-    <div className={s.app_main} >
+    <div className={s.app_main}>
       <SideBarLeft />
-      <div className={s.app_main__container} >
+      <div className={s.app_main__container}>
         <AddTask />
         <TasksList />
       </div>

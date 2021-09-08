@@ -4,11 +4,11 @@ import {
   DELETE_TASK,
   REJECTED_TASK,
   SPLIT_TASK,
-  TODO_TASK
+  TODO_TASK,
 } from './actionsTasks';
 import { COMPLETED, IN_PROGRESS, REJECTED } from '../../common/constants/constantsTasks/constantsTasks';
 
-const addTask = (state, task) => {
+const setTask = (state, task) => {
   return {
     ...state,
     [task.id]: task,
@@ -21,7 +21,7 @@ const rejectTask = (state, id) => {
     status: REJECTED,
     timeChange: Date.now(),
   };
-  return {...state, [id]: newTask};
+  return { ...state, [id]: newTask };
 };
 
 const completeTask = (state, id) => {
@@ -30,48 +30,48 @@ const completeTask = (state, id) => {
     status: COMPLETED,
     timeChange: Date.now(),
   };
-  return {...state, [id]: newTask};
+  return { ...state, [id]: newTask };
 };
 
-const todoTask = (state, id) => {
+const setTodoTask = (state, id) => {
   const newTask = {
     ...state[id],
     status: IN_PROGRESS,
     timeChange: Date.now(),
   };
-  return {...state, [id]: newTask};
+  return { ...state, [id]: newTask };
 };
 
-const deleteTask = (state, id) => {
-  const newState = {...state};
+const deletedTask = (state, id) => {
+  const newState = { ...state };
   delete newState[id];
   state = newState;
   return {
-    ...state
+    ...state,
   };
 };
 
-const splitTask = (state, tasks) => {
+const splitedTask = (state, tasks) => {
   return {
     ...state,
-    [tasks.id]: {...tasks},
+    [tasks.id]: { ...tasks },
   };
 };
 
 export const tasks = (state = [], action) => {
   switch (action.type) {
     case ADD_TASK:
-      return addTask(state, action.payload);
+      return setTask(state, action.payload);
     case REJECTED_TASK:
       return rejectTask(state, action.id);
     case COMPLETED_TASK:
       return completeTask(state, action.id);
     case TODO_TASK:
-      return todoTask(state, action.id);
+      return setTodoTask(state, action.id);
     case DELETE_TASK:
-      return deleteTask(state, action.id);
+      return deletedTask(state, action.id);
     case SPLIT_TASK:
-      return splitTask(state, action.payload);
+      return splitedTask(state, action.payload);
     default:
       return state;
   }
