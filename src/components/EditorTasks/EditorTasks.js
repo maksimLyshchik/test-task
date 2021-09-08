@@ -2,21 +2,18 @@ import React, { useCallback } from 'react';
 import { Button } from '../../common/modules/Button/Button';
 import { INFO, PRIMARY, SUCCESS, WARNING } from '../../common/constants/constantsColorButton/constantsColorButton';
 import { Icon } from '../../common/modules/Icons/Icons';
-import { COMPLETED, IN_PROGRESS, REJECTED, TODO } from '../../common/constants/constantsTasks/constantsTasks';
-import {
-  addTask,
-  completedTask,
-  deleteTask,
-  rejectedTask,
-  splitTask,
-  todoTask
-} from '../../store/tasks/actionsTasks';
+import { COMPLETED, IN_PROGRESS, REJECTED } from '../../common/constants/constantsTasks/constantsTasks';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCheckedTask, selectMarkedTask } from '../../store/selectedEntity/selectorSelects';
-import { deleteSelectTask, setSelectTask } from '../../store/selectedEntity/actionsSelects';
 import { selectObjectTasks } from '../../store/tasks/selectorTasks';
-import { getId } from '../../helpers/getUniqId';
 import { selectSettings } from '../../store/componentsSettings/selectorcomponentsSettings';
+import {
+  collapsingTask,
+  completingTask,
+  rejectingTask,
+  splittingTask,
+  todoingTask,
+} from '../../store/tasks/thunkTasks';
 import s from './EditTasks.module.css';
 
 export const EditorTasks = () => {
@@ -31,90 +28,47 @@ export const EditorTasks = () => {
 
   const handleRejectedTask = useCallback(() => {
     markTasksId.forEach((id) => {
-      dispatch(rejectedTask(id));
-      dispatch(setSelectTask({[id]: false}));
+      dispatch(rejectingTask(id));
     });
   }, [dispatch, markTasksId]);
 
   const handleCompletedTask = useCallback(() => {
     markTasksId.forEach((id) => {
-      dispatch(completedTask(id));
-      dispatch(setSelectTask({[id]: false}));
+      dispatch(completingTask(id));
     });
   }, [dispatch, markTasksId]);
 
   const handleTodoTask = useCallback(() => {
     markTasksId.forEach((id) => {
-      dispatch(todoTask(id));
-      dispatch(setSelectTask({[id]: false}));
+      dispatch(todoingTask(id));
     });
   }, [dispatch, markTasksId]);
 
-  const handleCollapsedTask = useCallback(() => {
-    const collapsedTasks = {};
-    const id = getId();
+  const handleCollapsedTask = useCallback(() => dispatch(collapsingTask(tasks, markTasksId)), [dispatch, markTasksId, tasks]);
 
-    markTasksId.forEach(item => {
-      const collapsedTask = {
-        value: tasks[item].value,
-        id: tasks[item].id,
-      };
+  const handleSplitTask = useCallback(() => dispatch(splittingTask(tasks, markTasksId)), [dispatch, markTasksId, tasks]);
 
-      return collapsedTasks[item] = collapsedTask;
-    });
-
-    dispatch(addTask({id, timeCreation: Date.now(), status: TODO, timeChange: Date.now(), subtasks: collapsedTasks, }));
-    dispatch(setSelectTask({[id]: false}));
-
-    markTasksId.forEach((id) => {
-      dispatch(deleteTask(id));
-      dispatch(setSelectTask({[id]: false}));
-    })
-  }, [dispatch, markTasksId, tasks]);
-
-  const handleSplitTask = () => {
-    markTasksId.forEach(item => {
-
-      if (tasks[item].subtasks) {
-        Object.values(tasks[item].subtasks).forEach((subtask) => {
-          const restoredTask = {
-            ...subtask,
-            time: tasks[item].time,
-            status: tasks[item].status,
-            timeChange: tasks[item].timeChange,
-          };
-
-          dispatch(splitTask({...restoredTask}));
-          dispatch(deleteTask(item));
-          dispatch(deleteSelectTask(item));
-        });
-      } else {
-        dispatch(setSelectTask({[item]: false}));
-      }
-    });
-  };
-
-  if(!isVisebled) {
+  if (!isVisebled) {
     return null;
   }
 
   return (
-    <div className={`${s.tasksEditor} ${isChangePosition} ${tasksEditor__stretch}`} >
+    <div className={`${s.tasksEditor} ${isChangePosition} ${tasksEditor__stretch}`}>
       <span className={s.tasksEditor__name}>Tasks manager</span>
       <div className={s.tasksEditor__panel}>
-        <Button color={WARNING} onClick={handleRejectedTask} >
+        <Button color={WARNING} onClick={handleRejectedTask}>
           <Icon type={REJECTED} />
         </Button>
-        <Button color={INFO} onClick={handleTodoTask} >
+        <Button color={INFO} onClick={handleTodoTask}>
           <Icon type={IN_PROGRESS} />
         </Button>
-        <Button color={SUCCESS} onClick={handleCompletedTask} >
+        <Button color={SUCCESS} onClick={handleCompletedTask}>
           <Icon type={COMPLETED} />
         </Button>
-        <Button color={PRIMARY} onClick={handleCollapsedTask} >
+        <Button color={PRIMARY} onClick={handleCollapsedTask}>
           <Icon type='collapsed' />
         </Button>
-        <Button color={PRIMARY} onClick={handleSplitTask} >
+        <Button color={PRIMARY} onClick={handleSplitTask}>
           <Icon type='breakUp' />
         </Button>
       </div>

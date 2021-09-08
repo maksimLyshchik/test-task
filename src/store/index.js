@@ -4,6 +4,7 @@ import { selectedTasks } from './selectedEntity/reducerSelects';
 import { filterTasks } from './filter/reducerFilter';
 import { componentsSettings } from './componentsSettings/reducerSettings';
 import { addDataToLocalStoreMiddleware } from './middleware/addDataToLocalStoreMiddleware';
+import thunk from 'redux-thunk';
 
 export default configureStore({
   reducer: {
@@ -12,5 +13,5 @@ export default configureStore({
     filter: filterTasks,
     sidebar: componentsSettings,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(addDataToLocalStoreMiddleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(addDataToLocalStoreMiddleware, thunk),
 });

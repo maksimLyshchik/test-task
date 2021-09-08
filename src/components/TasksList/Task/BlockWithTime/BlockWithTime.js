@@ -3,7 +3,7 @@ import { getDateNow } from '../../../../helpers/getDateNow';
 import s from './BlockWithTime.module.css';
 
 export const BlockWithTime = ({timeCreation, timeChange, status}) => {
-  const isVisibledTimeChange = timeCreation !== timeChange;
+  const isVisibledTimeChange = !!timeChange;
 
   return (
     <div className={s.blockTask__block_time} >
