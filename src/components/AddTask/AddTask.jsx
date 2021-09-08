@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../../common/modules/Button/Button';
 import { Input } from '../../common/modules/Input/Input';
-import { addTaskThunkCreator } from '../../store/tasks/reducerTasks';
+import { addingTask } from '../../store/tasks/thunkTasks';
 import { getId } from '../../helpers/getUniqId';
 import { selectTasksId } from '../../store/tasks/selectorTasks';
 import { PRIMARY, WARNING } from '../../common/constants/constantTypeInput/constantTypeInput';
@@ -23,7 +23,7 @@ export const AddTask = () => {
     const newId = getId(tasksId);
     setTypeInput(PRIMARY);
 
-    dispatch(addTaskThunkCreator(task, newId));
+    dispatch(addingTask(task, newId));
   }, [dispatch, task, tasksId]);
 
   const handleChangeValue = useCallback(({ target }) => {

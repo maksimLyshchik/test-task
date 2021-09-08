@@ -5,16 +5,15 @@ import { Icon } from '../../common/modules/Icons/Icons';
 import { COMPLETED, IN_PROGRESS, REJECTED } from '../../common/constants/constantsTasks/constantsTasks';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCheckedTask, selectMarkedTask } from '../../store/selectedEntity/selectorSelects';
-import { selectObjectTasks, selectTasksId } from '../../store/tasks/selectorTasks';
+import { selectObjectTasks } from '../../store/tasks/selectorTasks';
 import { selectSettings } from '../../store/componentsSettings/selectorcomponentsSettings';
 import {
-  collapsedTaskThunkCreator,
-  completedTaskThunkCreator,
-  rejectedTaskThunkCreator,
-  splitTaskThunkCreator,
-  todoTaskThunkCreator,
-} from '../../store/tasks/reducerTasks';
-import { getId } from '../../helpers/getUniqId';
+  collapsingTask,
+  completingTask,
+  rejectingTask,
+  splittingTask,
+  todoingTask,
+} from '../../store/tasks/thunkTasks';
 import s from './EditTasks.module.css';
 
 export const EditorTasks = () => {
@@ -22,7 +21,6 @@ export const EditorTasks = () => {
   const markTasksId = useSelector(selectMarkedTask);
   const selectedTasks = useSelector(selectCheckedTask);
   const tasks = useSelector(selectObjectTasks);
-  const tasksId = useSelector(selectTasksId);
   const { isVisibledSidebar } = useSelector(selectSettings);
   const isVisebled = Object.values(selectedTasks).filter(item => item).length;
   const isChangePosition = isVisebled && s.collapsed;
@@ -30,30 +28,25 @@ export const EditorTasks = () => {
 
   const handleRejectedTask = useCallback(() => {
     markTasksId.forEach((id) => {
-      dispatch(rejectedTaskThunkCreator(id));
+      dispatch(rejectingTask(id));
     });
   }, [dispatch, markTasksId]);
 
   const handleCompletedTask = useCallback(() => {
     markTasksId.forEach((id) => {
-      dispatch(completedTaskThunkCreator(id));
+      dispatch(completingTask(id));
     });
   }, [dispatch, markTasksId]);
 
   const handleTodoTask = useCallback(() => {
     markTasksId.forEach((id) => {
-      dispatch(todoTaskThunkCreator(id));
+      dispatch(todoingTask(id));
     });
   }, [dispatch, markTasksId]);
 
-  const handleCollapsedTask = useCallback(() => {
-    const newId = getId(tasksId);
-    dispatch(collapsedTaskThunkCreator(tasks, markTasksId, newId));
-  }, [dispatch, markTasksId, tasks, tasksId]);
+  const handleCollapsedTask = useCallback(() => dispatch(collapsingTask(tasks, markTasksId)), [dispatch, markTasksId, tasks]);
 
-  const handleSplitTask = useCallback(() => {
-    dispatch(splitTaskThunkCreator(tasks, markTasksId));
-  }, [dispatch, markTasksId, tasks]);
+  const handleSplitTask = useCallback(() => dispatch(splittingTask(tasks, markTasksId)), [dispatch, markTasksId, tasks]);
 
   if (!isVisebled) {
     return null;
