@@ -9,5 +9,10 @@ export const selectSorting = store => store.filter.sorting;
 export const selectFiltredTasks = createSelector(
   selectTasks,
   selectFilter,
-  (tasks, filter) => tasks.filter(item => item.status === filter.condition || filter.condition === ALL)
+  (tasks, filter) => tasks.filter(item => item.status === filter.condition || filter.condition === ALL),
+);
+
+export const selectValueSearch = createSelector(
+  selectFilter,
+  filter => filter.value,
 );
