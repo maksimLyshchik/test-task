@@ -41,7 +41,7 @@
 }
 
 .radioButton_warning {
-  color: var(--red-delete);
+  color: var(--red-warning);
 }
 
 .radioButton_success {

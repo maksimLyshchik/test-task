@@ -17,13 +17,15 @@ ReactDOM.render(
 );
 
 window.onload = () => {
-  Object.values(initialState.tasks).forEach(task => {
-    store.dispatch(addTask({...task}));
+  if (!!Object.keys(initialState).length) {
+    Object.values(initialState.tasks).forEach(task => {
+      store.dispatch(addTask({ ...task }));
 
-    store.dispatch(setSelectTask({
-      [task.id]: false
-    }));
-  });
+      store.dispatch(setSelectTask({
+        [task.id]: false,
+      }));
+    });
+  }
 };
 
 window.onunload = () => {
