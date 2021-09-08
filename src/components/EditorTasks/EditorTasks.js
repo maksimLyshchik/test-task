@@ -5,7 +5,7 @@ import { Icon } from '../../common/modules/Icons/Icons';
 import { COMPLETED, IN_PROGRESS, REJECTED } from '../../common/constants/constantsTasks/constantsTasks';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCheckedTask, selectMarkedTask, selectMarkedTaskLength } from '../../store/selectedEntity/selectorSelects';
-import { selectObjectTasks } from '../../store/tasks/selectorTasks';
+import { selectObjectTasks, selectTasksId } from '../../store/tasks/selectorTasks';
 import { selectSettings } from '../../store/componentsSettings/selectorcomponentsSettings';
 import {
   collapsingTask,
@@ -14,6 +14,7 @@ import {
   splittingTask,
   todoingTask,
 } from '../../store/tasks/thunkTasks';
+import { getId } from '../../helpers/getUniqId';
 import s from './EditTasks.module.css';
 
 export const EditorTasks = () => {
@@ -27,6 +28,7 @@ export const EditorTasks = () => {
   const isChangePosition = isVisebled && s.collapsed;
   const isDisabledCollapsedAndSplitButton = lengthMarkTasksId;
   const tasksEditor__stretch = isVisibledSidebar === 'collapsed' ? s.tasksEditor__stretch : '';
+  const tasksId = useSelector(selectTasksId);
 
   const handleRejectedTask = useCallback(() => {
     markTasksId.forEach((id) => {
@@ -46,9 +48,15 @@ export const EditorTasks = () => {
     });
   }, [dispatch, markTasksId]);
 
-  const handleCollapsedTask = useCallback(() => dispatch(collapsingTask(tasks, markTasksId)), [dispatch, markTasksId, tasks]);
+  const handleCollapsedTask = useCallback(() => {
+    const newId = getId(tasksId);
+    dispatch(collapsingTask(tasks, markTasksId, newId));
+  }, [dispatch, markTasksId, tasks]);
 
-  const handleSplitTask = useCallback(() => dispatch(splittingTask(tasks, markTasksId)), [dispatch, markTasksId, tasks]);
+  const handleSplitTask = useCallback(() => {
+    const newId = getId(tasksId);
+    dispatch(splittingTask(tasks, markTasksId, newId));
+  }, [dispatch, markTasksId, tasks]);
 
   if (!isVisebled) {
     return null;
