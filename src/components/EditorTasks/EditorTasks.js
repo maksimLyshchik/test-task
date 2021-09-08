@@ -51,12 +51,12 @@ export const EditorTasks = () => {
   const handleCollapsedTask = useCallback(() => {
     const newId = getId(tasksId);
     dispatch(collapsingTask(tasks, markTasksId, newId));
-  }, [dispatch, markTasksId, tasks]);
+  }, [dispatch, markTasksId, tasks, tasksId]);
 
   const handleSplitTask = useCallback(() => {
     const newId = getId(tasksId);
     dispatch(splittingTask(tasks, markTasksId, newId));
-  }, [dispatch, markTasksId, tasks]);
+  }, [dispatch, markTasksId, tasks, tasksId]);
 
   if (!isVisebled) {
     return null;
