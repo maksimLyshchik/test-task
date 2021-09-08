@@ -6,7 +6,11 @@ const StyledInput = styled.input`
   min-width: 300px;
 
   padding-left: 8px;
-  
+
+  &:required:invalid {
+    border: 2px solid ${RootColors['redDelete']};    
+  }
+      
   &:disabled {
     background-color: ${RootColors['grayDisable']};
   }

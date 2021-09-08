@@ -18,6 +18,13 @@ export const AddTask = () => {
   const [task, setTask] = useState();
 
   const handleSubmitTask = useCallback(() => {
+    const validationMessage = document.getElementById('addTaskInput').validationMessage;
+
+    if (validationMessage) {
+      alert(validationMessage)
+      return;
+    }
+
     const id = getId();
     dispatch(addTask({ value: task, id, timeCreation: Date.now(), status: TODO, timeChange: Date.now() }));
     dispatch(setSelectTask({ [id]: false }));
@@ -30,7 +37,11 @@ export const AddTask = () => {
 
   return (
     <StyledWrapperAddTask>
-      <Input onChange={handleChangeValue} placeholder='Enter task' />
+      <Input
+        onChange={handleChangeValue}
+        placeholder='Enter task'
+        id='addTaskInput'
+        required />
       <Button onClick={handleSubmitTask}>
         Add task
       </Button>
