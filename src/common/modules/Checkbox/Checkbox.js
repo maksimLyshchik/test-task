@@ -20,7 +20,7 @@ const StyledCheckmark = styled.span`
   background-color: ${RootColors['lightBlue']};
   border: 2px solid ${RootColors['mainBlue']};
 
-  &::after {
+  &:after {
     content: "";
     position: absolute;
     display: none;
@@ -46,7 +46,8 @@ const StyledCheckbox = styled.label`
     background-color: ${RootColors['mainBlue']};
   }
 
-  & > ${StyledCheckmark}::after {
+  & > ${StyledCheckboxInput}:checked ~ ${StyledCheckmark}:after {
+    display: block;
     left: 14px;
     top: 6px;
     width: 8px;
