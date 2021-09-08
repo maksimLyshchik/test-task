@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { selectObjectTasks, selectTasks } from '../tasks/selectorTasks';
+import { selectObjectTasks } from '../tasks/selectorTasks';
 
 export const selectCheckedTask = store => store.selects;
 

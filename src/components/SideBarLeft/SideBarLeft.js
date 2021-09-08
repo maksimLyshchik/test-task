@@ -11,7 +11,7 @@ export const SideBarLeft = () => {
   const dispatch = useDispatch();
   const { isVisibledSidebar } = useSelector(selectSettings);
   const isVisibled = isVisibledSidebar === 'expanded';
-  const typeIcons = isVisibled ? 'arrowDown' : 'arrowUp';
+  const typeIcons = isVisibled ? 'arrowUp' : 'arrowDown';
 
   const handleSideBarPosition = useCallback(() => {
     const isChangeVisibled = isVisibled ? 'collapsed' : 'expanded';
@@ -24,14 +24,13 @@ export const SideBarLeft = () => {
       <StyledSideBarButton
         color={OUTLINE}
         onClick={handleSideBarPosition}
-
       >
         <Icon
           type={typeIcons}
           width='20px'
           height='20px'
         />
-        {isVisibled && <span>Filter</span>}
+        {!isVisibled && <span>Filter</span>}
       </StyledSideBarButton>
       <TasksFilter />
     </StyledWrapperSideBar>
