@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { RootColors } from '../../constants/constantsRootColors/constantsRootColors';
 
 const StyledInput = styled.input`
   min-height: 36px;
@@ -7,7 +8,7 @@ const StyledInput = styled.input`
   padding-left: 8px;
   
   &:disabled {
-    background-color: var(--gray-disable);
+    background-color: ${RootColors['grayDisable']};
   }
 `;
 

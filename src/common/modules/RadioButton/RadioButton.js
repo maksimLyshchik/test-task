@@ -6,12 +6,13 @@ import {
   WARNING,
 } from '../../constants/constantsColorButton/constantsColorButton';
 import styled from 'styled-components';
+import { RootColors } from '../../constants/constantsRootColors/constantsRootColors';
 
 const radioButtonColors = {
-  [PRIMARY]: 'var(--main-blue)',
-  [WARNING]: 'var(--red-delete)',
-  [SUCCESS]: 'var(--green-complete)',
-  [INFO]: 'var(--yellow-info)',
+  [PRIMARY]: 'mainBlue',
+  [WARNING]: 'redDelete',
+  [SUCCESS]: 'greenComplete',
+  [INFO]: 'yellowInfo',
 };
 
 const StyledRadioButton = styled.div`
@@ -19,7 +20,7 @@ const StyledRadioButton = styled.div`
   align-items: center;
   margin-bottom: 6px;
 
-  color: var(--main-blue);
+  color: ${RootColors['mainBlue']};
 `;
 
 const StyledLabel = styled.label`
@@ -46,17 +47,17 @@ const StyledInput = styled.input`
 
   cursor: pointer;
   
-  color: ${props => radioButtonColors[props.id] || 'var(--main-blue)'};
+  color: ${props => RootColors[radioButtonColors[props.id]] || RootColors['mainBlue']};
   
   &:checked {
-    background-color: ${props => radioButtonColors[props.id] || 'var(--main-blue)'};
+    background-color: ${props => RootColors[radioButtonColors[props.id]] || RootColors['mainBlue']};
     border: 2px solid;
 
     cursor: default;
   }  
   
   &:checked + ${StyledLabel} {
-    border: 2px solid ${props => radioButtonColors[props.id] || 'var(--main-blue)'};
+    border: 2px solid ${props => RootColors[radioButtonColors[props.id]] || RootColors['mainBlue']};
     border-radius: 8px;
 
     cursor: default;

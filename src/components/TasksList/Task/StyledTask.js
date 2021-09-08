@@ -1,27 +1,35 @@
 import styled from 'styled-components';
 import { COMPLETED, IN_PROGRESS, REJECTED, TODO } from '../../../common/constants/constantsTasks/constantsTasks';
+import { RootColors } from '../../../common/constants/constantsRootColors/constantsRootColors';
 
-const taskClass = {
-  [COMPLETED]: 'green-complete',
-  [REJECTED]: 'red-delete',
-  [IN_PROGRESS]: 'yellow-info',
+const taskBorderColor = {
+  [COMPLETED]: 'greenComplete',
+  [REJECTED]: 'redDelete',
+  [IN_PROGRESS]: 'yellowInfo',
+  [TODO]: '',
+};
+
+const taskBGColor = {
+  [COMPLETED]: 'lightGreenComplete',
+  [REJECTED]: 'lightRedDelete',
+  [IN_PROGRESS]: 'lightYellowInfo',
   [TODO]: '',
 };
 
 export const StyledWrapperTask = styled.div`
   margin-bottom: 12px;
   border: 2px solid ${props =>
-                    props.status !== TODO ?
-                    `var(--${taskClass[props.status]})` :
-                    `var(--blue-dull)`};;
+          props.status !== TODO ?
+                  RootColors[taskBorderColor[props.status]] :
+                  RootColors['blueDull']};
   border-radius: 8px;
   padding: 10px;
 
-  color: var(--main-blue);
+  color: ${RootColors['mainBlue']};
   background-color: ${props =>
-                    props.status !== TODO ? 
-                    `var(--light-${taskClass[props.status]})` : 
-                    `var(--white)`};
+          props.status !== TODO ?
+                  `${RootColors[`${taskBGColor[props.status]}`]}` :
+                  `${RootColors['white']}`};
 `;
 
 export const StyledTaskMainBlock = styled.div`

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { RootColors } from '../../common/constants/constantsRootColors/constantsRootColors';
 
 export const StyledWrapperTaskEditor = styled.div`
   display: flex;
@@ -14,12 +15,12 @@ export const StyledWrapperTaskEditor = styled.div`
   transform: ${props => props.isVisebled ? 'translate(0px, 0px)' : 'translate(0px, 100%)'};
   transition: all 0.8s;
 
-  border: 2px solid var(--main-blue);
+  border: 2px solid ${RootColors['mainBlue']};
   border-radius: 8px;
   padding: 10px 22px 10px 10px;
 
-  color: var(--main-blue);
-  background-color: var(--white);
+  color: ${RootColors['mainBlue']};
+  background-color: ${RootColors['white']};
 
   animation-duration: 0.6s;
   animation-name: slideFromBottom;

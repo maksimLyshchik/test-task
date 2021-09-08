@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Button } from '../../common/modules/Button/Button';
+import { RootColors } from '../../common/constants/constantsRootColors/constantsRootColors';
 
 export const StyledWrapperSideBar = styled.div`
   display: flex;
@@ -25,16 +26,16 @@ export const StyledSideBarButton = styled(Button)`
 
   height: 50px;
   width: 72px;
-  border: 2px solid var(--main-blue);
+  border: 2px solid ${RootColors['mainBlue']};
   border-radius: 8px;
 
-  color: var(--main-blue);
-  background-color: var(--light-blue);
+  color: ${RootColors['mainBlue']};
+  background-color: ${RootColors['lightBlue']};
 
   transform: rotate(-90deg);
 
   &:hover {
-    background-color: var(--main-blue);
-    color: var(--white);
+    background-color: ${RootColors['mainBlue']};
+    color: ${RootColors['white']};
   }
 `;
