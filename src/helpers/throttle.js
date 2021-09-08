@@ -9,6 +9,7 @@ export const throttle = (func, ms) => {
     if (isThrottled) {
       savedArgs = arguments;
       savedThis = this;
+
       return;
     }
 

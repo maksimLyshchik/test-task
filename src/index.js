@@ -18,13 +18,7 @@ ReactDOM.render(
 
 window.onload = () => {
   Object.values(initialState.tasks).forEach(task => {
-    store.dispatch(addTask({
-      id: task.id,
-      value: task.value,
-      timeCreation: task.timeCreation,
-      status: task.status,
-      timeChange: task.timeChange,
-    }));
+    store.dispatch(addTask({...task}));
 
     store.dispatch(setSelectTask({
       [task.id]: false
