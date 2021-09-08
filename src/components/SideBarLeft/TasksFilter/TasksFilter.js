@@ -5,7 +5,7 @@ import { setFilterTasks } from '../../../store/filter/actionsFilter';
 import { COMPLETED, IN_PROGRESS, REJECTED, TODO, ALL } from '../../../common/constants/constantsTasks/constantsTasks';
 import { INFO, PRIMARY, SUCCESS, WARNING } from '../../../common/constants/constantsColorButton/constantsColorButton';
 import { selectFilter } from '../../../store/filter/selectorFilter';
-import { WrapperTaskFilter } from './StyledTaskFilter';
+import { StyledWrapperTaskFilter } from './StyledTaskFilter';
 
 export const TasksFilter = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ export const TasksFilter = () => {
   }, [dispatch]);
 
   return (
-    <WrapperTaskFilter>
+    <StyledWrapperTaskFilter>
       <RadioButton
         onClick={handleChangeFilter}
         value={ALL}
@@ -79,6 +79,6 @@ export const TasksFilter = () => {
       >
         todo
       </RadioButton>
-    </WrapperTaskFilter>
+    </StyledWrapperTaskFilter>
   );
 };

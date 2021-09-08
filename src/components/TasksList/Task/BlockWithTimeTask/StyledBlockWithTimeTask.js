@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const TimeBlock = styled.div`
+export const StyledTimeBlock = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 48px;

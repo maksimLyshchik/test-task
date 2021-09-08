@@ -8,7 +8,7 @@ import { addTask } from '../../store/tasks/actionsTasks';
 import { TODO } from '../../common/constants/constantsTasks/constantsTasks';
 import styled from 'styled-components';
 
-const WrapperAddTask = styled.div`
+const StyledWrapperAddTask = styled.div`
   display: flex;
   padding: 0 0 10px 72px;
 `;
@@ -29,11 +29,11 @@ export const AddTask = () => {
   }, []);
 
   return (
-    <WrapperAddTask>
+    <StyledWrapperAddTask>
       <Input onChange={handleChangeValue} placeholder='Enter task' />
       <Button onClick={handleSubmitTask}>
         Add task
       </Button>
-    </WrapperAddTask>
+    </StyledWrapperAddTask>
   );
 };

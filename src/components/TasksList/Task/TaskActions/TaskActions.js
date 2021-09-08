@@ -5,7 +5,7 @@ import { Icon } from '../../../../common/modules/Icons/Icons';
 import { completedTask, rejectedTask, todoTask } from '../../../../store/tasks/actionsTasks';
 import { COMPLETED, IN_PROGRESS, REJECTED } from '../../../../common/constants/constantsTasks/constantsTasks';
 import { INFO, SUCCESS, WARNING } from '../../../../common/constants/constantsColorButton/constantsColorButton';
-import { TaskActionBlock } from './StyledTaskAction';
+import { StyledTaskActionBlock } from './StyledTaskAction';
 
 export const TaskActions = ({ id, status }) => {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ export const TaskActions = ({ id, status }) => {
   }, [dispatch, id]);
 
   return (
-    <TaskActionBlock>
+    <StyledTaskActionBlock>
       <Button
         color={WARNING}
         onClick={handleRejectedTask}
@@ -48,6 +48,6 @@ export const TaskActions = ({ id, status }) => {
       >
         <Icon type={COMPLETED} />
       </Button>
-    </TaskActionBlock>
+    </StyledTaskActionBlock>
   );
 };

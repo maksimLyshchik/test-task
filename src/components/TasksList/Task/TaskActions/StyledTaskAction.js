@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const TaskActionBlock = styled.div`
+export const StyledTaskActionBlock = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;

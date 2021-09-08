@@ -21,7 +21,7 @@ import { deleteSelectTask, setSelectTask } from '../../store/selectedEntity/acti
 import { selectObjectTasks } from '../../store/tasks/selectorTasks';
 import { getId } from '../../helpers/getUniqId';
 import { selectSettings } from '../../store/componentsSettings/selectorcomponentsSettings';
-import { TaskEditorName, TaskEditorPanel, WrapperTaskEditor } from './StyledEditorTask';
+import { StyledTaskEditorName, StyledTaskEditorPanel, StyledWrapperTaskEditor } from './StyledEditorTask';
 
 export const EditorTasks = () => {
   const dispatch = useDispatch();
@@ -120,9 +120,9 @@ export const EditorTasks = () => {
   }
 
   return (
-    <WrapperTaskEditor isVisebled={isVisebled} isStretch={isStretch}>
-      <TaskEditorName>Tasks manager</TaskEditorName>
-      <TaskEditorPanel>
+    <StyledWrapperTaskEditor isVisebled={isVisebled} isStretch={isStretch}>
+      <StyledTaskEditorName>Tasks manager</StyledTaskEditorName>
+      <StyledTaskEditorPanel>
         <Button color={WARNING} onClick={handleRejectedTask}>
           <Icon type={REJECTED} />
         </Button>
@@ -138,7 +138,7 @@ export const EditorTasks = () => {
         <Button color={PRIMARY} onClick={handleSplitTask} disabled={isDisabledCollapsedAndSplitButton}>
           <Icon type='breakUp' />
         </Button>
-      </TaskEditorPanel>
-    </WrapperTaskEditor>
+      </StyledTaskEditorPanel>
+    </StyledWrapperTaskEditor>
   );
 };

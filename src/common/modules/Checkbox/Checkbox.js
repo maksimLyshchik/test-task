@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CheckboxInput = styled.input`
+const StyledCheckboxInput = styled.input`
   position: absolute;
   opacity: 0;
   height: 0;
@@ -9,7 +9,7 @@ const CheckboxInput = styled.input`
   select: none;
 `;
 
-const Checkmark = styled.span`
+const StyledCheckmark = styled.span`
   position: absolute;
   top: 0;
   left: 0;
@@ -36,16 +36,16 @@ const StyledCheckbox = styled.label`
 
   font-size: 22px;
 
-  &:hover > ${CheckboxInput} ~ ${Checkmark} {
+  &:hover > ${StyledCheckboxInput} ~ ${StyledCheckmark} {
     background-color: var(--light-blue);
   }
 
-  & > ${CheckboxInput}:checked ~ ${Checkmark} {
+  & > ${StyledCheckboxInput}:checked ~ ${StyledCheckmark} {
     display: block;
     background-color: var(--main-blue);
   }
 
-  & > ${Checkmark}::after {
+  & > ${StyledCheckmark}::after {
     left: 14px;
     top: 6px;
     width: 8px;
@@ -56,7 +56,7 @@ const StyledCheckbox = styled.label`
     transform: rotate(45deg);
   }
 
-  & > ${CheckboxInput}:disabled ~ ${Checkmark} {
+  & > ${StyledCheckboxInput}:disabled ~ ${StyledCheckmark} {
     background-color: var(--gray-disable);
     border: 2px solid var(--white-gray-tint);
 
@@ -69,8 +69,8 @@ export const Checkbox = (props) => {
 
   return (
     <StyledCheckbox>
-      <CheckboxInput {...props} type='checkbox' />
-      <Checkmark />
+      <StyledCheckboxInput {...props} type='checkbox' />
+      <StyledCheckmark />
     </StyledCheckbox>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { TextArea } from '../../../../common/modules/TextArea/TextArea';
-import { WrapperTaskContent } from './StyledTaskContent';
+import { StyledWrapperTaskContent } from './StyledTaskContent';
 
 export const TaskContent = ({ task }) => {
   const { value } = task;
@@ -15,8 +15,8 @@ export const TaskContent = ({ task }) => {
   }, [isMultiplayTask, task, value]);
 
   return (
-    <WrapperTaskContent>
+    <StyledWrapperTaskContent>
       {content}
-    </WrapperTaskContent>
+    </StyledWrapperTaskContent>
   );
 };

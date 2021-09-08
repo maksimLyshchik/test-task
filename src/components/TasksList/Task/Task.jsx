@@ -7,7 +7,7 @@ import { TaskActions } from './TaskActions/TaskActions';
 import { selectCheckedTask } from '../../../store/selectedEntity/selectorSelects';
 import { TaskContent } from './TaskContent/TaskContent';
 import { BlockWithTimeTask } from './BlockWithTimeTask/BlockWithTimeTask';
-import { TaskMainBlock, WrapperTask } from './StyledTask';
+import { StyledTaskMainBlock, StyledWrapperTask } from './StyledTask';
 
 
 export const Task = ({ task }) => {
@@ -23,8 +23,8 @@ export const Task = ({ task }) => {
   }, [dispatch, id]);
 
   return (
-    <WrapperTask status={status}>
-      <TaskMainBlock>
+    <StyledWrapperTask status={status}>
+      <StyledTaskMainBlock>
         <Checkbox
           onChange={handleChangeSelect}
           checked={selectedTasks[id]}
@@ -32,12 +32,12 @@ export const Task = ({ task }) => {
         />
         <TaskContent task={task} />
         <TaskActions id={id} status={status} />
-      </TaskMainBlock>
+      </StyledTaskMainBlock>
       <BlockWithTimeTask
         timeCreation={timeCreation}
         timeChange={timeChange}
         status={status}
       />
-    </WrapperTask>
+    </StyledWrapperTask>
   );
 };

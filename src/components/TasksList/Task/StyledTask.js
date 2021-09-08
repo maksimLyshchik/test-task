@@ -8,7 +8,7 @@ const taskClass = {
   [TODO]: '',
 };
 
-export const WrapperTask = styled.div`
+export const StyledWrapperTask = styled.div`
   margin-bottom: 12px;
   border: 2px solid ${props =>
                     props.status !== TODO ?
@@ -24,6 +24,6 @@ export const WrapperTask = styled.div`
                     `var(--white)`};
 `;
 
-export const TaskMainBlock = styled.div`
+export const StyledTaskMainBlock = styled.div`
   display: flex;
 `;

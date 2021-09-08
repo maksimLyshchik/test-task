@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Button } from '../../common/modules/Button/Button';
 
-export const WrapperSideBar = styled.div`
+export const StyledWrapperSideBar = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -16,7 +16,7 @@ export const WrapperSideBar = styled.div`
   transition: left 0.8s;
 `;
 
-export const SideBarButton = styled(Button)`
+export const StyledSideBarButton = styled(Button)`
   flex-direction: column;
 
   position: absolute;

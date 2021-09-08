@@ -5,7 +5,7 @@ import { Icon } from '../../common/modules/Icons/Icons';
 import { OUTLINE } from '../../common/constants/constantsColorButton/constantsColorButton';
 import { setVisibledSidebar } from '../../store/componentsSettings/actionSettings';
 import { selectSettings } from '../../store/componentsSettings/selectorcomponentsSettings';
-import { SideBarButton, WrapperSideBar } from './StyledSideBarLeft';
+import { StyledSideBarButton, StyledWrapperSideBar } from './StyledSideBarLeft';
 
 export const SideBarLeft = () => {
   const dispatch = useDispatch();
@@ -20,8 +20,8 @@ export const SideBarLeft = () => {
   }, [dispatch, isVisibled]);
 
   return (
-    <WrapperSideBar isVisibled={isVisibled}>
-      <SideBarButton
+    <StyledWrapperSideBar isVisibled={isVisibled}>
+      <StyledSideBarButton
         color={OUTLINE}
         onClick={handleSideBarPosition}
 
@@ -32,8 +32,8 @@ export const SideBarLeft = () => {
           height='20px'
         />
         {isVisibled && <span>Filter</span>}
-      </SideBarButton>
+      </StyledSideBarButton>
       <TasksFilter />
-    </WrapperSideBar>
+    </StyledWrapperSideBar>
   );
 };

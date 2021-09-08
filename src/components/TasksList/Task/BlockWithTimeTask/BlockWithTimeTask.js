@@ -1,14 +1,14 @@
 import React from 'react';
 import { formatDate } from '../../../../helpers/formatDate';
-import { TimeBlock } from './StyledBlockWithTimeTask';
+import { StyledTimeBlock } from './StyledBlockWithTimeTask';
 
 export const BlockWithTimeTask = ({ timeCreation, timeChange, status }) => {
   const isVisibledTimeChange = timeCreation !== timeChange;
 
   return (
-    <TimeBlock>
+    <StyledTimeBlock>
       <span>Time created task: {formatDate(timeCreation)} </span>
       {isVisibledTimeChange && <span>Time {status} task: {formatDate(timeChange)} </span>}
-    </TimeBlock>
+    </StyledTimeBlock>
   );
 };

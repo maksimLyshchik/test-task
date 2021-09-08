@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const WrapperTaskList = styled.div`
+export const StyledWrapperTaskList = styled.div`
   padding: 10px 10px 0 10px;
   min-width: 714px;
   border: 2px solid var(--blue-dull);
@@ -9,7 +9,7 @@ export const WrapperTaskList = styled.div`
   background-color: var(--white-blue-tint);
 `;
 
-export const TaskListHeader = styled.div`
+export const StyledTaskListHeader = styled.div`
   display: flex;
   justify-content: space-between;
 
@@ -17,7 +17,7 @@ export const TaskListHeader = styled.div`
   padding: 0 12px 12px 12px;
 `;
 
-export const HeaderName = styled.span`
+export const StyledHeaderName = styled.span`
   padding: 10px;
 
   font-size: 1.2em;
@@ -25,11 +25,11 @@ export const HeaderName = styled.span`
   text-transform: uppercase;
 `;
 
-export const HeaderBlockCheckbox = styled.div`
+export const StyledHeaderBlockCheckbox = styled.div`
   display: flex;
 `;
 
-export const InitialText = styled.div`
+export const StyledInitialText = styled.div`
   display: flex;
   justify-content: center;
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const WrapperTaskEditor = styled.div`
+export const StyledWrapperTaskEditor = styled.div`
   display: flex;
 
   position: fixed;
@@ -37,7 +37,7 @@ export const WrapperTaskEditor = styled.div`
   }
 `;
 
-export const TaskEditorPanel = styled.div`
+export const StyledTaskEditorPanel = styled.div`
   display: flex;
   justify-content: space-between;
 
@@ -45,7 +45,7 @@ export const TaskEditorPanel = styled.div`
   min-width: 540px;
 `;
 
-export const TaskEditorName = styled.span`
+export const StyledTaskEditorName = styled.span`
   display: flex;
   align-items: center;
 

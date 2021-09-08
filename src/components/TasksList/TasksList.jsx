@@ -11,11 +11,11 @@ import { Icon } from '../../common/modules/Icons/Icons';
 import { ASCENDING, DESCENDING } from '../../common/constants/constantsSort/constantsSort';
 import { OUTLINE } from '../../common/constants/constantsColorButton/constantsColorButton';
 import {
-  HeaderBlockCheckbox,
-  HeaderName,
-  InitialText,
-  TaskListHeader,
-  WrapperTaskList,
+  StyledHeaderBlockCheckbox,
+  StyledHeaderName,
+  StyledInitialText,
+  StyledTaskListHeader,
+  StyledWrapperTaskList,
 } from './StyledTaskList';
 
 export const TasksList = () => {
@@ -58,24 +58,24 @@ export const TasksList = () => {
 
   if (!sortedTasks || !sortedTasks.length) {
     return (
-      <InitialText>
+      <StyledInitialText>
         <span>Nothing to show </span>
-      </InitialText>
+      </StyledInitialText>
     );
   }
 
   return (
-    <WrapperTaskList>
-      <TaskListHeader>
-        <HeaderBlockCheckbox>
+    <StyledWrapperTaskList>
+      <StyledTaskListHeader>
+        <StyledHeaderBlockCheckbox>
           <Checkbox name='checkedAll' onChange={handleChange} checked={checkedAll} />
-          <HeaderName>Selected all tasks </HeaderName>
-        </HeaderBlockCheckbox>
+          <StyledHeaderName>Selected all tasks </StyledHeaderName>
+        </StyledHeaderBlockCheckbox>
         <Button color={OUTLINE} onClick={handleChangeSort}>
           <Icon type={typeIcons} width='20px' height='20px' />
         </Button>
-      </TaskListHeader>
+      </StyledTaskListHeader>
       {sortedTasks.map(item => <Task key={item.id} task={item} />)}
-    </WrapperTaskList>
+    </StyledWrapperTaskList>
   );
 };

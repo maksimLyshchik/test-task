@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const WrapperTaskContent = styled.div`
+export const StyledWrapperTaskContent = styled.div`
   display: flex;
   flex-direction: column;
 `;
