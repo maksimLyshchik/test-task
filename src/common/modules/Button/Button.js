@@ -24,7 +24,7 @@ const StyledButton = styled.button`
   border-radius: 6px;
   border: 2px solid ${RootColors['whiteGrayTint']};
   min-width: 100px;
-  min-height: 40px;
+  height: 44px;
 
   text-transform: uppercase;
   background-color: ${props => RootColors[buttonColors[props.color]] || RootColors['mainBlue']};

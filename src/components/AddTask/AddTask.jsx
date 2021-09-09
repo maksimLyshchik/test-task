@@ -7,7 +7,7 @@ import { getId } from '../../helpers/getUniqId';
 import { selectTasksId } from '../../store/tasks/selectorTasks';
 import styled from 'styled-components';
 
-const StyledWrapperAddTask = styled.form`
+const StyledWrapperAddTask = styled.div`
   display: flex;
   padding: 0 0 10px 72px;
 `;
@@ -18,9 +18,7 @@ export const AddTask = () => {
   const tasksId = useSelector(selectTasksId);
 
   const handleSubmitTask = useCallback(() => {
-    const validationMessage = document.getElementById('addTaskInput').validationMessage;
-
-    if (validationMessage) {
+    if (!task) {
       return;
     }
 
@@ -39,8 +37,10 @@ export const AddTask = () => {
       <Input
         onChange={handleChangeValue}
         placeholder='Enter task'
-        id='addTaskInput'
         required
+        id='inputAddTask'
+        value={task}
+        validation
       />
       <Button onClick={handleSubmitTask}>
         Add task
