@@ -5,6 +5,7 @@ import { Icon } from '../../common/modules/Icons/Icons';
 import { OUTLINE } from '../../common/constants/constantsColorButton/constantsColorButton';
 import { setVisibledSidebar } from '../../store/componentsSettings/actionSettings';
 import { selectSettings } from '../../store/componentsSettings/selectorcomponentsSettings';
+import { SearchTasks } from './SearchTasks/SearchTasks';
 import { StyledSideBarButton, StyledWrapperSideBar } from './StyledSideBarLeft';
 
 export const SideBarLeft = () => {
@@ -32,6 +33,7 @@ export const SideBarLeft = () => {
         />
         {!isVisibled && <span>Filter</span>}
       </StyledSideBarButton>
+      <SearchTasks />
       <TasksFilter />
     </StyledWrapperSideBar>
   );

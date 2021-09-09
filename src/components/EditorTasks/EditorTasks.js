@@ -2,25 +2,20 @@ import React, { useCallback } from 'react';
 import { Button } from '../../common/modules/Button/Button';
 import { INFO, PRIMARY, SUCCESS, WARNING } from '../../common/constants/constantsColorButton/constantsColorButton';
 import { Icon } from '../../common/modules/Icons/Icons';
-import { COMPLETED, IN_PROGRESS, REJECTED, TODO } from '../../common/constants/constantsTasks/constantsTasks';
-import {
-  addTask,
-  completedTask,
-  deleteTask,
-  rejectedTask,
-  splitTask,
-  todoTask,
-} from '../../store/tasks/actionsTasks';
+import { COMPLETED, IN_PROGRESS, REJECTED } from '../../common/constants/constantsTasks/constantsTasks';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectCheckedTask,
-  selectMarkedTask,
-  selectMarkedTaskLength,
-} from '../../store/selectedEntity/selectorSelects';
-import { deleteSelectTask, setSelectTask } from '../../store/selectedEntity/actionsSelects';
-import { selectObjectTasks } from '../../store/tasks/selectorTasks';
-import { getId } from '../../helpers/getUniqId';
+import { selectCheckedTask, selectMarkedTask, selectMarkedTaskLength } from '../../store/selectedEntity/selectorSelects';
+import { selectObjectTasks, selectTasksId } from '../../store/tasks/selectorTasks';
 import { selectSettings } from '../../store/componentsSettings/selectorcomponentsSettings';
+import {
+  collapsingTask,
+  completingTask,
+  rejectingTask,
+  splittingTask,
+  todoingTask,
+} from '../../store/tasks/thunkTasks';
+import { getId } from '../../helpers/getUniqId';
+import s from './EditTasks.module.css';
 import { StyledTaskEditorName, StyledTaskEditorPanel, StyledWrapperTaskEditor } from './StyledEditorTask';
 
 export const EditorTasks = () => {
@@ -33,87 +28,35 @@ export const EditorTasks = () => {
   const isVisebled = !!Object.values(selectedTasks).filter(item => item).length;
   const isDisabledCollapsedAndSplitButton = lengthMarkTasksId;
   const isStretch = isVisibledSidebar === 'collapsed'
+  const tasksId = useSelector(selectTasksId);
 
   const handleRejectedTask = useCallback(() => {
     markTasksId.forEach((id) => {
-      dispatch(rejectedTask(id));
-      dispatch(setSelectTask({ [id]: false }));
+      dispatch(rejectingTask(id));
     });
   }, [dispatch, markTasksId]);
 
   const handleCompletedTask = useCallback(() => {
     markTasksId.forEach((id) => {
-      dispatch(completedTask(id));
-      dispatch(setSelectTask({ [id]: false }));
+      dispatch(completingTask(id));
     });
   }, [dispatch, markTasksId]);
 
   const handleTodoTask = useCallback(() => {
     markTasksId.forEach((id) => {
-      dispatch(todoTask(id));
-      dispatch(setSelectTask({ [id]: false }));
+      dispatch(todoingTask(id));
     });
   }, [dispatch, markTasksId]);
 
   const handleCollapsedTask = useCallback(() => {
-    let subtasks = {};
-    const id = getId();
+    const newId = getId(tasksId);
+    dispatch(collapsingTask(tasks, markTasksId, newId));
+  }, [dispatch, markTasksId, tasks, tasksId]);
 
-    const markTasks = Object.values(tasks).filter(task => markTasksId.includes(task.id));
-
-    markTasks.forEach(task => {
-      if (task.subtasks) {
-        subtasks = {
-          ...subtasks,
-          ...task.subtasks,
-        };
-        return;
-      }
-      subtasks = {
-        ...subtasks,
-        [task.id]: {
-          value: task.value,
-          id: task.id,
-        },
-      };
-    });
-
-    dispatch(addTask({
-      id,
-      timeCreation: Date.now(),
-      status: TODO,
-      timeChange: Date.now(),
-      subtasks,
-    }));
-    dispatch(setSelectTask({ [id]: false }));
-
-    markTasksId.forEach((id) => {
-      dispatch(deleteTask(id));
-      dispatch(setSelectTask({ [id]: false }));
-    });
-  }, [dispatch, markTasksId, tasks]);
-
-  const handleSplitTask = () => {
-    markTasksId.forEach(item => {
-
-      if (tasks[item].subtasks) {
-        Object.values(tasks[item].subtasks).forEach((subtask) => {
-          const restoredTask = {
-            ...subtask,
-            time: tasks[item].time,
-            status: tasks[item].status,
-            timeChange: tasks[item].timeChange,
-          };
-
-          dispatch(splitTask({ ...restoredTask }));
-          dispatch(deleteTask(item));
-          dispatch(deleteSelectTask(item));
-        });
-      } else {
-        dispatch(setSelectTask({ [item]: false }));
-      }
-    });
-  };
+  const handleSplitTask = useCallback(() => {
+    const newId = getId(tasksId);
+    dispatch(splittingTask(tasks, markTasksId, newId));
+  }, [dispatch, markTasksId, tasks, tasksId]);
 
   if (!isVisebled) {
     return null;

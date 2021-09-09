@@ -1,11 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setSelectTask } from '../../store/selectedEntity/actionsSelects';
-import { getId } from '../../helpers/getUniqId';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../../common/modules/Button/Button';
 import { Input } from '../../common/modules/Input/Input';
-import { addTask } from '../../store/tasks/actionsTasks';
-import { TODO } from '../../common/constants/constantsTasks/constantsTasks';
+import { addingTask } from '../../store/tasks/thunkTasks';
+import { getId } from '../../helpers/getUniqId';
+import { selectTasksId } from '../../store/tasks/selectorTasks';
 import styled from 'styled-components';
 
 const StyledWrapperAddTask = styled.form`
@@ -16,6 +15,7 @@ const StyledWrapperAddTask = styled.form`
 export const AddTask = () => {
   const dispatch = useDispatch();
   const [task, setTask] = useState();
+  const tasksId = useSelector(selectTasksId);
 
   const handleSubmitTask = useCallback(() => {
     const validationMessage = document.getElementById('addTaskInput').validationMessage;
@@ -24,10 +24,11 @@ export const AddTask = () => {
       return;
     }
 
-    const id = getId();
-    dispatch(addTask({ value: task, id, timeCreation: Date.now(), status: TODO, timeChange: Date.now() }));
-    dispatch(setSelectTask({ [id]: false }));
-  }, [dispatch, task]);
+    const newId = getId(tasksId);
+    setTypeInput(PRIMARY);
+
+    dispatch(addingTask(task, newId));
+  }, [dispatch, task, tasksId]);
 
   const handleChangeValue = useCallback(({ target }) => {
     const { value } = target;

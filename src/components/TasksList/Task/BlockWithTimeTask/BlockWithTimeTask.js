@@ -3,7 +3,7 @@ import { formatDate } from '../../../../helpers/formatDate';
 import { StyledTimeBlock } from './StyledBlockWithTimeTask';
 
 export const BlockWithTimeTask = ({ timeCreation, timeChange, status }) => {
-  const isVisibledTimeChange = timeCreation !== timeChange;
+  const isVisibledTimeChange = !!timeChange;
 
   return (
     <StyledTimeBlock>

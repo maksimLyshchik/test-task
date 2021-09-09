@@ -6,6 +6,7 @@ import { EditorTasks } from './components/EditorTasks/EditorTasks';
 import { StyledMainContainer, StyledWrapperApp } from './StyledApp';
 
 export const App = () => {
+
   return (
     <StyledWrapperApp>
       <SideBarLeft />

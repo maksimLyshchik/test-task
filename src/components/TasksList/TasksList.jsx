@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Checkbox } from '../../common/modules/Checkbox/Checkbox';
 import { setSelectTask } from '../../store/selectedEntity/actionsSelects';
 import { selectCheckedTask } from '../../store/selectedEntity/selectorSelects';
-import { selectFiltredTasks, selectSorting } from '../../store/filter/selectorFilter';
+import { selectFiltredTasks, selectSorting, selectValueSearch } from '../../store/filter/selectorFilter';
 import { Button } from '../../common/modules/Button/Button';
 import { setSorterTasks } from '../../store/filter/actionsFilter';
 import { Icon } from '../../common/modules/Icons/Icons';
@@ -23,17 +23,37 @@ export const TasksList = () => {
   const selectedTasks = useSelector(selectCheckedTask);
   const filtredTasks = useSelector(selectFiltredTasks);
   const sortingRule = useSelector(selectSorting);
+  const valueSearch = useSelector(selectValueSearch);
   const typeIcons = sortingRule === ASCENDING ? 'arrowDown' : 'arrowUp';
 
-  const sortedTasks = filtredTasks.sort((itemPrev, itemPres) => {
-    if (itemPrev.timeChange > itemPres.timeChange) {
-      return sortingRule === DESCENDING ? -1 : 1;
+  const searchTasks = useMemo(() => {
+    if (valueSearch) {
+      return filtredTasks.filter(
+        task => task.subtasks ?
+          Object.values(task.subtasks).filter(subtask => subtask.value?.toLowerCase().indexOf(valueSearch.toLowerCase()) > -1).length :
+          task.value?.toLowerCase().indexOf(valueSearch.toLowerCase()) > -1,
+      );
     }
-    if (itemPrev.timeChange < itemPres.timeChange) {
-      return sortingRule === DESCENDING ? 1 : -1;
-    }
-    return 0;
-  });
+
+    return filtredTasks;
+  }, [filtredTasks, valueSearch]);
+
+  const sortedTasks = useMemo(() => {
+    return (
+      searchTasks.sort((itemPrev, itemPres) => {
+        const compareTime = itemPrev.timeChange || itemPres.timeChange
+          ? 'timeChange' : 'timeCreation';
+
+        if (itemPrev[compareTime] > itemPres[compareTime]) {
+          return sortingRule === DESCENDING ? -1 : 1;
+        }
+        if (itemPrev[compareTime] < itemPres[compareTime]) {
+          return sortingRule === DESCENDING ? 1 : -1;
+        }
+        return null;
+      })
+    );
+  }, [searchTasks, sortingRule]);
 
   const handleChange = useCallback(({ target }) => {
     const { checked } = target;
