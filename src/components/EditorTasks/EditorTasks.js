@@ -15,7 +15,6 @@ import {
   todoingTask,
 } from '../../store/tasks/thunkTasks';
 import { getId } from '../../helpers/getUniqId';
-import s from './EditTasks.module.css';
 import { StyledTaskEditorName, StyledTaskEditorPanel, StyledWrapperTaskEditor } from './StyledEditorTask';
 
 export const EditorTasks = () => {

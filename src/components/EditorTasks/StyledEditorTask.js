@@ -5,7 +5,7 @@ export const StyledWrapperTaskEditor = styled.div`
   display: flex;
 
   position: fixed;
-  left: ${props => props.isStretch ? '0' : '180px'};
+  left: ${props => props.isStretch ? '0' : '264px'};
   right: 0;
   bottom: 0;
   z-index: 2;

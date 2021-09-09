@@ -25,7 +25,6 @@ export const AddTask = () => {
     }
 
     const newId = getId(tasksId);
-    setTypeInput(PRIMARY);
 
     dispatch(addingTask(task, newId));
   }, [dispatch, task, tasksId]);

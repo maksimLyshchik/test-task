@@ -7,21 +7,26 @@ export const StyledWrapperSideBar = styled.div`
   flex-direction: column;
 
   position: fixed;
-  left: ${props => props.isVisibled ? '0' : '-180px'};
+  left: ${props => props.isVisibled ? '0' : '-264px'};
   top: 0;
-  z-index: 3;
+  z-index: 10;
 
   min-height: 100vh;
-  min-width: 180px;
+  min-width: 240px;
+  border: 2px solid ${RootColors['mainBlue']};
+  border-radius: 12px;
+  padding: 10px;
 
   transition: left 0.8s;
 `;
 
 export const StyledSideBarButton = styled(Button)`
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   position: absolute;
-  left: 160px;
+  left: 240px;
   top: 60px;
 
   height: 50px;

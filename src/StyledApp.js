@@ -10,5 +10,5 @@ export const StyledMainContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  padding-left: 260px;
+  padding-left: 360px;
 `;

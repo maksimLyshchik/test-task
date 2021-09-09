@@ -7,8 +7,7 @@ export const StyledWrapperTaskFilter = styled.div`
   align-items: flex-start;
 
   flex: 1 1 100%;
-
-  border: 2px solid ${RootColors['mainBlue']};
+  
   border-radius: 8px;
   padding: 8px;
 
