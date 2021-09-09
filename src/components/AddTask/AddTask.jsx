@@ -8,7 +8,7 @@ import { addTask } from '../../store/tasks/actionsTasks';
 import { TODO } from '../../common/constants/constantsTasks/constantsTasks';
 import styled from 'styled-components';
 
-const StyledWrapperAddTask = styled.div`
+const StyledWrapperAddTask = styled.form`
   display: flex;
   padding: 0 0 10px 72px;
 `;
@@ -21,7 +21,6 @@ export const AddTask = () => {
     const validationMessage = document.getElementById('addTaskInput').validationMessage;
 
     if (validationMessage) {
-      alert(validationMessage)
       return;
     }
 
@@ -41,7 +40,8 @@ export const AddTask = () => {
         onChange={handleChangeValue}
         placeholder='Enter task'
         id='addTaskInput'
-        required />
+        required
+      />
       <Button onClick={handleSubmitTask}>
         Add task
       </Button>
