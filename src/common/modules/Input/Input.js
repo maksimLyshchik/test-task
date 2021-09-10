@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { RootColors } from '../../constants/constantsRootColors/constantsRootColors';
+import { rootColors } from '../../constants/constantsRootColors/constantsRootColors';
 import { OUTLINE } from '../../constants/constantTypeInput/constantTypeInput';
 
 const StyledInput = styled.input`
@@ -20,7 +20,7 @@ const StyledInput = styled.input`
   `};
 
   &:disabled {
-    background-color: ${RootColors['grayDisable']};
+    background-color: ${rootColors.grayDisable};
   }
 `;
 

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { RootColors } from '../../../common/constants/constantsRootColors/constantsRootColors';
+import { rootColors } from '../../../common/constants/constantsRootColors/constantsRootColors';
 
 export const StyledSearchTasks = styled.div`
   display: flex;
   align-items: center;
 
-  border: 2px solid ${RootColors['lightBlue']};
-  box-shadow: 0 1px 6px 0 rgb(32 33 36 / 30%);
+  border: 2px solid ${rootColors.lightBlue};
+  box-shadow: 0 1px 6px 0 ${rootColors.lightBlue};
   border-radius: 20px;
 
   width: 220px;

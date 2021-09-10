@@ -1,4 +1,4 @@
-export const RootColors = {
+export const rootColors = {
   mainBlue: '#0764e5',
   grayDisable: '#cbd0d2',
   redDelete: '#e04545',

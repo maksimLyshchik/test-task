@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import { RootColors } from '../../common/constants/constantsRootColors/constantsRootColors';
+import { rootColors } from '../../common/constants/constantsRootColors/constantsRootColors';
 
 export const StyledWrapperTaskList = styled.div`
   padding: 10px 10px 0 10px;
   min-width: 714px;
-  border: 2px solid ${RootColors['blueDull']};
+  border: 2px solid ${rootColors.blueDull};
   border-radius: 8px;
 
-  background-color: ${RootColors['whiteBlueTint']};
+  background-color: ${rootColors.whiteBlueTint};
 `;
 
 export const StyledTaskListHeader = styled.div`
@@ -22,7 +22,7 @@ export const StyledHeaderName = styled.span`
   padding: 10px;
 
   font-size: 1.2em;
-  color: ${RootColors['mainBlue']};
+  color: ${rootColors.mainBlue};
   text-transform: uppercase;
 `;
 
@@ -36,7 +36,7 @@ export const StyledInitialText = styled.div`
 
   padding: 20px 0;
 
-  color: ${RootColors['mainBlue']};
+  color: ${rootColors.mainBlue};
   text-transform: uppercase;
   font-size: 1.2em;
 `;

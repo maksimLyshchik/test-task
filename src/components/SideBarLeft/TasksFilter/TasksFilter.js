@@ -28,7 +28,7 @@ export const TasksFilter = () => {
         onClick={handleChangeFilter}
         value={ALL}
         name='filter'
-        type={PRIMARY}
+        color={PRIMARY}
         id={`${PRIMARY} 2`}
         htmlFor={`${PRIMARY} 2`}
         checked={isCheckedRadioButtonAll}
@@ -39,7 +39,7 @@ export const TasksFilter = () => {
         onClick={handleChangeFilter}
         value={COMPLETED}
         name='filter'
-        type={SUCCESS}
+        color={SUCCESS}
         id={SUCCESS}
         htmlFor={SUCCESS}
         checked={isCheckedRadioButtonCompleted}
@@ -50,7 +50,7 @@ export const TasksFilter = () => {
         onClick={handleChangeFilter}
         value={REJECTED}
         name='filter'
-        type={WARNING}
+        color={WARNING}
         id={WARNING}
         htmlFor={WARNING}
         checked={isCheckedRadioButtonRejected}
@@ -61,7 +61,7 @@ export const TasksFilter = () => {
         onClick={handleChangeFilter}
         value={IN_PROGRESS}
         name='filter'
-        type={INFO}
+        color={INFO}
         id={INFO}
         htmlFor={INFO}
         checked={isCheckedRadioButtonInProgress}
@@ -72,7 +72,7 @@ export const TasksFilter = () => {
         onClick={handleChangeFilter}
         value={TODO}
         name='filter'
-        type={PRIMARY}
+        color={PRIMARY}
         id={PRIMARY}
         htmlFor={PRIMARY}
         checked={isCheckedRadioButtonTodo}

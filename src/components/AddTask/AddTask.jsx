@@ -18,12 +18,6 @@ export const AddTask = () => {
   const tasksId = useSelector(selectTasksId);
 
   const handleSubmitTask = useCallback(() => {
-    const validationMessage = document.getElementById('addTaskInput').validationMessage;
-
-    if (validationMessage) {
-      return;
-    }
-
     const newId = getId(tasksId);
 
     dispatch(addingTask(task, newId));

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { RootColors } from '../../../common/constants/constantsRootColors/constantsRootColors';
+import { rootColors } from '../../../common/constants/constantsRootColors/constantsRootColors';
 
 export const StyledWrapperTaskFilter = styled.div`
   display: flex;
@@ -11,8 +11,8 @@ export const StyledWrapperTaskFilter = styled.div`
   border-radius: 8px;
   padding: 8px;
 
-  color: ${RootColors['mainBlue']};
-  background-color: ${RootColors['white']};
+  color: ${rootColors.mainBlue};
+  background-color: ${rootColors.white};
 
   min-width: 90%;
 

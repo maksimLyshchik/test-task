@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { RootColors } from '../../constants/constantsRootColors/constantsRootColors';
+import { rootColors } from '../../constants/constantsRootColors/constantsRootColors';
 
 const StyledTextarea = styled.textarea`
   height: 36px;
@@ -13,8 +13,8 @@ const StyledTextarea = styled.textarea`
   resize: none;
 
   &:disabled {
-    background-color: ${RootColors['white']};
-    color: ${RootColors['mainBlue']};
+    background-color: ${rootColors.white};
+    color: ${rootColors.mainBlue};
   }
 `;
 

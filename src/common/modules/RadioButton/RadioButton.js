@@ -6,13 +6,13 @@ import {
   WARNING,
 } from '../../constants/constantsColorButton/constantsColorButton';
 import styled from 'styled-components';
-import { RootColors } from '../../constants/constantsRootColors/constantsRootColors';
+import { rootColors } from '../../constants/constantsRootColors/constantsRootColors';
 
 const radioButtonColors = {
-  [PRIMARY]: 'mainBlue',
-  [WARNING]: 'redDelete',
-  [SUCCESS]: 'greenComplete',
-  [INFO]: 'yellowInfo',
+  [PRIMARY]: rootColors.mainBlue,
+  [WARNING]: rootColors.redDelete,
+  [SUCCESS]: rootColors.greenComplete,
+  [INFO]: rootColors.yellowInfo,
 };
 
 const StyledRadioButton = styled.div`
@@ -20,7 +20,7 @@ const StyledRadioButton = styled.div`
   align-items: center;
   margin-bottom: 6px;
 
-  color: ${RootColors['mainBlue']};
+  color: ${rootColors.mainBlue};
 `;
 
 const StyledLabel = styled.label`
@@ -46,18 +46,18 @@ const StyledInput = styled.input`
   margin-right: 10px;
 
   cursor: pointer;
-  
-  color: ${props => RootColors[radioButtonColors[props.id]] || RootColors['mainBlue']};
-  
+
+  color: ${({ color }) => radioButtonColors[color] || rootColors.mainBlue};
+
   &:checked {
-    background-color: ${props => RootColors[radioButtonColors[props.id]] || RootColors['mainBlue']};
+    background-color: ${({ color }) => radioButtonColors[color] || rootColors.mainBlue};
     border: 2px solid;
 
     cursor: default;
-  }  
-  
+  }
+
   &:checked + ${StyledLabel} {
-    border: 2px solid ${props => RootColors[radioButtonColors[props.id]] || RootColors['mainBlue']};
+    border: 2px solid ${({ color }) => radioButtonColors[color] || rootColors.mainBlue};
     border-radius: 8px;
 
     cursor: default;
@@ -69,7 +69,8 @@ export const RadioButton = ({
   value,
   onClick,
   children,
-  type = PRIMARY,
+  type,
+  color = PRIMARY,
   id,
   htmlFor,
   ...props
@@ -83,6 +84,7 @@ export const RadioButton = ({
         value={value}
         onClick={onClick}
         id={id}
+        color={color}
         {...props}
       />
       <StyledLabel

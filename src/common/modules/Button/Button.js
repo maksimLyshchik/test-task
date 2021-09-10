@@ -6,14 +6,14 @@ import {
   SUCCESS,
   WARNING,
 } from '../../constants/constantsColorButton/constantsColorButton';
-import { RootColors } from '../../constants/constantsRootColors/constantsRootColors';
+import { rootColors } from '../../constants/constantsRootColors/constantsRootColors';
 
 const buttonColors = {
-  [PRIMARY]: 'mainBlue',
-  [WARNING]: 'redDelete',
-  [SUCCESS]: 'greenComplete',
-  [INFO]: 'yellowInfo',
-  [OUTLINE]: 'lightBlue',
+  [PRIMARY]: rootColors.mainBlue,
+  [WARNING]: rootColors.redDelete,
+  [SUCCESS]: rootColors.greenComplete,
+  [INFO]: rootColors.yellowInfo,
+  [OUTLINE]: rootColors.lightBlue,
 };
 
 const StyledButton = styled.button`
@@ -22,30 +22,29 @@ const StyledButton = styled.button`
   justify-content: center;
   padding: 10px;
   border-radius: 6px;
-  border: 2px solid ${RootColors['whiteGrayTint']};
+  border: 2px solid ${rootColors.whiteGrayTint};
   min-width: 100px;
   min-height: 40px;
 
   text-transform: uppercase;
-  background-color: ${props => RootColors[buttonColors[props.color]] || RootColors['mainBlue']};
-  color: ${RootColors['white']};
+  background-color: ${({ color }) => buttonColors[color] || rootColors.mainBlue};
+  color: ${rootColors.white};
 
   cursor: pointer;
 
   &:disabled {
-    background-color: ${RootColors['grayDisable']};
+    background-color: ${rootColors.grayDisable};
 
     cursor: not-allowed;
-  }
-;
+  };
 
   ${props => props.color === OUTLINE && `
-  border: 2px solid ${RootColors['mainBlue']};
-  min-width: 40px;
-  background-color: ${RootColors['lightBlue']};
-  &:hover {
-    background-color: ${RootColors['mainBlue']};
-  }`
+      border: 2px solid ${rootColors.mainBlue};
+      min-width: 40px;
+      background-color: ${rootColors.lightBlue};
+    &:hover {
+      background-color: ${rootColors.mainBlue};
+    }`
   };
 `;
 

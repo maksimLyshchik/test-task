@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { RootColors } from '../../constants/constantsRootColors/constantsRootColors';
+import { rootColors } from '../../constants/constantsRootColors/constantsRootColors';
 
 const StyledCheckboxInput = styled.input`
   position: absolute;
@@ -17,8 +17,8 @@ const StyledCheckmark = styled.span`
   height: 38px;
   width: 38px;
 
-  background-color: ${RootColors['lightBlue']};
-  border: 2px solid ${RootColors['mainBlue']};
+  background-color: ${rootColors.lightBlue};
+  border: 2px solid ${rootColors.mainBlue};
 
   &:after {
     content: "";
@@ -38,12 +38,12 @@ const StyledCheckbox = styled.label`
   font-size: 22px;
 
   &:hover > ${StyledCheckboxInput} ~ ${StyledCheckmark} {
-    background-color: ${RootColors['lightBlue']};
+    background-color: ${rootColors.lightBlue};
   }
 
   & > ${StyledCheckboxInput}:checked ~ ${StyledCheckmark} {
     display: block;
-    background-color: ${RootColors['mainBlue']};
+    background-color: ${rootColors.mainBlue};
   }
 
   & > ${StyledCheckboxInput}:checked ~ ${StyledCheckmark}:after {
@@ -53,14 +53,14 @@ const StyledCheckbox = styled.label`
     width: 8px;
     height: 16px;
 
-    border: solid ${RootColors['white']};
+    border: solid ${rootColors.white};
     border-width: 0 4px 4px 0;
     transform: rotate(45deg);
   }
 
   & > ${StyledCheckboxInput}:disabled ~ ${StyledCheckmark} {
-    background-color: ${RootColors['grayDisable']};
-    border: 2px solid ${RootColors['whiteGrayTint']};
+    background-color: ${rootColors.grayDisable};
+    border: 2px solid ${rootColors.whiteGrayTint};
 
     cursor: not-allowed;
   }
