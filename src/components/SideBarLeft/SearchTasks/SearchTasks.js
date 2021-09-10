@@ -19,7 +19,12 @@ export const SearchTasks = () => {
   return (
     <StyledSearchTasks>
       <Icon type='search' fill={RootColors['lightBlue']} />
-      <Input type={OUTLINE} placeholder='Search task' onChange={handleChangeValue} />
+      <Input
+        type={OUTLINE}
+        id='searchInput'
+        placeholder='Search task'
+        onChange={handleChangeValue}
+      />
     </StyledSearchTasks>
   );
 };

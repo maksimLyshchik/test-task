@@ -4,7 +4,7 @@ import { selectedTasks } from './selectedEntity/reducerSelects';
 import { filterTasks } from './filter/reducerFilter';
 import { componentsSettings } from './componentsSettings/reducerSettings';
 import { addDataToLocalStoreMiddleware } from './middleware/addDataToLocalStoreMiddleware';
-import { inputsState } from './InputsState/reducerInputs';
+import { inputsValidator } from './validator/reducerValodator';
 import thunk from 'redux-thunk';
 
 export default configureStore({
@@ -13,7 +13,7 @@ export default configureStore({
     selects: selectedTasks,
     filter: filterTasks,
     sidebar: componentsSettings,
-    input: inputsState,
+    validator: inputsValidator,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(addDataToLocalStoreMiddleware, thunk),
 });

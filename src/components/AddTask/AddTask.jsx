@@ -5,6 +5,7 @@ import { Input } from '../../common/modules/Input/Input';
 import { addingTask } from '../../store/tasks/thunkTasks';
 import { getId } from '../../helpers/getUniqId';
 import { selectTasksId } from '../../store/tasks/selectorTasks';
+import { validation } from '../../store/validator/thunkValidation/validation';
 import styled from 'styled-components';
 
 const StyledWrapperAddTask = styled.div`
@@ -40,7 +41,7 @@ export const AddTask = () => {
         required
         id='inputAddTask'
         value={task}
-        validation
+        validation={validation}
       />
       <Button onClick={handleSubmitTask}>
         Add task

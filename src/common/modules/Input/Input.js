@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import { RootColors } from '../../constants/constantsRootColors/constantsRootColors';
 import { OUTLINE } from '../../constants/constantTypeInput/constantTypeInput';
-import { useDispatch } from 'react-redux';
-import { setInputState } from '../../../store/InputsState/actionsInputs';
+import { useDispatch, useSelector } from 'react-redux';
+import { setInputState } from '../../../store/validator/actionsValidator';
+import { selectValidator } from '../../../store/validator/selectorValodator';
+import { useCallback } from 'react';
 
 const StyledInput = styled.input`
   min-height: 36px;
@@ -36,18 +38,29 @@ const StyledMessageError = styled.span`
   color: ${RootColors['redDelete']}
 `;
 
-export const Input = ({ validation, required, id, value, ...props }) => {
+export const Input = ({ validation, ...props }) => {
   const dispatch = useDispatch();
+  const validator = useSelector(selectValidator);
+  const errorInput = validator[props.id]?.error;
 
-  const handleChangeInput = ({ target }) => {
-    const { id, value, validationMessage } = target;
-    dispatch(setInputState({ id, value, validationMessage }));
-  };
+  const handleChangeInput = useCallback(({ target }) => {
+    const { id, value } = target;
+
+    dispatch(setInputState({ id, value, valid: true, error: false }));
+  }, []);
+
+  const handleChangeValidation = useCallback(({ target }) => {
+    const { id, value } = target;
+
+    if (typeof validation === 'function') {
+      dispatch(validation(id, value));
+    }
+  }, []);
 
   return (
     <StyledLabel onChange={handleChangeInput}>
-      <StyledInput onBlur={validation(id, value)} {...props} />
-      { && <StyledMessageError>Please fill out this field</StyledMessageError>}
+      <StyledInput onBlur={handleChangeValidation} {...props} />
+      {validation && errorInput && <StyledMessageError>Please fill out this field</StyledMessageError>}
     </StyledLabel>
   );
 };
