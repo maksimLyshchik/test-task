@@ -4,7 +4,8 @@ import { Icon } from '../../../common/modules/Icons/Icons';
 import { useDispatch } from 'react-redux';
 import { setValueForTaskSearch } from '../../../store/filter/thunk/setValueForTaskSearch';
 import { OUTLINE } from '../../../common/constants/constantTypeInput/constantTypeInput';
-import s from './SearchTasks.module.css';
+import { StyledSearchTasks } from './StyledSearchTasks';
+import { RootColors } from '../../../common/constants/constantsRootColors/constantsRootColors';
 
 export const SearchTasks = () => {
   const dispatch = useDispatch();
@@ -16,9 +17,14 @@ export const SearchTasks = () => {
   }, [dispatch]);
 
   return (
-    <div className={s.searchTasks}>
-      <Icon type='search' fill='var(--light-blue)' />
-      <Input type={OUTLINE} placeholder='Search task' onChange={handleChangeValue} />
-    </div>
+    <StyledSearchTasks>
+      <Icon type='search' fill={RootColors['lightBlue']} />
+      <Input
+        type={OUTLINE}
+        id='searchInput'
+        placeholder='Search task'
+        onChange={handleChangeValue}
+      />
+    </StyledSearchTasks>
   );
 };

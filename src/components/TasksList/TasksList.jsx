@@ -10,7 +10,13 @@ import { setSorterTasks } from '../../store/filter/actionsFilter';
 import { Icon } from '../../common/modules/Icons/Icons';
 import { ASCENDING, DESCENDING } from '../../common/constants/constantsSort/constantsSort';
 import { OUTLINE } from '../../common/constants/constantsColorButton/constantsColorButton';
-import s from './TasksList.module.css';
+import {
+  StyledHeaderBlockCheckbox,
+  StyledHeaderName,
+  StyledInitialText,
+  StyledTaskListHeader,
+  StyledWrapperTaskList,
+} from './StyledTaskList';
 
 export const TasksList = () => {
   const dispatch = useDispatch();
@@ -72,24 +78,24 @@ export const TasksList = () => {
 
   if (!sortedTasks || !sortedTasks.length) {
     return (
-      <div className={s.initialText}>
+      <StyledInitialText>
         <span>Nothing to show </span>
-      </div>
+      </StyledInitialText>
     );
   }
 
   return (
-    <div className={s.TasksList}>
-      <div className={s.TasksList__header}>
-        <div className={s.TasksList__header_checkbox}>
+    <StyledWrapperTaskList>
+      <StyledTaskListHeader>
+        <StyledHeaderBlockCheckbox>
           <Checkbox name='checkedAll' onChange={handleChange} checked={checkedAll} />
-          <span className={s.TasksList__header_name}>Selected all tasks </span>
-        </div>
+          <StyledHeaderName>Selected all tasks </StyledHeaderName>
+        </StyledHeaderBlockCheckbox>
         <Button color={OUTLINE} onClick={handleChangeSort}>
           <Icon type={typeIcons} width='20px' height='20px' />
         </Button>
-      </div>
+      </StyledTaskListHeader>
       {sortedTasks.map(item => <Task key={item.id} task={item} />)}
-    </div>
+    </StyledWrapperTaskList>
   );
 };

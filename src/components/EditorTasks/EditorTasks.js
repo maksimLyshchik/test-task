@@ -15,7 +15,7 @@ import {
   todoingTask,
 } from '../../store/tasks/thunkTasks';
 import { getId } from '../../helpers/getUniqId';
-import s from './EditTasks.module.css';
+import { StyledTaskEditorName, StyledTaskEditorPanel, StyledWrapperTaskEditor } from './StyledEditorTask';
 
 export const EditorTasks = () => {
   const dispatch = useDispatch();
@@ -25,9 +25,8 @@ export const EditorTasks = () => {
   const { isVisibledSidebar } = useSelector(selectSettings);
   const lengthMarkTasksId = useSelector(selectMarkedTaskLength);
   const isVisebled = !!Object.values(selectedTasks).filter(item => item).length;
-  const isChangePosition = isVisebled && s.collapsed;
   const isDisabledCollapsedAndSplitButton = lengthMarkTasksId;
-  const tasksEditor__stretch = isVisibledSidebar === 'collapsed' ? s.tasksEditor__stretch : '';
+  const isStretch = isVisibledSidebar === 'collapsed'
   const tasksId = useSelector(selectTasksId);
 
   const handleRejectedTask = useCallback(() => {
@@ -63,9 +62,9 @@ export const EditorTasks = () => {
   }
 
   return (
-    <div className={`${s.tasksEditor} ${isChangePosition} ${tasksEditor__stretch}`}>
-      <span className={s.tasksEditor__name}>Tasks manager</span>
-      <div className={s.tasksEditor__panel}>
+    <StyledWrapperTaskEditor isVisebled={isVisebled} isStretch={isStretch}>
+      <StyledTaskEditorName>Tasks manager</StyledTaskEditorName>
+      <StyledTaskEditorPanel>
         <Button color={WARNING} onClick={handleRejectedTask}>
           <Icon type={REJECTED} />
         </Button>
@@ -81,7 +80,7 @@ export const EditorTasks = () => {
         <Button color={PRIMARY} onClick={handleSplitTask} disabled={isDisabledCollapsedAndSplitButton}>
           <Icon type='breakUp' />
         </Button>
-      </div>
-    </div>
+      </StyledTaskEditorPanel>
+    </StyledWrapperTaskEditor>
   );
 };

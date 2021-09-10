@@ -1,11 +1,27 @@
 import React from 'react';
-import s from './TextArea.module.css';
+import styled from 'styled-components';
+import { RootColors } from '../../constants/constantsRootColors/constantsRootColors';
 
-export const TextArea = ({value, disabled, ...props}) => {
+const StyledTextarea = styled.textarea`
+  height: 36px;
+  min-width: 300px;
+
+  padding-left: 8px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+
+  resize: none;
+
+  &:disabled {
+    background-color: ${RootColors['white']};
+    color: ${RootColors['mainBlue']};
+  }
+`;
+
+export const TextArea = ({ value, disabled, ...props }) => {
 
   return (
-    <textarea
-      className={s.textArea}
+    <StyledTextarea
       value={value}
       disabled={disabled}
       {...props}

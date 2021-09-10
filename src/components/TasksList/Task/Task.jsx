@@ -7,31 +7,24 @@ import { TaskActions } from './TaskActions/TaskActions';
 import { selectCheckedTask } from '../../../store/selectedEntity/selectorSelects';
 import { TaskContent } from './TaskContent/TaskContent';
 import { BlockWithTimeTask } from './BlockWithTimeTask/BlockWithTimeTask';
-import s from './Task.module.css';
+import { StyledTaskMainBlock, StyledWrapperTask } from './StyledTask';
 
-const taskClass = {
-  primary: s.task,
-  completed: s.completed,
-  rejected: s.rejected,
-  in_progress: s.inProgress,
-  todo: '',
-};
 
-export const Task = ({task}) => {
+export const Task = ({ task }) => {
   const dispatch = useDispatch();
-  const {id, status, timeCreation, timeChange} = task;
+  const { id, status, timeCreation, timeChange } = task;
   const selectedTasks = useSelector(selectCheckedTask);
   const isRejectedTask = status === REJECTED;
   const isSuccessTask = status === COMPLETED;
 
-  const handleChangeSelect = useCallback(({target}) => {
-    const {checked} = target;
-    dispatch(setSelectTask({[id]: checked}));
+  const handleChangeSelect = useCallback(({ target }) => {
+    const { checked } = target;
+    dispatch(setSelectTask({ [id]: checked }));
   }, [dispatch, id]);
 
   return (
-    <div className={`${s.task} ${taskClass[status]}`} >
-      <div className={s.blockTask__main}>
+    <StyledWrapperTask status={status}>
+      <StyledTaskMainBlock>
         <Checkbox
           onChange={handleChangeSelect}
           checked={selectedTasks[id]}
@@ -39,12 +32,12 @@ export const Task = ({task}) => {
         />
         <TaskContent task={task} />
         <TaskActions id={id} status={status} />
-      </div>
+      </StyledTaskMainBlock>
       <BlockWithTimeTask
         timeCreation={timeCreation}
         timeChange={timeChange}
         status={status}
       />
-    </div>
+    </StyledWrapperTask>
   );
 };

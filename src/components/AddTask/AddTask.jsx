@@ -5,23 +5,25 @@ import { Input } from '../../common/modules/Input/Input';
 import { addingTask } from '../../store/tasks/thunkTasks';
 import { getId } from '../../helpers/getUniqId';
 import { selectTasksId } from '../../store/tasks/selectorTasks';
-import { PRIMARY, WARNING } from '../../common/constants/constantTypeInput/constantTypeInput';
-import s from './AddTask.module.css';
+import { validation } from '../../store/validator/thunkValidation/validation';
+import styled from 'styled-components';
+
+const StyledWrapperAddTask = styled.div`
+  display: flex;
+  padding: 0 0 10px 72px;
+`;
 
 export const AddTask = () => {
   const dispatch = useDispatch();
   const [task, setTask] = useState();
-  const [typeInput, setTypeInput] = useState(PRIMARY);
   const tasksId = useSelector(selectTasksId);
 
   const handleSubmitTask = useCallback(() => {
     if (!task) {
-      setTypeInput(WARNING);
       return;
     }
 
     const newId = getId(tasksId);
-    setTypeInput(PRIMARY);
 
     dispatch(addingTask(task, newId));
   }, [dispatch, task, tasksId]);
@@ -29,15 +31,21 @@ export const AddTask = () => {
   const handleChangeValue = useCallback(({ target }) => {
     const { value } = target;
     setTask(value);
-    setTypeInput(PRIMARY);
   }, []);
 
   return (
-    <div className={s.add_task}>
-      <Input onChange={handleChangeValue} placeholder='Enter task' type={typeInput} />
+    <StyledWrapperAddTask>
+      <Input
+        onChange={handleChangeValue}
+        placeholder='Enter task'
+        required
+        id='inputAddTask'
+        value={task}
+        validation={validation}
+      />
       <Button onClick={handleSubmitTask}>
         Add task
       </Button>
-    </div>
+    </StyledWrapperAddTask>
   );
 };
