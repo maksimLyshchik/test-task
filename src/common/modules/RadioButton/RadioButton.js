@@ -1,33 +1,97 @@
 import React from 'react';
-import { PRIMARY } from '../../constants/constantsColorButton/constantsColorButton';
-import s from './RadioButton.module.css';
+import {
+  INFO,
+  PRIMARY,
+  SUCCESS,
+  WARNING,
+} from '../../constants/constantsColorButton/constantsColorButton';
+import styled from 'styled-components';
+import { rootColors } from '../../constants/constantsRootColors/constantsRootColors';
 
 const radioButtonColors = {
-  primary: s.radioButton_primary,
-  warning: s.radioButton_warning,
-  success: s.radioButton_success,
-  info: s.radioButton_info,
+  [PRIMARY]: rootColors.mainBlue,
+  [WARNING]: rootColors.redDelete,
+  [SUCCESS]: rootColors.greenComplete,
+  [INFO]: rootColors.yellowInfo,
 };
 
-export const RadioButton = ({name, value, onClick, children, type = PRIMARY, id, htmlFor, ...props}) => {
+const StyledRadioButton = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+
+  color: ${rootColors.mainBlue};
+`;
+
+const StyledLabel = styled.label`
+  display: flex;
+  align-items: center;
+
+  margin-right: 6px;
+  padding: 4px;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+`;
+
+const StyledInput = styled.input`
+  appearance: none;
+
+  border-radius: 50%;
+  height: 16px;
+  width: 16px;
+
+  border: 2px solid;
+  margin-right: 10px;
+
+  cursor: pointer;
+
+  color: ${({ color }) => radioButtonColors[color] || rootColors.mainBlue};
+
+  &:checked {
+    background-color: ${({ color }) => radioButtonColors[color] || rootColors.mainBlue};
+    border: 2px solid;
+
+    cursor: default;
+  }
+
+  &:checked + ${StyledLabel} {
+    border: 2px solid ${({ color }) => radioButtonColors[color] || rootColors.mainBlue};
+    border-radius: 8px;
+
+    cursor: default;
+  }
+`;
+
+export const RadioButton = ({
+  name,
+  value,
+  onClick,
+  children,
+  type,
+  color = PRIMARY,
+  id,
+  htmlFor,
+  ...props
+}) => {
 
   return (
-    <div className={s.radioButton} >
-      <input
-        className={`${s.radioButton__input} ${radioButtonColors[type]}`}
+    <StyledRadioButton>
+      <StyledInput
         type='radio'
         name={name}
         value={value}
         onClick={onClick}
         id={id}
+        color={color}
         {...props}
       />
-      <label
-        className={`${s.radioButton__label} ${radioButtonColors[type]}`}
+      <StyledLabel
         htmlFor={htmlFor}
       >
         {children}
-      </label>
-    </div>
+      </StyledLabel>
+    </StyledRadioButton>
   );
 };

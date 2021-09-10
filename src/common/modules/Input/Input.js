@@ -1,18 +1,38 @@
-import { DISABLED, OUTLINE, PRIMARY, WARNING } from '../../constants/constantTypeInput/constantTypeInput';
-import s from './Input.module.css';
+import styled from 'styled-components';
+import { rootColors } from '../../constants/constantsRootColors/constantsRootColors';
+import { OUTLINE } from '../../constants/constantTypeInput/constantTypeInput';
 
-const inputType = {
-  [PRIMARY]: s.input,
-  [DISABLED]: s.input_disabled,
-  [OUTLINE]: s.input_outline,
-  [WARNING]: s.input_warning,
-};
+const StyledInput = styled.input`
+  min-height: 36px;
+  min-width: 300px;
 
-export const Input = ({type = 'primary', ...props}) => {
+  padding-left: 8px;
+
+  ${props => props.type === OUTLINE && `
+    border: none;
+    min-width: 120px;
+    background: transparent;
+    
+    &:focus {
+      outline: 0;
+      outline-offset: 0;
+    }
+  `};
+
+  &:disabled {
+    background-color: ${rootColors.grayDisable};
+  }
+`;
+
+const StyledLabel = styled.label`
+  margin: 0 10px 0 0;
+`;
+
+export const Input = ({ ...props }) => {
 
   return (
-    <label className={s.label}>
-      <input className={`${s.input} ${inputType[type]}`} {...props} />
-    </label>
+    <StyledLabel>
+      <StyledInput {...props} />
+    </StyledLabel>
   );
 };
